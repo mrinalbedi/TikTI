@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale= 1" />
+    <title>@ViewData["Title"] - Tikti</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .content {
+            padding: 16px;
+        }
+
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header id="myHeader" class="header_section">
+        <div class="bs-example tiki_navbar header">
+            <nav class="navbar navbar-expand-md navbar-light navbar_section" >
+                <a class="navbar-brand logo_section" asp-controller="Home" asp-action="Index">
+                    <img src="~/Images/Logo/Tikti.png" alt="TikTi" height="80" />
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav">
+                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="Home" asp-action="Approach">TikTi’s Approach</a>
+                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="Home" asp-action="JobSeeker">Job Seekers</a>
+                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="Home" asp-action="Organization">Organization</a>
+                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="Home" asp-action="Organization">Login</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Tikti</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <partial name="_LoginPartial" />
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>*@
+    </header>
+    <main role="main">
+        <div class="content_section">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="border-top footer" >
+        @*footer section starts here*@
+        <div class="container-fluid">
+            <div class="text-center">
+                <div>This is message banner</div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col footer_text">
+                        <h5>Learn More</h5>
+                        <p>We know the current recruiting<br/> processes are broken for everyone <br/>involved, so we created TikTi.</p>
+                        <p>
+                            The word TikTi means <b>fit, match, go together.</b> <br />
+                            <a class="read_more" asp-controller="Home" asp-action="LearnMore">Read More</a>
+                        </p>
+                    </div>
+                    <div class="col footer_text">
+                        <h5>Menu</h5>
+                        <ul class="footer_link">
+                            <li><a href="#" class="link_page">Page 1</a></li>
+                            <li><a href="#" class="link_page">Page 1</a></li>
+                            <li><a href="#" class="link_page">Page 1</a></li>
+                        </ul>
+                    </div>
+                    <div class="col footer_text">
+                        <h5>Help</h5>
+                        <ul class="footer_link">
+                            <li><a class="link_page" asp-controller="Home" asp-action="PrivacyPolicy">Privacy Policy</a></li>
+                            <li><a class="link_page" asp-controller="Home" asp-action="LearnMore">Terms Of Use</a></li>
+                            <li><a class="link_page" asp-controller="Home" asp-action="LearnMore">Contact Form</a></li>
+                        </ul>
+                    </div>
+                    <div class="col footer_text">
+                        <h5>Contact Info</h5>
+                        <p>Adress</p>
+                        <p>Mail id</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="copyright_text">
+                        &copy; 2020 - Tikti
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*footer section ends here*@
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+
+    <script>
+        window.onscroll = function () { myFunction() };
+
+        var header = document.getElementById("myHeader");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    </script>
+</body>
+</html>
