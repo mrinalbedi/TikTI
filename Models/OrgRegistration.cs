@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Tikti.Models
 {
@@ -14,7 +11,7 @@ namespace Tikti.Models
         [EmailAddress]
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
-        
+
         public string Email { get; set; }
 
 
@@ -22,7 +19,7 @@ namespace Tikti.Models
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
-        [RegularExpression("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$", ErrorMessage ="The password must be strong")]
+        [RegularExpression("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$", ErrorMessage = "The password must be strong")]
         public string Pwd { get; set; }
 
         [DataType(DataType.Password)]
@@ -31,7 +28,7 @@ namespace Tikti.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [MaxLength(50,ErrorMessage ="The First name should be of max 50 characters")]
+        [MaxLength(50, ErrorMessage = "The First name should be of max 50 characters")]
         [Display(Name = "Contact First Name")]
         public string ContactFirstName { get; set; }
         [Required]

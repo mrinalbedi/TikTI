@@ -1,5 +1,3 @@
-using System;
-
 namespace Tikti.Models
 {
     public class ErrorViewModel
