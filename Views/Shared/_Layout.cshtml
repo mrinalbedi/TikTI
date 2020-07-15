@@ -16,6 +16,8 @@
             top: 0;
             width: 100%;
         }
+
+
     </style>
 </head>
 <body>
@@ -35,43 +37,24 @@
                         <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="Home" asp-action="Approach">TikTi’s Approach</a>
                         <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="Home" asp-action="JobSeeker">Job Seekers</a>
                         <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="Home" asp-action="Organization">Organization</a>
-                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="Home" asp-action="Organization">Login</a>
+                        @*<a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="OrgRegistration" asp-action="Login">Login</a>
+                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="OrgRegistration" asp-action="Register">Register</a>*@
                     </div>
                 </div>
             </nav>
         </div>
-        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <div class="container">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Tikti</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <partial name="_LoginPartial" />
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>*@
     </header>
-    <main role="main">
+    <main role="main" class="bg-dark text-light">
         <div class="content_section">
             @RenderBody()
         </div>
     </main>
 
-    <footer class="border-top footer" >
+    <footer class="border-top footer text-center" >
         @*footer section starts here*@
         <div class="container-fluid">
             <div class="text-center">
-                <div>This is message banner</div>
+                <div style="border-bottom: 1px solid #000000; border-top: 1px solid #000000">This is message banner</div>
             </div>
             <div class="container-fluid">
                 <div class="row">
@@ -86,23 +69,25 @@
                     <div class="col footer_text">
                         <h5>Menu</h5>
                         <ul class="footer_link">
-                            <li><a href="#" class="link_page">Page 1</a></li>
-                            <li><a href="#" class="link_page">Page 1</a></li>
-                            <li><a href="#" class="link_page">Page 1</a></li>
+                            <li><a href="#" class="link_page">TikTi's Approach</a></li>
+                            <li><a href="#" class="link_page">Job Seekers</a></li>
+                            <li><a href="#" class="link_page">Organization</a></li>
                         </ul>
                     </div>
                     <div class="col footer_text">
                         <h5>Help</h5>
                         <ul class="footer_link">
                             <li><a class="link_page" asp-controller="Home" asp-action="PrivacyPolicy">Privacy Policy</a></li>
-                            <li><a class="link_page" asp-controller="Home" asp-action="LearnMore">Terms Of Use</a></li>
+                            <li><a class="link_page" asp-controller="Home" asp-action="TermsOfUse">Terms Of Use</a></li>
                             <li><a class="link_page" asp-controller="Home" asp-action="LearnMore">Contact Form</a></li>
                         </ul>
                     </div>
                     <div class="col footer_text">
                         <h5>Contact Info</h5>
-                        <p>Adress</p>
-                        <p>Mail id</p>
+                        <ul class="footer_link">
+                            <li><a href="#" class="link_page">Address</a></li>
+                            <li><a href="#" class="link_page">Mail id</a></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="row">

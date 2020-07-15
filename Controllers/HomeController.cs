@@ -44,6 +44,12 @@ namespace Tikti.Controllers
         {
             return View();
         }
+        public IActionResult TermsOfUse()
+        {
+            return View();
+        }
+
+
 
 
 

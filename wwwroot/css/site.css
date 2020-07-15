@@ -255,3 +255,18 @@ button:focus {
         font-size: 12px;
     }
     }
+.privacy_4rem_pad {
+    padding-left: 4rem;
+}
+.privacy_3rem_pad{
+    padding-left:3rem;
+}
+.privacy_2rem_pad {
+    padding-left: 2rem;
+}
+.privacy_pad{
+    padding-left:1rem;
+}
+.footer-bottom-border {
+    border-bottom: 1px solid #000000 !important;
+}
