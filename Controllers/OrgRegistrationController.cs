@@ -89,31 +89,37 @@ namespace Tikti.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register([Bind("RegistrationId,Email,Pwd,ConfirmPassword,ContactFirstName,ContactLastName,ContactTitle,Department")] OrgRegistration orgRegistration)
         {
-            MailMessage mm = new MailMessage();
-            mm.To.Add(new MailAddress(orgRegistration.Email, "Request for Verification"));
-            mm.From = new MailAddress("alexbaby463@gmail.com");
-            mm.Body = "click here";
-            mm.IsBodyHtml = true;
-            mm.Subject = "Verification";
-            SmtpClient smcl = new SmtpClient();
-            smcl.Host = "smtp.gmail.com";
-            smcl.Port = 587;
-            smcl.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smcl.Credentials = new NetworkCredential("alexbaby463@gmail.com", "Alexbaby13@");
-            smcl.EnableSsl = true;
-            smcl.Send(mm);
+            var isDuplicate = _context.OrgRegistration.Where(x => x.Email == orgRegistration.Email);
+            if(isDuplicate.Any())
+            {
+                ModelState.AddModelError("", "User E-mail ID already exists");
+            }
+           
             if (ModelState.IsValid)
             {
-
+                MailMessage mm = new MailMessage();
+                mm.To.Add(new MailAddress(orgRegistration.Email, "Request for Verification"));
+                mm.From = new MailAddress("alexbaby463@gmail.com");
+                mm.Body = "<a href='http://localhost:55446/OrgRegistration/EmailConfirmed'>Please click here to confirm your registration</a>";
+                mm.IsBodyHtml = true;
+                mm.Subject = "Tikti Registration Verification link";
+                SmtpClient smcl = new SmtpClient();
+                smcl.Host = "smtp.gmail.com";
+                smcl.Port = 587;
+                smcl.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smcl.Credentials = new NetworkCredential("alexbaby463@gmail.com", "Alexbaby13@");
+                smcl.EnableSsl = true;
+                smcl.Send(mm);
                 byte[] encode = new byte[orgRegistration.Pwd.Length];
                 encode = Encoding.UTF8.GetBytes(orgRegistration.Pwd);
 
                 orgRegistration.Pwd = Convert.ToBase64String(encode);
                 orgRegistration.ConfirmPassword = Convert.ToBase64String(encode);
 
+
                 _context.Add(orgRegistration);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Login));
+                return RedirectToAction(nameof(ConfirmEmail));
             }
             return View(orgRegistration);
         }
@@ -244,6 +250,14 @@ namespace Tikti.Controllers
             {
                 return RedirectToAction("Login");
             }
+        }
+        public IActionResult ConfirmEmail()
+        {
+            return View();
+        }
+        public IActionResult EmailConfirmed()
+        {
+            return View();
         }
 
     }
