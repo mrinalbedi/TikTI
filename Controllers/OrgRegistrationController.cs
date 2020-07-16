@@ -106,9 +106,9 @@ namespace Tikti.Controllers
                 MailMessage mm = new MailMessage();
                 mm.To.Add(new MailAddress(orgRegistration.Email, "Request for Verification"));
                 mm.From = new MailAddress("alexbaby463@gmail.com");
-                mm.Body = "click here";
+                mm.Body = "<a href='http://localhost:55446/OrgRegistration/EmailConfirmed'>Please click here to confirm your registration</a>";
                 mm.IsBodyHtml = true;
-                mm.Subject = "Verification";
+                mm.Subject = "Tikti Registration Verification link";
                 SmtpClient smcl = new SmtpClient();
                 smcl.Host = "smtp.gmail.com";
                 smcl.Port = 587;
@@ -125,7 +125,7 @@ namespace Tikti.Controllers
 
                 _context.Add(orgRegistration);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Login));
+                return RedirectToAction(nameof(ConfirmEmail));
             }
             return View(orgRegistration);
         }
@@ -256,6 +256,14 @@ namespace Tikti.Controllers
             {
                 return RedirectToAction("Login");
             }
+        }
+        public IActionResult ConfirmEmail()
+        {
+            return View();
+        }
+        public IActionResult EmailConfirmed()
+        {
+            return View();
         }
 
     }
