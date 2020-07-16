@@ -1,10 +1,17 @@
-﻿namespace Tikti.Models
+
+=======
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Tikti.Models
 {
     public partial class OrgRegistration
     {
         public int RegistrationId { get; set; }
+
         public string Email { get; set; }
 
+
+     
         public string Pwd { get; set; }
         public string ConfirmPassword { get; set; }
 

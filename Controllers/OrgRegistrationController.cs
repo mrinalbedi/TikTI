@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Tikti.Models;
-using Microsoft.AspNetCore.Http;
-using System.Text;
-using System.Reflection.Metadata;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using System.Net.Mail;
+using System;
+using System.Linq;
 using System.Net;
+using System.Net.Mail;
+using System.Text;
+using System.Threading.Tasks;
+using Tikti.Models;
 
 namespace Tikti.Controllers
 {
@@ -235,7 +229,7 @@ namespace Tikti.Controllers
 
             //var usr = _context.OrgRegistration.FirstOrDefault(u => u.Email == org.Email
             // && u.Pwd == org.Pwd);
-            if(result == org.Pwd)
+            if (result == org.Pwd)
             {
                 HttpContext.Session.SetString("UserId", usr.Email.ToString());
                 return RedirectToAction("LoggedIn");
