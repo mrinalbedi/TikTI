@@ -1,6 +1,7 @@
 
-=======
-﻿using System.ComponentModel.DataAnnotations;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Tikti.Models
 {
@@ -10,8 +11,6 @@ namespace Tikti.Models
 
         public string Email { get; set; }
 
-
-     
         public string Pwd { get; set; }
         public string ConfirmPassword { get; set; }
 

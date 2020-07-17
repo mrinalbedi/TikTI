@@ -90,11 +90,11 @@ namespace Tikti.Controllers
         public async Task<IActionResult> Register([Bind("RegistrationId,Email,Pwd,ConfirmPassword,ContactFirstName,ContactLastName,ContactTitle,Department")] OrgRegistration orgRegistration)
         {
             var isDuplicate = _context.OrgRegistration.Where(x => x.Email == orgRegistration.Email);
-            if(isDuplicate.Any())
+            if (isDuplicate.Any())
             {
                 ModelState.AddModelError("", "User E-mail ID already exists");
             }
-           
+
             if (ModelState.IsValid)
             {
                 MailMessage mm = new MailMessage();
