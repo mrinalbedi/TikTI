@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Tikti.Models
 {
@@ -20,7 +22,7 @@ namespace Tikti.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=LAPTOP-IQ1VNAIU\\SQLEXPRESS;Database=TikTi;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=LAPTOP-370U335S\\SQLEXPRESS;Database=TikTi;Trusted_Connection=True;");
             }
         }
 
@@ -29,7 +31,9 @@ namespace Tikti.Models
             modelBuilder.Entity<OrgRegistration>(entity =>
             {
                 entity.HasKey(e => e.RegistrationId)
-                    .HasName("PK__OrgRegis__A3DB1415771A3260");
+                    .HasName("PK__orgRegis__A3DB14152181B9D8");
+
+                entity.ToTable("orgRegistration");
 
                 entity.Property(e => e.RegistrationId).HasColumnName("registrationID");
 
@@ -47,6 +51,11 @@ namespace Tikti.Models
                     .HasColumnName("contactLastName")
                     .HasMaxLength(30);
 
+                entity.Property(e => e.ContactPhoneNumber)
+                    .IsRequired()
+                    .HasColumnName("contactPhoneNumber")
+                    .HasMaxLength(15);
+
                 entity.Property(e => e.ContactTitle)
                     .IsRequired()
                     .HasColumnName("contactTitle")
@@ -56,9 +65,28 @@ namespace Tikti.Models
                     .IsRequired()
                     .HasMaxLength(30);
 
+                entity.Property(e => e.DifferentHr)
+                    .HasColumnName("differentHR")
+                    .HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.Email)
                     .IsRequired()
                     .HasColumnName("email");
+
+                entity.Property(e => e.HrDepartment).HasMaxLength(30);
+
+                entity.Property(e => e.HrFirstName).HasMaxLength(30);
+
+                entity.Property(e => e.HrLastName).HasMaxLength(30);
+
+                entity.Property(e => e.HrPhoneNumber).HasMaxLength(15);
+
+                entity.Property(e => e.HrTitle).HasMaxLength(30);
+
+                entity.Property(e => e.OrganizationName)
+                    .IsRequired()
+                    .HasColumnName("organizationName")
+                    .HasMaxLength(30);
 
                 entity.Property(e => e.Pwd)
                     .IsRequired()
