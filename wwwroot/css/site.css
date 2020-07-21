@@ -5,13 +5,14 @@ for details on configuring this project to bundle and minify static web assets. 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700;900&display=swap');
 
 body {
-  font-family: 'Roboto', sans-serif !important;
-  font-size:14px ;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 14px;
 }
+
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
@@ -22,63 +23,67 @@ a {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
+
 .footer {
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
     white-space: nowrap;
     background-color: #93c4e2;
     padding-top: 10px;
 }
+
 .footer_text a.read_more {
     font-size: 12px;
     font-weight: 700;
@@ -89,35 +94,46 @@ header {
     z-index: 99999999999999;
     position: relative;
 }
-main{z-index:0 !important; padding:20px;min-height:100vh;}
-.content_section {
-    padding-bottom:110px;
+
+main {
+    z-index: 0 !important;
+    padding: 20px;
+    min-height: 100vh;
 }
+/*.content_section {
+    padding-bottom:110px;
+}*/
 .tiki_navbar .navbar_section {
     background-color: #c9e8a0 !important;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
     z-index: 9999;
 }
+
 a.nav-item.nav-link.active {
     color: #8bc640;
 }
+
 a.nav-item.nav-link.active {
     color: #8bc640;
 }
+
 .tiki_navbar .navbar-nav .nav-link {
     font-weight: 600;
     transition: .2s all ease;
 }
+
 .btn-outline-primary {
     color: #0076c0;
     border-color: #0076c0;
 }
-.btn-outline-primary:hover {
-    color: #fff;
-    background-color: #0076c0;
-    border-color: #0076c0;
-}
-.btn-margin{
+
+    .btn-outline-primary:hover {
+        color: #fff;
+        background-color: #0076c0;
+        border-color: #0076c0;
+    }
+
+.btn-margin {
     font-size: 1.2rem;
     margin: 0rem 3rem;
 }
@@ -128,23 +144,31 @@ a.nav-item.nav-link.active {
     margin-top: 5px;
     color: #000;
 }
+
 .footer_link {
     padding-left: 0px;
     list-style: none;
     margin-bottom: 5px;
 }
-.footer_link li {
-    line-height: 20px;
+
+    .footer_link li {
+        line-height: 20px;
+    }
+
+        .footer_link li a {
+            transition: .2s all ease;
+            font-size: 12px;
+            color: #000;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+.footer_col_border_left {
+    border-left: 1px solid gray;
 }
-.footer_link li a {
-    transition: .2s all ease;
-    font-size: 12px;
-    color:#000;
-    cursor:pointer;
-    font-weight:500;
-}
+
 .copyright_text {
-    border-top: 1px solid #8dbcd8;
+    border-top: 1px solid gray;
     line-height: 5px;
     color: #000;
     padding: 10px;
@@ -153,14 +177,24 @@ a.nav-item.nav-link.active {
     width: 100%;
     font-weight: 500;
 }
+
 .footer_text p {
-    color:#000;
-    font-size:12px;
-    margin-bottom:5px;
+    color: #000;
+    font-size: 12px;
+    margin-bottom: 5px;
 }
+
 .footer_link li a:hover {
     color: #0076c0 !important;
     text-decoration: none;
+}
+
+.row a.footer_social_media_icon {
+    padding-left: 1rem;
+}
+
+.padding_bottom_1rem {
+    padding-bottom: 1rem;
 }
 /*-----------Common css-----------------*/
 button:focus {
@@ -168,24 +202,26 @@ button:focus {
 }
 /*--------------Oraganization css-----*/
 .main_content_section {
-    background-image:url('../NewFolder/2.jpg');
-    background-size:cover;
+    background-image: url('../NewFolder/2.jpg');
+    background-size: cover;
     background-position: center;
-    padding:150px 20px;
+    padding: 150px 20px;
     position: relative;
 }
-.main_content_section:before {
-    content: "";
-    width:100%;
-    height:100%;
-    position:absolute;
-    top:0;
-    left:0;
-    background:rgba(233, 236, 239, 0.55);
-}
+
+    .main_content_section:before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: rgba(233, 236, 239, 0.55);
+    }
+
 .data_text {
-    z-index:5;
-    position:relative;
+    z-index: 5;
+    position: relative;
 }
 
 .slider_text {
@@ -203,11 +239,12 @@ button:focus {
         color: #fff;
     }
 /*-------------------------index css--------------------------*/
-        .main_header{
+.main_header {
     font-size: 40px;
     font-weight: 700;
     color: #0076c0;
 }
+
 .paragraph {
     font-size: 16px;
     color: #000;
@@ -219,55 +256,135 @@ button:focus {
         display: table;
         width: 100%
     }
-    .tiki_navbar .navbar-nav .nav-link {
-        display: table-cell;
-        width: 1%;
-        text-align: center;
-        font-size: 18px;
-        color: #000 !important;
-    }
-    .tiki_navbar .navbar-nav .nav-link:hover, .tiki_navbar .navbar-nav .nav-link:active {
-        color: #0076c0 !important;
-    }
+
+        .tiki_navbar .navbar-nav .nav-link {
+            display: table-cell;
+            width: 1%;
+            text-align: center;
+            font-size: 18px;
+            color: #000 !important;
+        }
+
+            .tiki_navbar .navbar-nav .nav-link:hover, .tiki_navbar .navbar-nav .nav-link:active {
+                color: #0076c0 !important;
+            }
+
     .logo_section {
         margin-right: 30px;
     }
 }
+
 @media only screen and (max-width: 767px) {
     .slider_text {
-        top:25%;
+        top: 25%;
     }
-    .slider_text h3 {
-        font-size:18px;
-    }
+
+        .slider_text h3 {
+            font-size: 18px;
+        }
+
     .tiki_navbar .navbar-nav .nav-link {
         font-size: 14px;
         color: #000 !important;
     }
-    .image_height{
-        height:30%;
+
+    .image_height {
+        height: 30%;
     }
+
     .tiki_navbar .navbar-nav .nav-link:hover, .tiki_navbar .navbar-nav .nav-link:active {
         color: #0076c0 !important;
     }
+
     .slider_text .btn-lg {
         padding: 5px 7px;
         font-size: 12px;
     }
-    }
+}
+
 .privacy_4rem_pad {
     padding-left: 4rem;
 }
-.privacy_3rem_pad{
-    padding-left:3rem;
+
+.privacy_3rem_pad {
+    padding-left: 3rem;
 }
+
 .privacy_2rem_pad {
     padding-left: 2rem;
 }
-.privacy_pad{
-    padding-left:1rem;
+
+.privacy_pad {
+    padding-left: 1rem;
 }
+
 .footer-bottom-border {
     border-bottom: 1px solid #000000 !important;
 }
 
+.no_padding {
+    padding: 0 !important;
+}
+
+/*Deviding organization registration part in two column*/
+.Org_reg_col_container {
+    display: table;
+    width: 100%;
+}
+
+.Org_reg_col_col1 {
+    display: table-cell;
+    padding: 16px;
+    width: 55%;
+    box-shadow: inset 0 0 10px #000000;
+}
+.Org_reg_col_col2 {
+    display: table-cell;
+    padding: 16px;
+    width:45%
+}
+
+/*flip box in organization registration page*/
+.flip-box {
+    background-color: transparent;
+    width: 90%;
+    height: 100px;
+    perspective: 1000px;
+}
+
+.flip-box-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-box:hover .flip-box-inner {
+    transform: rotateX(180deg);
+}
+
+.flip-box-front, .flip-box-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flip-box-front {
+    background-color: #343a40;
+    color: black;
+}
+
+.flip-box-back {
+    background-color: #343a40;
+    color: white;
+    transform: rotateX(180deg);
+}
+
+/*logo css for organization registration page*/
+.org_reg_logo_margin{
+    margin:2rem;
+}
