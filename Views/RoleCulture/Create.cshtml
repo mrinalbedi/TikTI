@@ -1,0 +1,35 @@
+﻿@model Tikti.Models.RoleCultureVM
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Organization_view.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>RoleCulture</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @for (int i = 0; i < Model.cultures.Count; i++)
+            {
+                @Html.CheckBoxFor(m => m.cultures[i].IsSelected)
+                @Html.LabelFor(m => m.cultures[i].CultureName, Model.cultures[i].CultureName)<br/>
+                @Html.HiddenFor(m => m.cultures[i].CultureId)
+            }
+            <div class="form-group">
+                <input type="submit" value="Next Fields" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

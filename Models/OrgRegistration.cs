@@ -15,7 +15,7 @@ namespace Tikti.Models
         public string ContactTitle { get; set; }
         public string ContactPhoneNumber { get; set; }
         public string Department { get; set; }
-        public bool DifferentHr { get; set; }
+        public bool? DifferentHr { get; set; }
         public string HrFirstName { get; set; }
         public string HrLastName { get; set; }
         public string HrTitle { get; set; }
