@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Tikti.Models.RoleOpportunity>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Organization_view.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.JobDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DesiredStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContractDuration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Province)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Postal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TelecommutingRoles)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weblink)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExtraCertificationRequired)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExtraCertification)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CertificationNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrencyNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EducationNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExperienceNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherRequirentsNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkCommitmentNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DesiredStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContractDuration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Province)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Postal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TelecommutingRoles)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weblink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExtraCertificationRequired)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExtraCertification)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CertificationNavigation.CertificationId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrencyNavigation.CurrencyId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EducationNavigation.EducationId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExperienceNavigation.ExperienceId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherRequirentsNavigation.OtherRequirementId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkCommitmentNavigation.WorkCommitmentId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.RoleOpportunityId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.RoleOpportunityId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.RoleOpportunityId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
