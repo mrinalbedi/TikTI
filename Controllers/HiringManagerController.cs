@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.FlowAnalysis;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Tikti.Models;
@@ -62,7 +63,15 @@ namespace Tikti.Controllers
             {
                 _context.Add(hiringManager);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+               
+                OrgRegisterHr orhr = new OrgRegisterHr();
+                orhr.HiringManagerId = hiringManager.HiringManagerId;
+                orhr.RegistrationId = Convert.ToInt32(Request.Cookies["RegistrationId"]);
+                
+                _context.Add(orhr);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Create","HiringManager");
             }
             return View(hiringManager);
         }
