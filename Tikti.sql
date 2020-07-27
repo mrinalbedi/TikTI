@@ -161,3 +161,32 @@ insert into certification values ('Python')
 insert into otherRequirement values ('must have a G2 License')
 insert into otherRequirement values ('must have a car')
 
+--=============================================================================
+CREATE TABLE orgRegister (
+    registrationID int identity primary key,
+    organizationName varchar(30) not null,
+    email varchar(max) not null,
+    password varchar(max) not null,
+    confirmPassword varchar(max) not null,
+	contactFirstName varchar(max) not null,
+	contactLastName varchar(max) not null,
+	contactTitle varchar(max) not null,
+	contactPhoneNumber varchar(max) not null,
+	Department varchar(max) not null
+);
+
+create table HiringManager(
+	hiringManagerID int identity primary key,
+	FirstName varchar(max) not null,
+	LastName varchar(max) not null,
+	Title varchar(max),
+	Department varchar(max),
+	PhoneNumber varchar(max),
+	email varchar(max)
+);
+
+create table orgRegisterHR(
+   orgRegisterHRID int identity primary key,
+   registrationID int foreign key references orgRegister(registrationID),
+   hiringManagerID int foreign key references HiringManager(hiringManagerID)
+);

@@ -22,7 +22,9 @@ namespace Tikti.Models
         public virtual DbSet<Currency> Currency { get; set; }
         public virtual DbSet<Education> Education { get; set; }
         public virtual DbSet<Experience> Experience { get; set; }
-        public virtual DbSet<OrgRegistration> OrgRegistration { get; set; }
+        public virtual DbSet<HiringManager> HiringManager { get; set; }
+        public virtual DbSet<OrgRegister> OrgRegister { get; set; }
+        public virtual DbSet<OrgRegisterHr> OrgRegisterHr { get; set; }
         public virtual DbSet<OtherRequirement> OtherRequirement { get; set; }
         public virtual DbSet<RoleBenefit> RoleBenefit { get; set; }
         public virtual DbSet<RoleCulture> RoleCulture { get; set; }
@@ -141,69 +143,103 @@ namespace Tikti.Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<OrgRegistration>(entity =>
+            modelBuilder.Entity<HiringManager>(entity =>
+            {
+                entity.Property(e => e.HiringManagerId).HasColumnName("hiringManagerID");
+
+                entity.Property(e => e.Department).IsUnicode(false);
+
+                entity.Property(e => e.Email)
+                    .HasColumnName("email")
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastName)
+                    .IsRequired()
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PhoneNumber).IsUnicode(false);
+
+                entity.Property(e => e.Title).IsUnicode(false);
+            });
+
+            modelBuilder.Entity<OrgRegister>(entity =>
             {
                 entity.HasKey(e => e.RegistrationId)
-                    .HasName("PK__orgRegis__A3DB14152181B9D8");
+                    .HasName("PK__orgRegis__A3DB1415B84BCE62");
 
-                entity.ToTable("orgRegistration");
+                entity.ToTable("orgRegister");
 
                 entity.Property(e => e.RegistrationId).HasColumnName("registrationID");
 
                 entity.Property(e => e.ConfirmPassword)
                     .IsRequired()
-                    .HasColumnName("confirmPassword");
+                    .HasColumnName("confirmPassword")
+                    .IsUnicode(false);
 
                 entity.Property(e => e.ContactFirstName)
                     .IsRequired()
                     .HasColumnName("contactFirstName")
-                    .HasMaxLength(30);
+                    .IsUnicode(false);
 
                 entity.Property(e => e.ContactLastName)
                     .IsRequired()
                     .HasColumnName("contactLastName")
-                    .HasMaxLength(30);
+                    .IsUnicode(false);
 
                 entity.Property(e => e.ContactPhoneNumber)
                     .IsRequired()
                     .HasColumnName("contactPhoneNumber")
-                    .HasMaxLength(15);
+                    .IsUnicode(false);
 
                 entity.Property(e => e.ContactTitle)
                     .IsRequired()
                     .HasColumnName("contactTitle")
-                    .HasMaxLength(30);
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Department)
                     .IsRequired()
-                    .HasMaxLength(30);
-
-                entity.Property(e => e.DifferentHr)
-                    .HasColumnName("differentHR")
-                    .HasDefaultValueSql("((0))");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Email)
                     .IsRequired()
-                    .HasColumnName("email");
-
-                entity.Property(e => e.HrDepartment).HasMaxLength(30);
-
-                entity.Property(e => e.HrFirstName).HasMaxLength(30);
-
-                entity.Property(e => e.HrLastName).HasMaxLength(30);
-
-                entity.Property(e => e.HrPhoneNumber).HasMaxLength(15);
-
-                entity.Property(e => e.HrTitle).HasMaxLength(30);
+                    .HasColumnName("email")
+                    .IsUnicode(false);
 
                 entity.Property(e => e.OrganizationName)
                     .IsRequired()
                     .HasColumnName("organizationName")
-                    .HasMaxLength(30);
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Pwd)
+                entity.Property(e => e.Password)
                     .IsRequired()
-                    .HasColumnName("pwd");
+                    .HasColumnName("password")
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<OrgRegisterHr>(entity =>
+            {
+                entity.ToTable("orgRegisterHR");
+
+                entity.Property(e => e.OrgRegisterHrid).HasColumnName("orgRegisterHRID");
+
+                entity.Property(e => e.HiringManagerId).HasColumnName("hiringManagerID");
+
+                entity.Property(e => e.RegistrationId).HasColumnName("registrationID");
+
+                entity.HasOne(d => d.HiringManager)
+                    .WithMany(p => p.OrgRegisterHr)
+                    .HasForeignKey(d => d.HiringManagerId)
+                    .HasConstraintName("FK__orgRegist__hirin__671F4F74");
+
+                entity.HasOne(d => d.Registration)
+                    .WithMany(p => p.OrgRegisterHr)
+                    .HasForeignKey(d => d.RegistrationId)
+                    .HasConstraintName("FK__orgRegist__regis__662B2B3B");
             });
 
             modelBuilder.Entity<OtherRequirement>(entity =>
