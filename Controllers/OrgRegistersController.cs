@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -63,11 +64,10 @@ namespace Tikti.Controllers
             }
             if (ModelState.IsValid)
             {
-                Response.Cookies.Append("RegistrationId",orgRegister.RegistrationId.ToString());
                 MailMessage mm = new MailMessage();
             mm.To.Add(new MailAddress(orgRegister.Email, "Request for Verification"));
             mm.From = new MailAddress("alexbaby463@gmail.com");
-            mm.Body = "<a href='http://localhost:55446/OrgRegister/EmailConfirmed'>Please click here to confirm your registration</a>";
+            mm.Body = "<a href='http://localhost:55446/OrgRegisters/EmailConfirmed'>Please click here to confirm your registration</a>";
             mm.IsBodyHtml = true;
             mm.Subject = "Tikti Registration Verification link";
             SmtpClient smcl = new SmtpClient();
@@ -84,7 +84,8 @@ namespace Tikti.Controllers
             orgRegister.ConfirmPassword = Convert.ToBase64String(encode);
             _context.Add(orgRegister);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                Response.Cookies.Append("RegistrationId", orgRegister.RegistrationId.ToString());
+                return RedirectToAction("Create","HiringManager");
             }
           return View(orgRegister);
     }
@@ -172,6 +173,59 @@ namespace Tikti.Controllers
         private bool OrgRegisterExists(int id)
         {
             return _context.OrgRegister.Any(e => e.RegistrationId == id);
+        }
+
+        public IActionResult ConfirmEmail()
+        {
+            return View();
+        }
+
+        public IActionResult EmailConfirmed()
+        {
+            return View();
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(OrgRegistration org)
+        {
+            System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
+            System.Text.Decoder utf8Decode = encoder.GetDecoder();
+            var usr = _context.OrgRegister.FirstOrDefault(u => u.Email == org.Email);
+            byte[] todecode_byte = Convert.FromBase64String(usr.Password);
+            int charCount = utf8Decode.GetCharCount(todecode_byte, 0, todecode_byte.Length);
+            char[] decoded_char = new char[charCount];
+            utf8Decode.GetChars(todecode_byte, 0, todecode_byte.Length, decoded_char, 0);
+            string result = new String(decoded_char);
+
+
+            //var usr = _context.OrgRegistration.FirstOrDefault(u => u.Email == org.Email
+            // && u.Pwd == org.Pwd);
+            if (result == org.Pwd)
+            {
+                HttpContext.Session.SetString("UserId", usr.Email.ToString());
+                return RedirectToAction("LoggedIn");
+            }
+            else
+            {
+                TempData["message"] = "Username or password is incorrect";
+            }
+            return View();
+        }
+        public ActionResult LoggedIn()
+        {
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
     }
 }
