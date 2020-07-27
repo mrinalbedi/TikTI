@@ -5,58 +5,81 @@
     Layout = "~/Views/Shared/_Organization_view.cshtml";
 }
 
-<h1>@ViewData["Title"]</h1>
+<div class="Org_reg_col_container">
+    <div class="Org_reg_col_col2 container" style="background-image: linear-gradient(to bottom left, #e5ffcc, #ccccff, #ffffb3 );
+   ">
+        <div class="row ">
+            <div class="col text-center org_reg_logo_margin">
+                <img src="~/Images/Logo/Tikti.png" alt="TikTi Logo" height="120" />
+            </div>
+        </div>
+        <div class=" row flip-box" style="margin:2.5rem">
+            <div class="flip-box-inner">
+                <div class="flip-box-front">
+                    <h2>TikTi dramatically reduces time to hire</h2>
+                </div>
+                <div class="flip-box-back">
+                    <h2>TikTi means Fit, match, go together</h2>
+                </div>
+            </div>
+        </div>
+        <div class="img-thumbnail" style="margin:0rem 1rem 0rem 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+            <img src="~/Images/Organization/Organization 7.jpg" class="img-fluid" />
+        </div>
+    </div>
 
-
-<hr/>
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+    <div class="Org_reg_col_col1">
+        <div class="row">
+            <div class="col-sm-6 col-md-8 mx-auto">
+                <h1 onmouseover="style.color='green'" onmouseout="style.color='black'" class="font-weight-bolder" style="color:black; text-align:center; text-shadow: 1px 1px 1px blue; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+                    Add Hiring Manager Information
+                </h1><br />
             </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
+            <div class="col-sm-5 col-md-7 mx-auto">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Department" class="control-label"></label>
+                        <input asp-for="Department" class="form-control" />
+                        <span asp-validation-for="Department" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber" class="control-label"></label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Add another hiring manager" class="btn btn-primary" />
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-primary" asp-controller="OrgRegisters" asp-action="ConfirmEmail">No I don't want to add</a>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Department" class="control-label"></label>
-                <input asp-for="Department" class="form-control" />
-                <span asp-validation-for="Department" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Add another hiring manager" class="btn btn-primary" />
-            </div>
-            <div class="form-group">
-                <a class="btn btn-primary" asp-controller="OrgRegisters" asp-action="ConfirmEmail">No I don't want to add</a> 
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
