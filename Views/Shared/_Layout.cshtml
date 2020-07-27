@@ -44,25 +44,40 @@
             </nav>
         </div>
     </header>
-    <main role="main" class="bg-dark text-light no_padding">
+    <main role="main" class="no_padding">
         <div class="content_section">
             @RenderBody()
         </div>
     </main>
 
 
-    <footer class="border-top footer text-center">
+    <footer class="border-top footer text-center" style="padding-top:0">
         @*footer section starts here*@
         <div class="container-fluid">
-            <div class="row">
-                <div class="col padding_bottom_1rem">
-                    <a href="#" class="footer_social_media_icon"><img src="~/Images/Logo/facebook-icon_24x24.png" alt="F" /></a>
-                    <a href="#" class="footer_social_media_icon"><img src="~/Images/Logo/linkedin-icon_24x24.png" alt="F" /></a>
-                    <a href="#" class="footer_social_media_icon"><img src="~/Images/Logo/twitter-icon_24x24.png" alt="F" /></a>
+            <div class="row" style="border-top:1px solid gray; padding-top:2rem; border-bottom:5px solid white; background-color:#02520c; color:white">
+                <div class="col-md-3 footer_text">
+                    <h4 class="font-weight-bolder" style="font-size: 1.5vw; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">We are always there to listen you <br/>
+                    <small>please submit your E-mail address</small></h4>
+                </div>
+                <div class="col-md-6" style="padding-left:10rem; padding-right:10rem">
+                    <br />
+                    <div class="input-group inquery_email">
+                    <input type="email" placeholder="Email id" value="" id="email-signup-textbox" class="form-control">
+                    <div class="input-group-append">
+                        <button onclick="Fn_alert()" type="button" class="btn btn-secondary btn-sm">Submit</button>
+                    </div>
+                        <div class="valid-tooltip">Should be a valid email address</div>
+                    </div>
+                </div>
+                <div class="col-md-3 padding_bottom_1rem" style="margin-bottom:2rem; text-align:right">
+                    <h5>Stay Connected</h5>
+                    <a href="#" class="footer_social_media_icon"><img src="~/Images/Logo/facebook.png" alt="F" /></a>
+                    <a href="#" class="footer_social_media_icon"><img src="~/Images/Logo/instagram.png" alt="F" /></a>
+                    <a href="#" class="footer_social_media_icon"><img src="~/Images/Logo/twitter.png" alt="F" /></a>
                 </div>
             </div>
-            <div class="row">
-                <div class="col footer_text footer_col_border_left">
+            <div class="row" style="border-top:1px solid gray">
+                <div class="col footer_text footer_col_border_left" style="margin-top:1rem;">
                     <h5>Learn More</h5>
                     <p>We know the current recruiting<br /> processes are broken for everyone <br />involved, so we created TikTi.</p>
                     <p>
@@ -70,7 +85,7 @@
                         <a class="read_more" asp-controller="Home" asp-action="LearnMore">Read More</a>
                     </p>
                 </div>
-                <div class="col footer_text footer_col_border_left">
+                <div class="col footer_text footer_col_border_left" style="margin-top:1rem">
                     <h5>Menu</h5>
                     <ul class="footer_link">
                         <li><a href="#" class="link_page">TikTi's Approach</a></li>
@@ -78,7 +93,7 @@
                         <li><a href="#" class="link_page">Organization</a></li>
                     </ul>
                 </div>
-                <div class="col footer_text footer_col_border_left">
+                <div class="col footer_text footer_col_border_left" style="margin-top:1rem">
                     <h5>Help</h5>
                     <ul class="footer_link">
                         <li><a class="link_page" asp-controller="Home" asp-action="PrivacyPolicy">Privacy Policy</a></li>
@@ -86,7 +101,7 @@
                         <li><a class="link_page" asp-controller="Home" asp-action="LearnMore">Contact Form</a></li>
                     </ul>
                 </div>
-                <div class="col footer_text footer_col_border_left">
+                <div class="col footer_text footer_col_border_left" style="margin-top:1rem">
                     <h5>Contact Info</h5>
                     <ul class="footer_link">
                         <li><a href="#" class="link_page">Address</a></li>
@@ -108,6 +123,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 
+    @*Script for stickey header*@
     <script>
         window.onscroll = function () { myFunction() };
 
@@ -120,6 +136,12 @@
             } else {
                 header.classList.remove("sticky");
             }
+        }
+    </script>
+
+    <script>
+        function Fn_alert() {
+            alert("Thank You! \nYou will be contacted soon.");
         }
     </script>
 </body>

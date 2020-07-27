@@ -3,6 +3,8 @@
     ViewData["Title"] = "Organization";
     Layout = "~/Views/Shared/_Organization_view.cshtml";
 }
+
+@* Carousel for images *@
 <div class="container" style="max-width:100%; padding:0">
     <div class="carousel slide carousel-fade" id="featured" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -20,7 +22,7 @@
 
             </div>
             <div class="carousel-item img-fluid">
-                <img class="d-block w-100" src="~/Images/Organization/1C.jpg" alt="Lifestyle Photo">
+                <img class="d-block w-100" src="~/Images/Organization/1B.jpg" alt="Lifestyle Photo">
                 <div class="slider_text">
                     <h3 class="font-weight-bolder">Get Qualified, Matched Candidates Quickly</h3>
                     <p><a class="btn btn-primary btn-lg" asp-controller="OrgRegister" asp-action="Register">Get Started</a></p>
@@ -28,7 +30,7 @@
 
             </div>
             <div class="carousel-item img-fluid">
-                <img class="d-block w-100" src="~/Images/Organization/1B.jpg" alt="Vaccinations">
+                <img class="d-block w-100" src="~/Images/Organization/1C.jpg" alt="Vaccinations">
                 <div class="slider_text">
                     <h3 class="font-weight-bolder">Get Qualified, Matched Candidates Quickly</h3>
                     <p><a class="btn btn-primary btn-lg" asp-controller="OrgRegister" asp-action="Register">Get Started</a></p>
@@ -51,11 +53,88 @@
         </a>
     </div>
 </div>
-<div class="container" >
-    @*<div class="text-center text-dark">
-        <h3>Get Qualified, Matched Candidates Quickly</h3>
-        <p><input type="button" class="btn btn-primary btn-lg" value="Get Started"></p>
-    </div>*@
+
+@* Message Banner *@
+<div style="margin:2rem; border:1px solid black; text-align:center; padding-top:1rem">
+    <div class="Message-slideshow-container">
+
+        <div class="mySlides Message-fade">
+            <h1>TikTi can help reduce bias in your hiring decisions</h1>
+        </div>
+
+        <div class="mySlides Message-fade">
+            <h1>TikTi dramatically reduces time to hire</h1>
+        </div>
+
+        <div class="mySlides Message-fade">
+            <h1>TikTi includes salary matching</h1>
+        </div>
+
+        <div class="mySlides Message-fade">
+            <h1>TikTi means Fit, match, go together</h1>
+        </div>
+
+        <div class="mySlides Message-fade">
+            <h1>TikTi reduces the time and cost of recruiting for organizations</h1>
+        </div>
+
+        <div class="mySlides Message-fade">
+            <h1>TikTi delivers a better recruiting experience for everyone</h1>
+        </div>
+    </div>
+    <br>
+
+    <div style="text-align:center">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
 </div>
+
+@* fix text on website *@
+<div style="margin:3rem 10rem 0rem 10rem; text-align:center">
+    <h5 class="display-4"><kbd>Recruiting is hard work</kbd></h5><br />
+    <p style="font-size:1.5rem">
+        A lot of time is spent getting to those well qualified candidates, only to lose some because of timing,
+        salary or even your vacation policy.
+    </p>
+
+    <p style="font-size:1.5rem;">
+        TikTi is all about matching your role and organizational criteria to those <br /> well matched,<br />
+        qualified candidates <br /> (including salary, benefits and your culture) in days … <br />not weeks
+    </p>
+    <br />
+    <h5 style="font-size:1.5rem">
+        Now that you have <b>TikTi</b>
+        working for you,<br />why would you recruit any other way?
+    </h5>
+</div>
+
+
+@* JS functions for message banner *@
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 5000); // Change image every 2 seconds
+}
+</script>
 
 

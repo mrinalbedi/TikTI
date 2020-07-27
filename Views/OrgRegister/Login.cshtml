@@ -4,36 +4,53 @@
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Organization_view.cshtml";
 }
-
-<h1 class="text-center">Organization Login</h1>
-<hr />
-<div class="container">
-    <div class="row">
-        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-            <form asp-action="Login">
-
-                <div class="text-danger font-weight-bold">@TempData["message"]</div>
-
-                <div class="form-group">
-                    <label class="control-label">Email</label>
-                    <input type="text" class="form-control" name="email" />
-
+<div class="Org_reg_col_container" style="height:100%">
+    <div class="Org_reg_col_col2 container">
+        <div class="row">
+            <div class="col text-center img-fluid org_reg_logo_margin">
+                <img src="~/Images/Logo/Tikti.png" alt="TikTi Logo" height="120" />
+            </div>
+        </div>
+        <div class=" row flip-box" style="margin:2.5rem">
+            <div class="flip-box-inner">
+                <div class="flip-box-front">
+                    <h2 class="text-center">TikTi dramatically reduces time to hire</h2>
                 </div>
-                <div class="form-group">
-                    <label class="control-label">Password</label>
-                    <input type="password" class="form-control" name="Pwd" />
-
+                <div class="flip-box-back">
+                    <h2>TikTi means Fit, match, go together</h2>
                 </div>
-                <div class="form-group text-center">
-                    <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+        </div>
+        <div class="img-thumbnail" style="margin:0rem 1rem 0rem 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+            <img src="~/Images/Organization/Organization 7.jpg" class="img-fluid" />
+        </div>
+    </div>
+    <div class="Org_reg_col_col1">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <form asp-action="Login">
+
+                    <div class="text-danger font-weight-bold">@TempData["message"]</div>
+
+                    <div class="form-group">
+                        <h6><label class="control-label">Email</label></h6>
+                        <input type="text" class="form-control" name="email" />
+
+                    </div>
+                    <div class="form-group">
+                        <h6><label class="control-label">Password</label></h6>
+                        <input type="password" class="form-control" name="Pwd" />
+
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="submit" value="Login" class="btn btn-primary" />
+                    </div>
+                </form>
+
+
+                <div class="row col-md-9">
+                    <a asp-action="Register" class="font-weight-bolder">Back to Registration</a>
                 </div>
-            </form>
-
-
-            <div class="row col-md-9">
-                <a asp-action="Register" class="font-weight-bolder">Back to Registration</a>
             </div>
         </div>
     </div>
 </div>
-
