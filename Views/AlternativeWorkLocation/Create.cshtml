@@ -4,13 +4,13 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Organization_view.cshtml";
 }
-
-<h1>Create</h1>
-
-<h4>AlternativeWorkLocation</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+@*<div class="row">*@
+    <div class="col-md-4 align-content-center" style="margin:auto">
+        <div class="row">
+            <h1>Alternative Work Location</h1>
+        </div>
+        <hr />
         <a class="float-right" asp-action="Create" asp-controller="RoleCulture">Skip this step</a>
         <br />
         <form asp-action="Create">
@@ -32,13 +32,11 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="Save & Add Another" class="btn btn-primary" asp-route-value="add" />
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Save & Next" class="btn btn-primary" asp-route-value="next" />
             </div>
         </form>
     </div>
-</div>
+@*</div>*@
 
 
 

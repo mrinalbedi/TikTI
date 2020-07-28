@@ -30,7 +30,7 @@ create table orgRegisterHR(
 
 create table workCommitment(
 	workCommitmentID int identity constraint workCommitment_pk primary key,
-	Commitment varchar(255) 
+	Commitment varchar(255)
 )
 
 insert into workCommitment values ('full time')
@@ -41,7 +41,7 @@ insert into workCommitment values ('full time contract')
 
 create table currency(
 	currencyID int identity constraint currency_pk primary key,
-	currency varchar(255) 
+	currency varchar(255)
 )
 
 insert into currency values ('US Dollar')
@@ -54,7 +54,7 @@ insert into currency values ('Indian Rupee')
 
 create table certification(
 	certificationID int identity constraint certification_pk primary key,
-	certificationName varchar(255) 
+	certificationName varchar(255)
 )
 
 insert into certification values ('MsOffice Certification ')
@@ -65,7 +65,7 @@ insert into certification values ('Python(Django) Certified')
 
 create table experience(
 	experienceID int identity constraint experience_pk primary key,
-	experience varchar(255) 
+	experience varchar(255)
 )
 
 insert into experience values ('<1 year')
@@ -77,7 +77,7 @@ insert into experience values ('10+ years')
 
 create table education(
 	educationID int identity constraint education_pk primary key,
-	education varchar(255) 
+	education varchar(255)
 )
 
 insert into education values ('High School')
@@ -92,7 +92,7 @@ insert into education values ('Certification')
 
 create table otherRequirement(
 	otherRequirementID int identity constraint otherRequirement_pk primary key,
-	otherRequirementName varchar(255) 
+	otherRequirementName varchar(255)
 )
 
 insert into otherRequirement values ('Travel Requirement')

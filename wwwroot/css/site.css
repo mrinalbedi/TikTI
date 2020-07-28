@@ -348,7 +348,6 @@ button:focus {
     padding: 16px;
     width: 45%;
     box-shadow: inset 0 0 10px #000000;
-    background-image: linear-gradient(to bottom left, white, black);
 }
 
 /*flip box in organization registration page*/
@@ -396,6 +395,24 @@ button:focus {
     margin: 2rem;
 }
 
+/*CSS for Organization main page*/
+
+.Org_main_col_col1 {
+    display: table-cell;
+    padding: 16px;
+    width: 30%;
+}
+
+.Org_main_col_col2 {
+    display: table-cell;
+    padding: 16px;
+    width: 30%;
+}
+.Org_main_col_col3 {
+    display: table-cell;
+    padding: 16px;
+    width: 30%;
+}
 /*for the message banner*/
 /* Slideshow container */
 .Message-slideshow-container {
@@ -417,7 +434,7 @@ button:focus {
 .active {
     background-color: #717171;
 }
-/* Fading animation */
+/* Fading animation for message banner */
 .Message-fade {
     -webkit-animation-name: fade;
     -webkit-animation-duration: 1.5s;
