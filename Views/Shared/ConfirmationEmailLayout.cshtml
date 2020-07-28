@@ -17,7 +17,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
     <header id="myHeader" class="header_section">
         <div class="bs-example tiki_navbar ">
             <nav class="navbar navbar-expand-md navbar-light navbar_section">
@@ -30,9 +30,9 @@
 
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav">
-                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="Home" asp-action="Index">Home</a>
-                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="Home" asp-action="Approach">TikTi’s Approach</a>
-                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="OrgRegisters" asp-action="Login">Login</a>
+                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" href="#">Home</a>
+                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" href="#">TikTi’s Approach</a>
+                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" href="#">Login</a>
                     </div>
                 </div>
             </nav>
@@ -78,7 +78,7 @@
                     <p>We know the current recruiting<br /> processes are broken for everyone <br />involved, so we created TikTi.</p>
                     <p>
                         The word TikTi means <b>fit, match, go together.</b> <br />
-                        <a class="read_more" asp-controller="Home" asp-action="LearnMore">Read More</a>
+                        <a class="read_more" href="#">Read More</a>
                     </p>
                 </div>
                 <div class="col footer_text footer_col_border_left" style="margin-top:1rem">
@@ -92,9 +92,9 @@
                 <div class="col footer_text footer_col_border_left" style="margin-top:1rem">
                     <h5>Help</h5>
                     <ul class="footer_link">
-                        <li><a class="link_page" asp-controller="Home" asp-action="PrivacyPolicy">Privacy Policy</a></li>
-                        <li><a class="link_page" asp-controller="Home" asp-action="TermsOfUse">Terms Of Use</a></li>
-                        <li><a class="link_page" asp-controller="Home" asp-action="LearnMore">Contact Form</a></li>
+                        <li><a class="link_page" href="#">Privacy Policy</a></li>
+                        <li><a class="link_page" href="#">Terms Of Use</a></li>
+                        <li><a class="link_page" href="#">Contact Form</a></li>
                     </ul>
                 </div>
                 <div class="col footer_text footer_col_border_left" style="margin-top:1rem">
@@ -135,9 +135,15 @@
         }
     </script>
 
-    <script>
+    <script type="text/javascript">
         function Fn_alert() {
             alert("Thank You! \nYou will be contacted soon.");
+        }
+    </script>
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
         }
     </script>
 </body>
