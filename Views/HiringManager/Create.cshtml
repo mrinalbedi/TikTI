@@ -36,6 +36,8 @@
                 </h1><br />
             </div>
             <div class="col-sm-5 col-md-7 mx-auto">
+                <a class="float-right" asp-action="ConfirmEmail" asp-controller="OrgRegisters">Skip this step</a>
+                <br/>
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
@@ -69,10 +71,10 @@
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Add another hiring manager" class="btn btn-primary" />
+                        <input type="submit" value="Save & add another" class="btn btn-primary" asp-route-value="add" />
                     </div>
                     <div class="form-group">
-                        <a class="btn btn-primary" asp-controller="OrgRegisters" asp-action="ConfirmEmail">No I don't want to add</a>
+                        <input type="submit" value="Save & Next" class="btn btn-primary" asp-route-value="next" />
                     </div>
                 </form>
             </div>

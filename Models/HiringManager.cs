@@ -8,6 +8,7 @@ namespace Tikti.Models
         public HiringManager()
         {
             OrgRegisterHr = new HashSet<OrgRegisterHr>();
+            RoleOpportunity = new HashSet<RoleOpportunity>();
         }
 
         public int HiringManagerId { get; set; }
@@ -19,5 +20,6 @@ namespace Tikti.Models
         public string Email { get; set; }
 
         public virtual ICollection<OrgRegisterHr> OrgRegisterHr { get; set; }
+        public virtual ICollection<RoleOpportunity> RoleOpportunity { get; set; }
     }
 }
