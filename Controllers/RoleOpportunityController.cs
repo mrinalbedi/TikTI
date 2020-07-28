@@ -64,8 +64,7 @@ namespace Tikti.Controllers
                         join hr in _context.HiringManager
                         on orhr.HiringManagerId equals hr.HiringManagerId
                         where org.Email == Request.Cookies["Email"].ToString()
-                        select new { HrmId = hr.HiringManagerId, HrmName = hr.FirstName };
-
+                        select new { HrmId = hr.HiringManagerId, HrmName = hr.FirstName+' '+hr.LastName };
 
             ViewData["HiringManager"] = new SelectList(query, "HrmId", "HrmName");
             ViewData["Certification"] = new SelectList(_context.Certification, "CertificationId", "CertificationName");

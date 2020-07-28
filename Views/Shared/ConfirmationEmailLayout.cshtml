@@ -1,0 +1,150 @@
+﻿<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale= 1" />
+    <title>@ViewData["Title"] - Tikti</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .content {
+            padding: 16px;
+        }
+
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+    <header id="myHeader" class="header_section">
+        <div class="bs-example tiki_navbar ">
+            <nav class="navbar navbar-expand-md navbar-light navbar_section">
+                <a href="#" class="navbar-brand logo_section">
+                    <img src="~/Images/Logo/Tikti.png" alt="TikTi" height="100" />
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav">
+                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" href="#">Home</a>
+                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" href="#">TikTi’s Approach</a>
+                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" href="#">Login</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+    </header>
+    <main role="main" class="no_padding">
+        <div class="content_section">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="border-top footer text-center" style="padding-top:0">
+        @*footer section starts here*@
+        <div class="container-fluid">
+            <div class="row" style="border-top:1px solid gray; padding-top:2rem; border-bottom:5px solid white; background-color:#02520c; color:white">
+                <div class="col-md-3 footer_text">
+                    <h4 class="font-weight-bolder" style="font-size: 1.5vw; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+                        We are always there to listen you <br />
+                        <small>please submit your E-mail address</small>
+                    </h4>
+                </div>
+                <div class="col-md-6" style="padding-left:10rem; padding-right:10rem">
+                    <br />
+                    <div class="input-group inquery_email">
+                        <input type="email" placeholder="Email id" value="" id="email-signup-textbox" class="form-control">
+                        <div class="input-group-append">
+                            <button onclick="Fn_alert()" type="button" class="btn btn-secondary btn-sm">Submit</button>
+                        </div>
+                        <div class="valid-tooltip">Should be a valid email address</div>
+                    </div>
+                </div>
+                <div class="col-md-3 padding_bottom_1rem" style="margin-bottom:2rem; text-align:right">
+                    <h5>Stay Connected</h5>
+                    <a href="#" class="footer_social_media_icon"><img src="~/Images/Logo/facebook.png" alt="F" /></a>
+                    <a href="#" class="footer_social_media_icon"><img src="~/Images/Logo/instagram.png" alt="F" /></a>
+                    <a href="#" class="footer_social_media_icon"><img src="~/Images/Logo/twitter.png" alt="F" /></a>
+                </div>
+            </div>
+            <div class="row" style="border-top:1px solid gray">
+                <div class="col footer_text footer_col_border_left" style="margin-top:1rem;">
+                    <h5>Learn More</h5>
+                    <p>We know the current recruiting<br /> processes are broken for everyone <br />involved, so we created TikTi.</p>
+                    <p>
+                        The word TikTi means <b>fit, match, go together.</b> <br />
+                        <a class="read_more" href="#">Read More</a>
+                    </p>
+                </div>
+                <div class="col footer_text footer_col_border_left" style="margin-top:1rem">
+                    <h5>Menu</h5>
+                    <ul class="footer_link">
+                        <li><a href="#" class="link_page">TikTi's Approach</a></li>
+                        <li><a href="#" class="link_page">Job Seekers</a></li>
+                        <li><a href="#" class="link_page">Organization</a></li>
+                    </ul>
+                </div>
+                <div class="col footer_text footer_col_border_left" style="margin-top:1rem">
+                    <h5>Help</h5>
+                    <ul class="footer_link">
+                        <li><a class="link_page" href="#">Privacy Policy</a></li>
+                        <li><a class="link_page" href="#">Terms Of Use</a></li>
+                        <li><a class="link_page" href="#">Contact Form</a></li>
+                    </ul>
+                </div>
+                <div class="col footer_text footer_col_border_left" style="margin-top:1rem">
+                    <h5>Contact Info</h5>
+                    <ul class="footer_link">
+                        <li><a href="#" class="link_page">Address</a></li>
+                        <li><a href="#" class="link_page">Mail id</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="copyright_text">
+                    &copy; 2020 - Tikti
+                </div>
+            </div>
+        </div>
+
+        @*footer section ends here*@
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+
+    @*Script for stickey header*@
+    <script>
+        window.onscroll = function () { myFunction() };
+
+        var header = document.getElementById("myHeader");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        function Fn_alert() {
+            alert("Thank You! \nYou will be contacted soon.");
+        }
+    </script>
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</body>
+</html>
