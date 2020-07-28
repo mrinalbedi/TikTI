@@ -1,16 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Tikti.Models;
 
 namespace Tikti.Controllers
 {
+    
     public class RoleOpportunityController : Controller
     {
         private readonly TikTiDbContext _context;
@@ -58,13 +59,13 @@ namespace Tikti.Controllers
             //var orgHR = _context.OrgRegisterHr.Where(x => x.RegistrationId == org.RegistrationId);
 
             var query = from org in _context.OrgRegister
-            join orhr in _context.OrgRegisterHr
-            on org.RegistrationId equals orhr.RegistrationId
-            join hr in _context.HiringManager
-            on orhr.HiringManagerId equals hr.HiringManagerId
-            where org.Email == Request.Cookies["Email"].ToString()
-            select new { HrmId = hr.HiringManagerId, HrmName = hr.FirstName};
-           
+                        join orhr in _context.OrgRegisterHr
+                        on org.RegistrationId equals orhr.RegistrationId
+                        join hr in _context.HiringManager
+                        on orhr.HiringManagerId equals hr.HiringManagerId
+                        where org.Email == Request.Cookies["Email"].ToString()
+                        select new { HrmId = hr.HiringManagerId, HrmName = hr.FirstName };
+
 
             ViewData["HiringManager"] = new SelectList(query, "HrmId", "HrmName");
             ViewData["Certification"] = new SelectList(_context.Certification, "CertificationId", "CertificationName");
@@ -72,7 +73,7 @@ namespace Tikti.Controllers
             ViewData["Education"] = new SelectList(_context.Education, "EducationId", "Education1");
             ViewData["Experience"] = new SelectList(_context.Experience, "ExperienceId", "Experience1");
             ViewData["OtherRequirents"] = new SelectList(_context.OtherRequirement, "OtherRequirementId", "OtherRequirementName");
-            ViewData["WorkCommitment"] = new SelectList(_context.WorkCommitment.OrderByDescending(x=>x.WorkCommitmentId), "WorkCommitmentId", "Commitment");
+            ViewData["WorkCommitment"] = new SelectList(_context.WorkCommitment.OrderByDescending(x => x.WorkCommitmentId), "WorkCommitmentId", "Commitment");
             return View();
         }
 
@@ -103,24 +104,21 @@ namespace Tikti.Controllers
             }
 
             if (ModelState.IsValid)
-                    {
-                        _context.Add(roleOpportunity);
-                        await _context.SaveChangesAsync();
-                        var temp = _context.RoleOpportunity.OrderByDescending(x => x.RoleOpportunityId).FirstOrDefault();
-                        Response.Cookies.Append("RoleOpportunityId", temp.RoleOpportunityId.ToString());
-                        return RedirectToAction("Create", "RoleCulture");
-                    }
-                    ViewData["Certification"] = new SelectList(_context.Certification, "CertificationId", "CertificationId", roleOpportunity.Certification);
-                    ViewData["Currency"] = new SelectList(_context.Currency, "CurrencyId", "CurrencyId", roleOpportunity.Currency);
-                    ViewData["Education"] = new SelectList(_context.Education, "EducationId", "EducationId", roleOpportunity.Education);
-                    ViewData["Experience"] = new SelectList(_context.Experience, "ExperienceId", "ExperienceId", roleOpportunity.Experience);
-                    ViewData["OtherRequirents"] = new SelectList(_context.OtherRequirement, "OtherRequirementId", "OtherRequirementId", roleOpportunity.OtherRequirents);
-                    ViewData["WorkCommitment"] = new SelectList(_context.WorkCommitment, "WorkCommitmentId", "WorkCommitmentId", roleOpportunity.WorkCommitment);
-                    return View(roleOpportunity);
-                }
-
-            
-
+            {
+                _context.Add(roleOpportunity);
+                await _context.SaveChangesAsync();
+                var temp = _context.RoleOpportunity.OrderByDescending(x => x.RoleOpportunityId).FirstOrDefault();
+                Response.Cookies.Append("RoleOpportunityId", temp.RoleOpportunityId.ToString());
+                return RedirectToAction("Create", "AlternativeWorkLocation");
+            }
+            ViewData["Certification"] = new SelectList(_context.Certification, "CertificationId", "CertificationId", roleOpportunity.Certification);
+            ViewData["Currency"] = new SelectList(_context.Currency, "CurrencyId", "CurrencyId", roleOpportunity.Currency);
+            ViewData["Education"] = new SelectList(_context.Education, "EducationId", "EducationId", roleOpportunity.Education);
+            ViewData["Experience"] = new SelectList(_context.Experience, "ExperienceId", "ExperienceId", roleOpportunity.Experience);
+            ViewData["OtherRequirents"] = new SelectList(_context.OtherRequirement, "OtherRequirementId", "OtherRequirementId", roleOpportunity.OtherRequirents);
+            ViewData["WorkCommitment"] = new SelectList(_context.WorkCommitment, "WorkCommitmentId", "WorkCommitmentId", roleOpportunity.WorkCommitment);
+            return View(roleOpportunity);
+        }
         // GET: RoleOpportunity/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

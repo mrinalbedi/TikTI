@@ -1,43 +1,131 @@
-
-CREATE TABLE OrgRegistration(
-    registrationID int not null identity primary key ,
-    email nvarchar(max) not null,
-    pwd nvarchar(max) not null,
-    confirmPassword nvarchar(max) not null,
-    contactFirstName nvarchar(30) not null,
-    contactLastName nvarchar(30) not null,
-    contactTitle nvarchar(30) not null,
-    Department nvarchar(30) not null
+CREATE TABLE orgRegister (
+    registrationID int identity primary key,
+    organizationName varchar(30) not null,
+    email varchar(max) not null,
+    password varchar(max) not null,
+    confirmPassword varchar(max) not null,
+	contactFirstName varchar(max) not null,
+	contactLastName varchar(max) not null,
+	contactTitle varchar(max) not null,
+	contactPhoneNumber varchar(max) not null,
+	Department varchar(max) not null
 );
+
+create table HiringManager(
+	hiringManagerID int identity primary key,
+	FirstName varchar(max) not null,
+	LastName varchar(max) not null,
+	Title varchar(max),
+	Department varchar(max),
+	PhoneNumber varchar(max),
+	email varchar(max)
+);
+
+create table orgRegisterHR(
+   orgRegisterHRID int identity primary key,
+   registrationID int foreign key references orgRegister(registrationID),
+   hiringManagerID int foreign key references HiringManager(hiringManagerID)
+);
+
 
 create table workCommitment(
 	workCommitmentID int identity constraint workCommitment_pk primary key,
 	Commitment varchar(255) 
 )
 
+insert into workCommitment values ('full time')
+insert into workCommitment values ('part time')
+insert into workCommitment values ('part time contract')
+insert into workCommitment values ('full time contract')
+
+
 create table currency(
 	currencyID int identity constraint currency_pk primary key,
 	currency varchar(255) 
 )
 
+insert into currency values ('US Dollar')
+insert into currency values ('Canadian Dollar')
+insert into currency values ('Euro')
+insert into currency values ('Pound')
+insert into currency values ('Franc')
+insert into currency values ('Indian Rupee')
+
+
 create table certification(
 	certificationID int identity constraint certification_pk primary key,
 	certificationName varchar(255) 
 )
+
+insert into certification values ('MsOffice Certification ')
+insert into certification values ('ASP.net Certified')
+insert into certification values ('Advanced Java Certified')
+insert into certification values ('Python(Django) Certified')
+
+
 create table experience(
 	experienceID int identity constraint experience_pk primary key,
 	experience varchar(255) 
 )
+
+insert into experience values ('<1 year')
+insert into experience values ('1-3 years')
+insert into experience values ('4-6 years')
+insert into experience values ('7-10 years')
+insert into experience values ('10+ years')
+
 
 create table education(
 	educationID int identity constraint education_pk primary key,
 	education varchar(255) 
 )
 
+insert into education values ('High School')
+insert into education values ('Under Graduate')
+insert into education values ('Diploma')
+insert into education values ('Advanced Diploma')
+insert into education values ('Post Graduate')
+insert into education values ('Masters')
+insert into education values ('PhD')
+insert into education values ('Certification')
+
+
 create table otherRequirement(
 	otherRequirementID int identity constraint otherRequirement_pk primary key,
 	otherRequirementName varchar(255) 
 )
+
+insert into otherRequirement values ('Travel Requirement')
+insert into otherRequirement values ('Driving License')
+insert into otherRequirement values ('Flexible Hours')
+insert into otherRequirement values ('Sponsership Required')
+insert into otherRequirement values ('Overseas Travel Required')
+insert into otherRequirement values ('Drug Testing Required')
+insert into otherRequirement values ('Age > 18')
+
+CREATE TABLE roleOpportunity (
+    roleOpportunityID int identity constraint roleOpportunity_pk primary key,
+    jobDescription varbinary(max) not null,
+	hiringManagerID int foreign key references HiringManager(hiringManagerID),
+    desiredStartDate date not null,
+	workCommitment int not null constraint workCommitment_fk foreign key references workCommitment(workCommitmentID),
+	contractDuration varchar(30),
+	currency int not null constraint currency_fk foreign key references currency(currencyID),
+	salary varchar(30) not null,
+	city varchar(30) not null,
+	province varchar(30) not null,
+	postal varchar(7) not null,
+	telecommutingRoles bit not null default 0,
+	weblink varchar(max),
+	certification int not null constraint certification_fk foreign key references certification(certificationID) on delete cascade,
+	extraCertificationRequired bit not null default 0,
+	extraCertification varchar(max),
+	experience int not null constraint experience_fk foreign key references experience(experienceID) on delete cascade,
+	education int not null constraint education_fk foreign key references education(educationID) on delete cascade,
+	otherRequirents int not null constraint otherRequirement_fk foreign key references otherRequirement(otherRequirementID) on delete cascade
+	)
+
+
 
 create table culture(
 	cultureID int identity constraint culture_pk primary key,
@@ -58,6 +146,7 @@ insert into culture values ('collaborativeTeamWork',0)
 insert into culture values ('roleProgression',0)
 insert into culture values ('vision_purposeDriven',0)
 insert into culture values ('agile',0)
+
 
 create table role_culture(
 	role_cultureID int identity constraint role_culture_pk primary key,
@@ -104,89 +193,17 @@ create table role_benefit(
 )
 
 
-CREATE TABLE roleOpportunity (
-    roleOpportunityID int identity constraint roleOpportunity_pk primary key,
-    jobDescription varbinary(max) not null,
-    desiredStartDate date not null,
-	workCommitment int not null constraint workCommitment_fk foreign key references workCommitment(workCommitmentID),
-	contractDuration varchar(30),
-	currency int not null constraint currency_fk foreign key references currency(currencyID),
-	salary varchar(30) not null,
-	city varchar(30) not null,
-	province varchar(30) not null,
-	postal varchar(7) not null,
-	telecommutingRoles bit not null default 0,
-	weblink varchar(max),
-	certification int not null constraint certification_fk foreign key references certification(certificationID) on delete cascade,
-	extraCertificationRequired bit not null default 0,
-	extraCertification varchar(max),
-	experience int not null constraint experience_fk foreign key references experience(experienceID) on delete cascade,
-	education int not null constraint education_fk foreign key references education(educationID) on delete cascade,
-	otherRequirents int not null constraint otherRequirement_fk foreign key references otherRequirement(otherRequirementID) on delete cascade
-	)
-
-
 create table alternativeWorkLocation(
 	workLocationID int identity constraint workLocation_pk primary key,
-    city varbinary(30) not null,
-	province varbinary(30) not null,
-	postal varbinary(6) not null,
-)
-
-create table role_WorkLocation(
-	role_WorkLocationID int identity constraint role_WorkLocation_pk primary key,
-	roleOpportunity int not null constraint roleOpportunity_fk foreign key references roleOpportunity(roleOpportunityID),
-	alternativeWorkLocation int not null constraint alternativeWorkLocation_fk foreign key references alternativeWorkLocation(workLocationID),
+    city varchar(max) not null,
+	province varchar(max) not null,
+	postal varchar(max) not null
 )
 
 
-insert into workCommitment values ('full time')
-insert into workCommitment values ('part time')
-insert into workCommitment values ('part time contract')
-insert into workCommitment values ('full time contract')
+create table alterWorkRoleOpportunity(
+	alterWorkRoleOpportunityId int identity primary key,
+	roleOpportunityID int foreign key references roleOpportunity(roleOpportunityID),
+	workLocationID int foreign key references alternativeWorkLocation(workLocationID)
+)
 
-insert into currency values ('dollor')
-insert into currency values ('euro')
-
-insert into education values ('bachelors')
-insert into education values ('masters')
-
-insert into experience values ('1 yr')
-insert into experience values ('3 yr')
-insert into experience values ('5 yr')
-
-insert into certification values ('MS Office')
-insert into certification values ('Python')
-
-insert into otherRequirement values ('must have a G2 License')
-insert into otherRequirement values ('must have a car')
-
---=============================================================================
-CREATE TABLE orgRegister (
-    registrationID int identity primary key,
-    organizationName varchar(30) not null,
-    email varchar(max) not null,
-    password varchar(max) not null,
-    confirmPassword varchar(max) not null,
-	contactFirstName varchar(max) not null,
-	contactLastName varchar(max) not null,
-	contactTitle varchar(max) not null,
-	contactPhoneNumber varchar(max) not null,
-	Department varchar(max) not null
-);
-
-create table HiringManager(
-	hiringManagerID int identity primary key,
-	FirstName varchar(max) not null,
-	LastName varchar(max) not null,
-	Title varchar(max),
-	Department varchar(max),
-	PhoneNumber varchar(max),
-	email varchar(max)
-);
-
-create table orgRegisterHR(
-   orgRegisterHRID int identity primary key,
-   registrationID int foreign key references orgRegister(registrationID),
-   hiringManagerID int foreign key references HiringManager(hiringManagerID)
-);

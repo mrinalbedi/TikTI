@@ -33,7 +33,10 @@ namespace Tikti
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
-            services.AddRazorPages();
+            services.AddRazorPages(options => { 
+                options.Conventions.AuthorizePage("/Login");
+                options.Conventions.AuthorizeFolder("/OrgRegisters");
+            });
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddDistributedMemoryCache();
             services.AddSession();

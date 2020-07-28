@@ -57,7 +57,7 @@ namespace Tikti.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("HiringManagerId,FirstName,LastName,Title,Department,PhoneNumber,Email")] HiringManager hiringManager)
+        public async Task<IActionResult> Create([Bind("HiringManagerId,FirstName,LastName,Title,Department,PhoneNumber,Email")] HiringManager hiringManager,string value)
         {
             if (ModelState.IsValid)
             {
@@ -70,8 +70,10 @@ namespace Tikti.Controllers
                 
                 _context.Add(orhr);
                 await _context.SaveChangesAsync();
-
-                return RedirectToAction("Create","HiringManager");
+                if (value == "add")
+                    return RedirectToAction("Create","HiringManager");
+                if (value == "next")
+                    return RedirectToAction("ConfirmEmail", "OrgRegisters");
             }
             return View(hiringManager);
         }

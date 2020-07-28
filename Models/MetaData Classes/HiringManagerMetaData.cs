@@ -9,24 +9,24 @@ namespace Tikti.Models
     public class HiringManagerMetaData
     {
         [Required]
-        [StringLength(50, ErrorMessage = "The First name should be minimum 5 characters and maximum 50 characters", MinimumLength = 5)]
-        [Display(Name = "Contact Person First Name")]
+        [StringLength(30, ErrorMessage = "The First name should be minimum 2 characters and maximum 30 characters", MinimumLength = 2)]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
-        [StringLength(50, ErrorMessage = "The Last name should be minimum 5 characters and maximum 50 characters", MinimumLength = 5)]
-        [Display(Name = "Contact Person Last Name")]
+        [StringLength(30, ErrorMessage = "The Last name should be minimum 2 characters and maximum 30 characters", MinimumLength = 2)]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Required]
-        [StringLength(50, ErrorMessage = "The Title should be minimum 5 characters and maximum 50 characters", MinimumLength = 5)]
-        [Display(Name = "Contact Person Title")]
+        [StringLength(30, ErrorMessage = "The Title should be minimum 2 characters and maximum 30 characters", MinimumLength = 2)]
+        [Display(Name = "Title")]
         public string Title { get; set; }
 
 
         [Required]
-        [StringLength(50, ErrorMessage = "The Department should be minimum 5 characters and maximum 50 characters", MinimumLength = 5)]
-        [Display(Name = "Department")]
+        [StringLength(30, ErrorMessage = "The Department name should be minimum 2 characters and maximum 30 characters", MinimumLength = 2)]
+        [Display(Name = "Department Name")]
         public string Department { get; set; }
 
         [Required]

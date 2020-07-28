@@ -15,6 +15,7 @@ namespace Tikti.Models
         {
         }
 
+        public virtual DbSet<AlterWorkRoleOpportunity> AlterWorkRoleOpportunity { get; set; }
         public virtual DbSet<AlternativeWorkLocation> AlternativeWorkLocation { get; set; }
         public virtual DbSet<Benefit> Benefit { get; set; }
         public virtual DbSet<Certification> Certification { get; set; }
@@ -42,6 +43,27 @@ namespace Tikti.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AlterWorkRoleOpportunity>(entity =>
+            {
+                entity.ToTable("alterWorkRoleOpportunity");
+
+                entity.Property(e => e.AlterWorkRoleOpportunityId).HasColumnName("alterWorkRoleOpportunityId");
+
+                entity.Property(e => e.RoleOpportunityId).HasColumnName("roleOpportunityID");
+
+                entity.Property(e => e.WorkLocationId).HasColumnName("workLocationID");
+
+                entity.HasOne(d => d.RoleOpportunity)
+                    .WithMany(p => p.AlterWorkRoleOpportunity)
+                    .HasForeignKey(d => d.RoleOpportunityId)
+                    .HasConstraintName("FK__alterWork__roleO__0880433F");
+
+                entity.HasOne(d => d.WorkLocation)
+                    .WithMany(p => p.AlterWorkRoleOpportunity)
+                    .HasForeignKey(d => d.WorkLocationId)
+                    .HasConstraintName("FK__alterWork__workL__09746778");
+            });
+
             modelBuilder.Entity<AlternativeWorkLocation>(entity =>
             {
                 entity.HasKey(e => e.WorkLocationId)
@@ -52,19 +74,16 @@ namespace Tikti.Models
                 entity.Property(e => e.WorkLocationId).HasColumnName("workLocationID");
 
                 entity.Property(e => e.City)
-                    .IsRequired()
                     .HasColumnName("city")
-                    .HasMaxLength(30);
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Postal)
-                    .IsRequired()
                     .HasColumnName("postal")
-                    .HasMaxLength(6);
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Province)
-                    .IsRequired()
                     .HasColumnName("province")
-                    .HasMaxLength(30);
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Benefit>(entity =>
