@@ -5,30 +5,35 @@
     Layout = "~/Views/Shared/_Organization_view.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>RoleCulture</h4>
 <hr />
-<div class="row align-items-center">
-    <div class="col-md-4 align-content-center">
-        <form asp-action="Create" >
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @for (int i = 0; i < Model.cultures.Count; i++)
-            {
+@*<div class="row align-items-center">*@
+<div class="col-md-4 align-content-center" style="margin:auto">
+    <div class="row">
+        <h1>Select Role Culter</h1>
+    </div>
+    <hr/>
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @for (int i = 0; i < Model.cultures.Count; i++)
+        {
+            <div>
                 @Html.CheckBoxFor(m => m.cultures[i].IsSelected)
-                @Html.LabelFor(m => m.cultures[i].CultureName, Model.cultures[i].CultureName)<br/>
-                @Html.HiddenFor(m => m.cultures[i].CultureId)
-            }
-            <div class="form-group">
-                <input type="submit" value="Next Fields" class="btn btn-primary" />
+                @Html.LabelFor(m => m.cultures[i].CultureName, Model.cultures[i].CultureName)<br />
             </div>
-        </form>
+            @Html.HiddenFor(m => m.cultures[i].CultureId)
+        }
+        <div class="form-group">
+            <input type="submit" value="Next Fields" class="btn btn-primary" />
+        </div>
+    </form>
+    <div>
+        <a asp-action="Index">Back to List</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@*</div>*@
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
