@@ -191,7 +191,7 @@ namespace Tikti.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(OrgRegistration org)
+        public ActionResult Login(OrgRegister org)
         {
             System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
             System.Text.Decoder utf8Decode = encoder.GetDecoder();
@@ -205,9 +205,10 @@ namespace Tikti.Controllers
 
             //var usr = _context.OrgRegistration.FirstOrDefault(u => u.Email == org.Email
             // && u.Pwd == org.Pwd);
-            if (result == org.Pwd)
+            if (result == org.Password)
             {
                 HttpContext.Session.SetString("UserId", usr.Email.ToString());
+                Response.Cookies.Append("Email", org.Email);
                 return RedirectToAction("LoggedIn");
             }
             else

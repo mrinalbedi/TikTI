@@ -335,6 +335,8 @@ namespace Tikti.Models
 
                 entity.Property(e => e.ExtraCertificationRequired).HasColumnName("extraCertificationRequired");
 
+                entity.Property(e => e.HiringManagerId).HasColumnName("hiringManagerID");
+
                 entity.Property(e => e.JobDescription)
                     .IsRequired()
                     .HasColumnName("jobDescription");
@@ -387,6 +389,11 @@ namespace Tikti.Models
                     .WithMany(p => p.RoleOpportunity)
                     .HasForeignKey(d => d.Experience)
                     .HasConstraintName("experience_fk");
+
+                entity.HasOne(d => d.HiringManager)
+                    .WithMany(p => p.RoleOpportunity)
+                    .HasForeignKey(d => d.HiringManagerId)
+                    .HasConstraintName("FK__roleOppor__hirin__73852659");
 
                 entity.HasOne(d => d.OtherRequirentsNavigation)
                     .WithMany(p => p.RoleOpportunity)

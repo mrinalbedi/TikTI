@@ -29,11 +29,13 @@ namespace Tikti.Models
         public int Experience { get; set; }
         public int Education { get; set; }
         public int OtherRequirents { get; set; }
+        public int? HiringManagerId { get; set; }
 
         public virtual Certification CertificationNavigation { get; set; }
         public virtual Currency CurrencyNavigation { get; set; }
         public virtual Education EducationNavigation { get; set; }
         public virtual Experience ExperienceNavigation { get; set; }
+        public virtual HiringManager HiringManager { get; set; }
         public virtual OtherRequirement OtherRequirentsNavigation { get; set; }
         public virtual WorkCommitment WorkCommitmentNavigation { get; set; }
         public virtual ICollection<RoleBenefit> RoleBenefit { get; set; }
