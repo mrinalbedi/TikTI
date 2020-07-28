@@ -5,30 +5,33 @@
     Layout = "~/Views/Shared/_Organization_view.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>RoleBenefit</h4>
-<hr />
-<div class="row align-items-center">
-    <div class="col-md-4 align-content-center">
+@*<div class="row align-items-center">*@
+    <div class="col-md-4 align-content-center" style="margin:auto">
+        <div class="row">
+            <h1>Select Role Benefit</h1>
+        </div>
+        <hr />
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @for (int i = 0; i < Model.benefits.Count; i++)
             {
-                @Html.CheckBoxFor(m => m.benefits[i].IsSelected)
-                @Html.LabelFor(m => m.benefits[i].BenefitName, Model.benefits[i].BenefitName)<br/>
+                <div>
+                    @Html.CheckBoxFor(m => m.benefits[i].IsSelected)
+                    @Html.LabelFor(m => m.benefits[i].BenefitName, Model.benefits[i].BenefitName)<br />
+                </div>
                 @Html.HiddenFor(m => m.benefits[i].BenefitId)
             }
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
     </div>
-</div>
+@*</div>*@
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
