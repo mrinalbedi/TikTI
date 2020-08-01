@@ -207,3 +207,20 @@ create table alterWorkRoleOpportunity(
 	workLocationID int foreign key references alternativeWorkLocation(workLocationID)
 )
 
+---------------------
+--Creating Technology Skills table
+
+Create table TechnologySkills
+(TechnologySkillId int identity constraint Technology_Skill_pk primary key,
+SkillName varchar(50) not null)
+
+insert into TechnologySkills values('ACT! Premium')
+insert into TechnologySkills values('Adobe Systems Adobe Distiller')
+insert into TechnologySkills values('Adobe Systems Adobe Flash')
+insert into TechnologySkills values('Adobe Systems Adobe Flex')
+insert into TechnologySkills values('Advanced business application programming ABAP')
+insert into TechnologySkills values('Amazon Web Services AWS software')
+
+insert into TechnologySkills values('Apache Cassandra')
+insert into TechnologySkills values('Apache HTTP Server')
+insert into TechnologySkills values('ACT! Premium')

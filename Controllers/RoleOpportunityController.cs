@@ -11,7 +11,7 @@ using Tikti.Models;
 
 namespace Tikti.Controllers
 {
-    
+   
     public class RoleOpportunityController : Controller
     {
         private readonly TikTiDbContext _context;
