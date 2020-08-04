@@ -144,7 +144,9 @@ a.nav-item.nav-link.active {
     margin-top: 5px;
     color: #000;
 }
-
+.footer-bottom-border {
+    border-bottom: 1px solid #000000 !important;
+}
 .footer_link {
     padding-left: 0px;
     list-style: none;
@@ -305,29 +307,24 @@ button:focus {
         font-size: 12px;
     }
 }
-
-.privacy_4rem_pad {
-    padding-left: 4rem;
-}
-
-.privacy_3rem_pad {
-    padding-left: 3rem;
-}
-
-.privacy_2rem_pad {
-    padding-left: 2rem;
+/*Privacy policy css*/
+.P_head {
+    text-shadow:1.5px 1px 1px #036636;
 }
 
 .privacy_pad {
     padding-left: 1rem;
 }
 
-.footer-bottom-border {
-    border-bottom: 1px solid #000000 !important;
+.pad_left_right_2rem{
+    padding:0 2rem 0 2rem;
 }
-
 .no_padding {
     padding: 0 !important;
+}
+
+.no_margin{
+    margin:0 !important;
 }
 
 /*Deviding organization registration part in two column*/
@@ -399,18 +396,15 @@ button:focus {
 
 .Org_main_col_col1 {
     display: table-cell;
-    padding: 16px;
     width: 30%;
 }
 
 .Org_main_col_col2 {
     display: table-cell;
-    padding: 16px;
     width: 30%;
 }
 .Org_main_col_col3 {
     display: table-cell;
-    padding: 16px;
     width: 30%;
 }
 /*for the message banner*/
