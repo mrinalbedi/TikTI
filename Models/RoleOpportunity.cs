@@ -8,6 +8,7 @@ namespace Tikti.Models
         public RoleOpportunity()
         {
             AlterWorkRoleOpportunity = new HashSet<AlterWorkRoleOpportunity>();
+            OtherRequirements = new HashSet<OtherRequirements>();
             RoleBenefit = new HashSet<RoleBenefit>();
             RoleCompetencyA = new HashSet<RoleCompetencyA>();
             RoleCompetencyB = new HashSet<RoleCompetencyB>();
@@ -15,7 +16,9 @@ namespace Tikti.Models
         }
 
         public int RoleOpportunityId { get; set; }
+        public int AlternateTitleId { get; set; }
         public byte[] JobDescription { get; set; }
+        public int? HiringManagerId { get; set; }
         public DateTime DesiredStartDate { get; set; }
         public int WorkCommitment { get; set; }
         public string ContractDuration { get; set; }
@@ -32,8 +35,8 @@ namespace Tikti.Models
         public int Experience { get; set; }
         public int Education { get; set; }
         public int OtherRequirents { get; set; }
-        public int? HiringManagerId { get; set; }
 
+        public virtual AlternateTitles AlternateTitle { get; set; }
         public virtual Certification CertificationNavigation { get; set; }
         public virtual Currency CurrencyNavigation { get; set; }
         public virtual Education EducationNavigation { get; set; }
@@ -42,6 +45,7 @@ namespace Tikti.Models
         public virtual OtherRequirement OtherRequirentsNavigation { get; set; }
         public virtual WorkCommitment WorkCommitmentNavigation { get; set; }
         public virtual ICollection<AlterWorkRoleOpportunity> AlterWorkRoleOpportunity { get; set; }
+        public virtual ICollection<OtherRequirements> OtherRequirements { get; set; }
         public virtual ICollection<RoleBenefit> RoleBenefit { get; set; }
         public virtual ICollection<RoleCompetencyA> RoleCompetencyA { get; set; }
         public virtual ICollection<RoleCompetencyB> RoleCompetencyB { get; set; }

@@ -30,6 +30,7 @@ namespace Tikti.Models
         public virtual DbSet<OrgRegister> OrgRegister { get; set; }
         public virtual DbSet<OrgRegisterHr> OrgRegisterHr { get; set; }
         public virtual DbSet<OtherRequirement> OtherRequirement { get; set; }
+        public virtual DbSet<OtherRequirements> OtherRequirements { get; set; }
         public virtual DbSet<RoleBenefit> RoleBenefit { get; set; }
         public virtual DbSet<RoleCompetencyA> RoleCompetencyA { get; set; }
         public virtual DbSet<RoleCompetencyB> RoleCompetencyB { get; set; }
@@ -62,12 +63,12 @@ namespace Tikti.Models
                 entity.HasOne(d => d.RoleOpportunity)
                     .WithMany(p => p.AlterWorkRoleOpportunity)
                     .HasForeignKey(d => d.RoleOpportunityId)
-                    .HasConstraintName("FK__alterWork__roleO__0880433F");
+                    .HasConstraintName("FK__alterWork__roleO__477199F1");
 
                 entity.HasOne(d => d.WorkLocation)
                     .WithMany(p => p.AlterWorkRoleOpportunity)
                     .HasForeignKey(d => d.WorkLocationId)
-                    .HasConstraintName("FK__alterWork__workL__09746778");
+                    .HasConstraintName("FK__alterWork__workL__4865BE2A");
             });
 
             modelBuilder.Entity<AlternateTitles>(entity =>
@@ -339,6 +340,40 @@ namespace Tikti.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<OtherRequirements>(entity =>
+            {
+                entity.HasKey(e => e.RequirementId)
+                    .HasName("PK__otherReq__60E29FF25FBE6F72");
+
+                entity.ToTable("otherRequirements");
+
+                entity.Property(e => e.RequirementId).HasColumnName("requirementID");
+
+                entity.Property(e => e.Age18).HasColumnName("age18");
+
+                entity.Property(e => e.DrugTesting).HasColumnName("drugTesting");
+
+                entity.Property(e => e.LicenseProvince)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OverseasTravel).HasColumnName("overseasTravel");
+
+                entity.Property(e => e.RoleOpportunityId).HasColumnName("roleOpportunityID");
+
+                entity.Property(e => e.Sponsorship).HasColumnName("sponsorship");
+
+                entity.Property(e => e.TravelDistance)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.RoleOpportunity)
+                    .WithMany(p => p.OtherRequirements)
+                    .HasForeignKey(d => d.RoleOpportunityId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__otherRequ__roleO__52E34C9D");
+            });
+
             modelBuilder.Entity<RoleBenefit>(entity =>
             {
                 entity.ToTable("role_benefit");
@@ -437,6 +472,8 @@ namespace Tikti.Models
 
                 entity.Property(e => e.RoleOpportunityId).HasColumnName("roleOpportunityID");
 
+                entity.Property(e => e.AlternateTitleId).HasColumnName("alternateTitleID");
+
                 entity.Property(e => e.Certification).HasColumnName("certification");
 
                 entity.Property(e => e.City)
@@ -500,6 +537,12 @@ namespace Tikti.Models
 
                 entity.Property(e => e.WorkCommitment).HasColumnName("workCommitment");
 
+                entity.HasOne(d => d.AlternateTitle)
+                    .WithMany(p => p.RoleOpportunity)
+                    .HasForeignKey(d => d.AlternateTitleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("alternateTitle_fk");
+
                 entity.HasOne(d => d.CertificationNavigation)
                     .WithMany(p => p.RoleOpportunity)
                     .HasForeignKey(d => d.Certification)
@@ -524,7 +567,7 @@ namespace Tikti.Models
                 entity.HasOne(d => d.HiringManager)
                     .WithMany(p => p.RoleOpportunity)
                     .HasForeignKey(d => d.HiringManagerId)
-                    .HasConstraintName("FK__roleOppor__hirin__73852659");
+                    .HasConstraintName("FK__roleOppor__hirin__3552E9B6");
 
                 entity.HasOne(d => d.OtherRequirentsNavigation)
                     .WithMany(p => p.RoleOpportunity)

@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Tikti.Models.OtherRequirements>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Organization_view.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Sponsorship)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OverseasTravel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DrugTesting)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age18)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Travel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TravelDistance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DriverLicense)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LicenseProvince)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WeekendWork)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Overnight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoleOpportunity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sponsorship)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OverseasTravel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrugTesting)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age18)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Travel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TravelDistance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DriverLicense)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LicenseProvince)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WeekendWork)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Overnight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleOpportunity.City)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.RequirementId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.RequirementId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.RequirementId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

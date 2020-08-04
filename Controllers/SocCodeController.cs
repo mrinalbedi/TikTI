@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -45,6 +46,9 @@ namespace Tikti.Controllers
         // GET: SocCode/Create
         public IActionResult Create()
         {
+            var query = from x in _context.SocCode
+                        select x;
+            ViewData["SocCode"] = new SelectList(query, "SocCode1", "Description");
             return View();
         }
 
@@ -53,15 +57,10 @@ namespace Tikti.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SocCode1,Description")] SocCode socCode)
+        public IActionResult Create([Bind("SocCode1,Description")] SocCode socCode)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(socCode);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(socCode);
+            string socCodeSelected = socCode.SocCode1;
+                return RedirectToAction("Create","RoleOpportunity", new { dsf = socCodeSelected });
         }
 
         // GET: SocCode/Edit/5

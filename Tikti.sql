@@ -105,6 +105,7 @@ insert into otherRequirement values ('Age > 18')
 
 CREATE TABLE roleOpportunity (
     roleOpportunityID int identity constraint roleOpportunity_pk primary key,
+	alternateTitleID int not null constraint alternateTitle_fk foreign key references alternateTitles(alternateTitleID),
     jobDescription varbinary(max) not null,
 	hiringManagerID int foreign key references HiringManager(hiringManagerID),
     desiredStartDate date not null,
@@ -125,7 +126,12 @@ CREATE TABLE roleOpportunity (
 	otherRequirents int not null constraint otherRequirement_fk foreign key references otherRequirement(otherRequirementID) on delete cascade
 	)
 
-
+--drop table role_culture
+--drop table role_benefit
+--drop table role_competencyA
+--drop table role_competencyB
+--drop table alterWorkRoleOpportunity
+--drop table roleOpportunity
 
 create table culture(
 	cultureID int identity constraint culture_pk primary key,
@@ -294,3 +300,20 @@ insert into alternateTitles values ('Chief Innovative Officer','11-3021.00')
 insert into alternateTitles values ('Adminsitrative Analysis','13-1111.00')
 insert into alternateTitles values ('Adviser Sales','13-1111.00')
 insert into alternateTitles values ('Analyst Sales','13-1111.00')
+
+--==================================================================================================================
+
+create table otherRequirements(
+	requirementID int identity not null primary key,
+	roleOpportunityID int not null foreign key references roleOpportunity(roleOpportunityID),
+	sponsorship bit not null default 0,
+	overseasTravel bit not null default 0,
+	drugTesting bit not null default 0,
+	age18 bit not null default 0,
+	Travel bit not null default 0,
+	TravelDistance varchar(10),
+	DriverLicense bit not null default 0,
+	LicenseProvince varchar(20),
+	WeekendWork bit not null default 0,
+	Overnight bit not null default 0
+)
