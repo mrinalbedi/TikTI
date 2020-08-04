@@ -25,7 +25,7 @@
         <div class="bs-example tiki_navbar header">
             <nav class="navbar navbar-expand-md navbar-light navbar_section">
                 <a class="navbar-brand logo_section" asp-controller="Home" asp-action="Index">
-                    <img src="~/Images/Logo/Tikti.png" alt="TikTi" height="80" />
+                    <img src="~/Images/Logo/Tikti.png"  alt="TikTi" height="100" />
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@
                     <div class="navbar-nav">
                         <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="Home" asp-action="Index">Home</a>
                         <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="Home" asp-action="Approach">TikTi’s Approach</a>
-                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="Home" asp-action="JobSeeker">Job Seekers</a>
+                        <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="Home" asp-action="Index">Job Seekers</a>
                         <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="Home" asp-action="Organization">Organization</a>
                         @*<a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="RoleOpportunity" asp-action="Create">Create</a>*@
                         <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="OrgRegisters" asp-action="Login">Login</a>
@@ -84,9 +84,9 @@
                 <div class="col footer_text footer_col_border_left" style="margin-top:1rem">
                     <h5>Menu</h5>
                     <ul class="footer_link">
-                        <li><a href="#" class="link_page">TikTi's Approach</a></li>
-                        <li><a href="#" class="link_page">Job Seekers</a></li>
-                        <li><a href="#" class="link_page">Organization</a></li>
+                        <li><a asp-controller="Home" asp-action="Approach" class="link_page">TikTi's Approach</a></li>
+                        <li><a asp-controller="Home" asp-action="Index" class="link_page">Job Seekers</a></li>
+                        <li><a asp-controller="Home" asp-action="Organization" class="link_page">Organization</a></li>
                     </ul>
                 </div>
                 <div class="col footer_text footer_col_border_left" style="margin-top:1rem">
