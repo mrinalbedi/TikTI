@@ -1,0 +1,107 @@
+﻿@model Tikti.Models.OtherRequirements
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Organization_view.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>OtherRequirements</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Sponsorship" /> @Html.DisplayNameFor(model => model.Sponsorship)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="OverseasTravel" /> @Html.DisplayNameFor(model => model.OverseasTravel)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="DrugTesting" /> @Html.DisplayNameFor(model => model.DrugTesting)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Age18" /> @Html.DisplayNameFor(model => model.Age18)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Travel" id="Travel" /> @Html.DisplayNameFor(model => model.Travel)
+                </label>
+            </div>
+            <div class="form-group" id="TravelDistance">
+                <label asp-for="TravelDistance" class="control-label"></label>
+                <input asp-for="TravelDistance" class="form-control" />
+                <span asp-validation-for="TravelDistance" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="DriverLicense" id="License" /> @Html.DisplayNameFor(model => model.DriverLicense)
+                </label>
+            </div>
+            <div class="form-group" id="LicenseProvince">
+                <label asp-for="LicenseProvince" class="control-label"></label>
+                <input asp-for="LicenseProvince" class="form-control" />
+                <span asp-validation-for="LicenseProvince" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="WeekendWork" /> @Html.DisplayNameFor(model => model.WeekendWork)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Overnight" /> @Html.DisplayNameFor(model => model.Overnight)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script type="text/javascript">
+    window.onload = function () {
+        document.getElementById('TravelDistance').style.display = 'none';
+        document.getElementById('LicenseProvince').style.display = 'none';
+    };
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Travel').click(function () {
+                if ($(this).is(":checked")) {
+                    $("#TravelDistance").show();
+                }
+                else {
+                    $("#TravelDistance").hide();
+                }
+            });
+        });
+</script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#License').click(function () {
+                if ($(this).is(":checked")) {
+                    $("#LicenseProvince").show();
+                }
+                else {
+                    $("#LicenseProvince").hide();
+                }
+            });
+        });
+    </script>
+}
+
+

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +10,7 @@ using Tikti.Models;
 
 namespace Tikti.Controllers
 {
-    
+
     public class RoleOpportunityController : Controller
     {
         private readonly TikTiDbContext _context;
@@ -53,19 +52,20 @@ namespace Tikti.Controllers
         }
 
         // GET: RoleOpportunity/Create
-        public IActionResult Create()
+        public IActionResult Create(string dsf)
         {
             //var org = _context.OrgRegister.Where(x => x.Email == Request.Cookies["Email"].ToString()).FirstOrDefault();
             //var orgHR = _context.OrgRegisterHr.Where(x => x.RegistrationId == org.RegistrationId);
-
+            var altTitle = _context.AlternateTitles.Where(x => x.SocCode == dsf);
             var query = from org in _context.OrgRegister
                         join orhr in _context.OrgRegisterHr
                         on org.RegistrationId equals orhr.RegistrationId
                         join hr in _context.HiringManager
                         on orhr.HiringManagerId equals hr.HiringManagerId
                         where org.Email == Request.Cookies["Email"].ToString()
-                        select new { HrmId = hr.HiringManagerId, HrmName = hr.FirstName+' '+hr.LastName };
+                        select new { HrmId = hr.HiringManagerId, HrmName = hr.FirstName + ' ' + hr.LastName };
 
+            ViewData["AlternateTitle"] = new SelectList(altTitle, "AlternateTitleId", "Name");
             ViewData["HiringManager"] = new SelectList(query, "HrmId", "HrmName");
             ViewData["Certification"] = new SelectList(_context.Certification, "CertificationId", "CertificationName");
             ViewData["Currency"] = new SelectList(_context.Currency, "CurrencyId", "Currency1");
@@ -81,7 +81,7 @@ namespace Tikti.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RoleOpportunityId,JobDescription,DesiredStartDate,WorkCommitment,ContractDuration,Currency,Salary,City,Province,Postal,TelecommutingRoles,Weblink,Certification,ExtraCertificationRequired,ExtraCertification,Experience,Education,OtherRequirents,HiringManagerId")] RoleOpportunity roleOpportunity, IFormFile files)
+        public async Task<IActionResult> Create([Bind("RoleOpportunityId,AlternateTitleId,JobDescription,DesiredStartDate,WorkCommitment,ContractDuration,Currency,Salary,City,Province,Postal,TelecommutingRoles,Weblink,Certification,ExtraCertificationRequired,ExtraCertification,Experience,Education,OtherRequirents,HiringManagerId")] RoleOpportunity roleOpportunity, IFormFile files)
         {
             if (files != null)
             {
