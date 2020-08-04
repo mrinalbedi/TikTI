@@ -75,7 +75,7 @@ namespace Tikti.Controllers
                         await _context.SaveChangesAsync();
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", "OtherRequirement");
             }
             return View(roleCompetencyB);
         }

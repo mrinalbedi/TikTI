@@ -12,12 +12,16 @@
             <h1>Upload the Role Opportunity</h1>
         </div>
         <hr/>
-        <form asp-action="Create" method="post" enctype="multipart/form-data" >
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                    <label asp-for="JobDescription" class="control-label">Job Description</label>
-                    <input asp-for="JobDescription" class="form-control-file" name="files" type="file" />
+                <label asp-for="AlternateTitle" class="control-label"></label>
+                <select asp-for="AlternateTitleId" class="form-control" asp-items="ViewBag.AlternateTitle"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="JobDescription" class="control-label">Job Description</label>
+                <input asp-for="JobDescription" class="form-control-file" name="files" type="file" />
             </div>
             <div class="form-group">
                 <label asp-for="HiringManagerId" class="control-label">Hiring Manager</label>
@@ -73,7 +77,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Certification" class="control-label"></label>
-                <select asp-for="Certification" class="form-control" asp-items="ViewBag.Certification" ></select>
+                <select asp-for="Certification" class="form-control" asp-items="ViewBag.Certification"></select>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">

@@ -1,0 +1,82 @@
+﻿@model Tikti.Models.OtherRequirements
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Organization_view.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>OtherRequirements</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="RequirementId" />
+            <div class="form-group">
+                <label asp-for="RoleOpportunityId" class="control-label"></label>
+                <select asp-for="RoleOpportunityId" class="form-control" asp-items="ViewBag.RoleOpportunityId"></select>
+                <span asp-validation-for="RoleOpportunityId" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Sponsorship" /> @Html.DisplayNameFor(model => model.Sponsorship)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="OverseasTravel" /> @Html.DisplayNameFor(model => model.OverseasTravel)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="DrugTesting" /> @Html.DisplayNameFor(model => model.DrugTesting)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Age18" /> @Html.DisplayNameFor(model => model.Age18)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Travel" /> @Html.DisplayNameFor(model => model.Travel)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="TravelDistance" class="control-label"></label>
+                <input asp-for="TravelDistance" class="form-control" />
+                <span asp-validation-for="TravelDistance" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="DriverLicense" /> @Html.DisplayNameFor(model => model.DriverLicense)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="LicenseProvince" class="control-label"></label>
+                <input asp-for="LicenseProvince" class="form-control" />
+                <span asp-validation-for="LicenseProvince" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="WeekendWork" /> @Html.DisplayNameFor(model => model.WeekendWork)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Overnight" /> @Html.DisplayNameFor(model => model.Overnight)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
