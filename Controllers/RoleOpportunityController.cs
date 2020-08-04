@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +10,7 @@ using Tikti.Models;
 
 namespace Tikti.Controllers
 {
-   
+
     public class RoleOpportunityController : Controller
     {
         private readonly TikTiDbContext _context;
@@ -64,7 +63,7 @@ namespace Tikti.Controllers
                         join hr in _context.HiringManager
                         on orhr.HiringManagerId equals hr.HiringManagerId
                         where org.Email == Request.Cookies["Email"].ToString()
-                        select new { HrmId = hr.HiringManagerId, HrmName = hr.FirstName+' '+hr.LastName };
+                        select new { HrmId = hr.HiringManagerId, HrmName = hr.FirstName + ' ' + hr.LastName };
 
             ViewData["HiringManager"] = new SelectList(query, "HrmId", "HrmName");
             ViewData["Certification"] = new SelectList(_context.Certification, "CertificationId", "CertificationName");

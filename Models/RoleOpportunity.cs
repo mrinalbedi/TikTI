@@ -9,6 +9,8 @@ namespace Tikti.Models
         {
             AlterWorkRoleOpportunity = new HashSet<AlterWorkRoleOpportunity>();
             RoleBenefit = new HashSet<RoleBenefit>();
+            RoleCompetencyA = new HashSet<RoleCompetencyA>();
+            RoleCompetencyB = new HashSet<RoleCompetencyB>();
             RoleCulture = new HashSet<RoleCulture>();
         }
 
@@ -41,6 +43,8 @@ namespace Tikti.Models
         public virtual WorkCommitment WorkCommitmentNavigation { get; set; }
         public virtual ICollection<AlterWorkRoleOpportunity> AlterWorkRoleOpportunity { get; set; }
         public virtual ICollection<RoleBenefit> RoleBenefit { get; set; }
+        public virtual ICollection<RoleCompetencyA> RoleCompetencyA { get; set; }
+        public virtual ICollection<RoleCompetencyB> RoleCompetencyB { get; set; }
         public virtual ICollection<RoleCulture> RoleCulture { get; set; }
     }
 }

@@ -207,20 +207,90 @@ create table alterWorkRoleOpportunity(
 	workLocationID int foreign key references alternativeWorkLocation(workLocationID)
 )
 
----------------------
---Creating Technology Skills table
+--============================================================================================
 
-Create table TechnologySkills
-(TechnologySkillId int identity constraint Technology_Skill_pk primary key,
-SkillName varchar(50) not null)
+create table competencyA(
+	competencyID int identity constraint competency_pk primary key,
+	competencyName varchar(50),
+	isSelected bit not null default 0
+)
 
-insert into TechnologySkills values('ACT! Premium')
-insert into TechnologySkills values('Adobe Systems Adobe Distiller')
-insert into TechnologySkills values('Adobe Systems Adobe Flash')
-insert into TechnologySkills values('Adobe Systems Adobe Flex')
-insert into TechnologySkills values('Advanced business application programming ABAP')
-insert into TechnologySkills values('Amazon Web Services AWS software')
+insert into competencyA values ('Insightful',0)
+insert into competencyA values ('Tech-Savvy',0)
+insert into competencyA values ('Problem Solver',0)
+insert into competencyA values ('Creative',0)
+insert into competencyA values ('Analytical',0)
+insert into competencyA values ('Innovative',0)
+insert into competencyA values ('Broad Perspective',0)
+insert into competencyA values ('Curious',0)
+insert into competencyA values ('Productive',0)
+insert into competencyA values ('Resourceful',0)
+insert into competencyA values ('Planner',0)
+insert into competencyA values ('Self-Starter',0)
+insert into competencyA values ('End user centric',0)
+insert into competencyA values ('Organized',0)
+insert into competencyA values ('Opportunitistic',0)
+insert into competencyA values ('Builder',0)
 
-insert into TechnologySkills values('Apache Cassandra')
-insert into TechnologySkills values('Apache HTTP Server')
-insert into TechnologySkills values('ACT! Premium')
+create table role_competencyA(
+	role_competencyAID int identity constraint role_competencyA_pk primary key,
+	roleOpportunity int not null constraint roleOpportunity_frgnkey foreign key references roleOpportunity(roleOpportunityID),
+	comptencyA int not null constraint competencyA_fk foreign key references competencyA(competencyID)
+)
+
+
+create table competencyB(
+	competencyID int identity constraint competencyB_pk primary key,
+	competencyName varchar(50),
+	isSelected bit not null default 0
+)
+
+insert into competencyB values ('Effective Communicator',0)
+insert into competencyB values ('Empathetic',0)
+insert into competencyB values ('Respectful',0)
+insert into competencyB values ('Relationship Builder',0)
+insert into competencyB values ('Collaborative',0)
+insert into competencyB values ('Open Minded',0)
+insert into competencyB values ('Authentic',0)
+insert into competencyB values ('Motivator',0)
+insert into competencyB values ('Trustworthy',0)
+insert into competencyB values ('Self-Aware',0)
+insert into competencyB values ('Risk Taker',0)
+insert into competencyB values ('Constant Learner',0)
+insert into competencyB values ('COnfident',0)
+insert into competencyB values ('Agile',0)
+insert into competencyB values ('Accountable',0)
+insert into competencyB values ('Resilient',0)
+insert into competencyB values ('Purposeful',0)
+insert into competencyB values ('Leader',0)
+insert into competencyB values ('Drive',0)
+
+
+create table role_competencyB(
+	role_competencyBID int identity constraint role_competencyB_pk primary key,
+	roleOpportunity int not null constraint roleOpportunity_frnkey foreign key references roleOpportunity(roleOpportunityID),
+	comptencyB int not null constraint competencyB_fk foreign key references competencyA(competencyID)
+)
+
+--=========================================================================================
+
+create table socCode(
+	socCode varchar(10) constraint socCode_pk primary key,
+	Description varchar(max) not null
+)
+
+insert into socCode values ('11-3021.00','Computer and Information Systems Manager')
+insert into socCode values ('13-1111.00','Management Analysis')
+
+create table alternateTitles (
+ alternateTitleID int identity primary key,
+ Name varchar(max) not null,
+ socCode varchar(10) not null foreign key references socCode(socCode)
+)
+
+insert into alternateTitles values ('Applciation Development Director','11-3021.00')
+insert into alternateTitles values ('Chief Information Officer','11-3021.00')
+insert into alternateTitles values ('Chief Innovative Officer','11-3021.00')
+insert into alternateTitles values ('Adminsitrative Analysis','13-1111.00')
+insert into alternateTitles values ('Adviser Sales','13-1111.00')
+insert into alternateTitles values ('Analyst Sales','13-1111.00')

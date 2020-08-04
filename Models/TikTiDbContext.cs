@@ -16,9 +16,12 @@ namespace Tikti.Models
         }
 
         public virtual DbSet<AlterWorkRoleOpportunity> AlterWorkRoleOpportunity { get; set; }
+        public virtual DbSet<AlternateTitles> AlternateTitles { get; set; }
         public virtual DbSet<AlternativeWorkLocation> AlternativeWorkLocation { get; set; }
         public virtual DbSet<Benefit> Benefit { get; set; }
         public virtual DbSet<Certification> Certification { get; set; }
+        public virtual DbSet<CompetencyA> CompetencyA { get; set; }
+        public virtual DbSet<CompetencyB> CompetencyB { get; set; }
         public virtual DbSet<Culture> Culture { get; set; }
         public virtual DbSet<Currency> Currency { get; set; }
         public virtual DbSet<Education> Education { get; set; }
@@ -28,8 +31,11 @@ namespace Tikti.Models
         public virtual DbSet<OrgRegisterHr> OrgRegisterHr { get; set; }
         public virtual DbSet<OtherRequirement> OtherRequirement { get; set; }
         public virtual DbSet<RoleBenefit> RoleBenefit { get; set; }
+        public virtual DbSet<RoleCompetencyA> RoleCompetencyA { get; set; }
+        public virtual DbSet<RoleCompetencyB> RoleCompetencyB { get; set; }
         public virtual DbSet<RoleCulture> RoleCulture { get; set; }
         public virtual DbSet<RoleOpportunity> RoleOpportunity { get; set; }
+        public virtual DbSet<SocCode> SocCode { get; set; }
         public virtual DbSet<WorkCommitment> WorkCommitment { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -62,6 +68,32 @@ namespace Tikti.Models
                     .WithMany(p => p.AlterWorkRoleOpportunity)
                     .HasForeignKey(d => d.WorkLocationId)
                     .HasConstraintName("FK__alterWork__workL__09746778");
+            });
+
+            modelBuilder.Entity<AlternateTitles>(entity =>
+            {
+                entity.HasKey(e => e.AlternateTitleId)
+                    .HasName("PK__alternat__1FAF7D5FB090BDB6");
+
+                entity.ToTable("alternateTitles");
+
+                entity.Property(e => e.AlternateTitleId).HasColumnName("alternateTitleID");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SocCode)
+                    .IsRequired()
+                    .HasColumnName("socCode")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.SocCodeNavigation)
+                    .WithMany(p => p.AlternateTitles)
+                    .HasForeignKey(d => d.SocCode)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__alternate__socCo__318258D2");
             });
 
             modelBuilder.Entity<AlternativeWorkLocation>(entity =>
@@ -110,6 +142,40 @@ namespace Tikti.Models
                     .HasColumnName("certificationName")
                     .HasMaxLength(255)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<CompetencyA>(entity =>
+            {
+                entity.HasKey(e => e.CompetencyId)
+                    .HasName("competency_pk");
+
+                entity.ToTable("competencyA");
+
+                entity.Property(e => e.CompetencyId).HasColumnName("competencyID");
+
+                entity.Property(e => e.CompetencyName)
+                    .HasColumnName("competencyName")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsSelected).HasColumnName("isSelected");
+            });
+
+            modelBuilder.Entity<CompetencyB>(entity =>
+            {
+                entity.HasKey(e => e.CompetencyId)
+                    .HasName("competencyB_pk");
+
+                entity.ToTable("competencyB");
+
+                entity.Property(e => e.CompetencyId).HasColumnName("competencyID");
+
+                entity.Property(e => e.CompetencyName)
+                    .HasColumnName("competencyName")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsSelected).HasColumnName("isSelected");
             });
 
             modelBuilder.Entity<Culture>(entity =>
@@ -296,6 +362,52 @@ namespace Tikti.Models
                     .HasConstraintName("roleOpportunity_fkey");
             });
 
+            modelBuilder.Entity<RoleCompetencyA>(entity =>
+            {
+                entity.ToTable("role_competencyA");
+
+                entity.Property(e => e.RoleCompetencyAid).HasColumnName("role_competencyAID");
+
+                entity.Property(e => e.ComptencyA).HasColumnName("comptencyA");
+
+                entity.Property(e => e.RoleOpportunity).HasColumnName("roleOpportunity");
+
+                entity.HasOne(d => d.ComptencyANavigation)
+                    .WithMany(p => p.RoleCompetencyA)
+                    .HasForeignKey(d => d.ComptencyA)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("competencyA_fk");
+
+                entity.HasOne(d => d.RoleOpportunityNavigation)
+                    .WithMany(p => p.RoleCompetencyA)
+                    .HasForeignKey(d => d.RoleOpportunity)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("roleOpportunity_frgnkey");
+            });
+
+            modelBuilder.Entity<RoleCompetencyB>(entity =>
+            {
+                entity.ToTable("role_competencyB");
+
+                entity.Property(e => e.RoleCompetencyBid).HasColumnName("role_competencyBID");
+
+                entity.Property(e => e.ComptencyB).HasColumnName("comptencyB");
+
+                entity.Property(e => e.RoleOpportunity).HasColumnName("roleOpportunity");
+
+                entity.HasOne(d => d.ComptencyBNavigation)
+                    .WithMany(p => p.RoleCompetencyB)
+                    .HasForeignKey(d => d.ComptencyB)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("competencyB_fk");
+
+                entity.HasOne(d => d.RoleOpportunityNavigation)
+                    .WithMany(p => p.RoleCompetencyB)
+                    .HasForeignKey(d => d.RoleOpportunity)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("roleOpportunity_frnkey");
+            });
+
             modelBuilder.Entity<RoleCulture>(entity =>
             {
                 entity.ToTable("role_culture");
@@ -424,6 +536,23 @@ namespace Tikti.Models
                     .HasForeignKey(d => d.WorkCommitment)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("workCommitment_fk");
+            });
+
+            modelBuilder.Entity<SocCode>(entity =>
+            {
+                entity.HasKey(e => e.SocCode1)
+                    .HasName("socCode_pk");
+
+                entity.ToTable("socCode");
+
+                entity.Property(e => e.SocCode1)
+                    .HasColumnName("socCode")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<WorkCommitment>(entity =>
