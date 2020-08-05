@@ -70,13 +70,15 @@ namespace Tikti.Controllers
             mm.Body = "<a href='http://localhost:55446/OrgRegisters/EmailConfirmed'>Please click here to confirm your registration</a>";
             mm.IsBodyHtml = true;
             mm.Subject = "Tikti Registration Verification link";
-            SmtpClient smcl = new SmtpClient();
-            smcl.Host = "smtp.gmail.com";
-            smcl.Port = 587;
-            smcl.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smcl.Credentials = new NetworkCredential("alexbaby463@gmail.com", "Alexbaby13@");
-            smcl.EnableSsl = true;
-            smcl.Send(mm);
+                SmtpClient smcl = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    Credentials = new NetworkCredential("alexbaby463@gmail.com", "Alexbaby13@"),
+                    EnableSsl = true
+                };
+                smcl.Send(mm);
             byte[] encode = new byte[orgRegister.Password.Length];
             encode = Encoding.UTF8.GetBytes(orgRegister.Password);
 
@@ -196,24 +198,27 @@ namespace Tikti.Controllers
             System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
             System.Text.Decoder utf8Decode = encoder.GetDecoder();
             var usr = _context.OrgRegister.FirstOrDefault(u => u.Email == org.Email);
-            byte[] todecode_byte = Convert.FromBase64String(usr.Password);
-            int charCount = utf8Decode.GetCharCount(todecode_byte, 0, todecode_byte.Length);
-            char[] decoded_char = new char[charCount];
-            utf8Decode.GetChars(todecode_byte, 0, todecode_byte.Length, decoded_char, 0);
-            string result = new String(decoded_char);
-
-
-            //var usr = _context.OrgRegistration.FirstOrDefault(u => u.Email == org.Email
-            // && u.Pwd == org.Pwd);
-            if (result == org.Password)
+            if(usr!=null)
             {
-                HttpContext.Session.SetString("UserId", usr.Email.ToString());
-                Response.Cookies.Append("Email", org.Email);
-                return RedirectToAction("LoggedIn");
+                byte[] todecode_byte = Convert.FromBase64String(usr.Password);
+                int charCount = utf8Decode.GetCharCount(todecode_byte, 0, todecode_byte.Length);
+                char[] decoded_char = new char[charCount];
+                utf8Decode.GetChars(todecode_byte, 0, todecode_byte.Length, decoded_char, 0);
+                string result = new String(decoded_char);
+                if (result == org.Password)
+                {
+                    HttpContext.Session.SetString("UserId", usr.Email.ToString());
+                    Response.Cookies.Append("Email", org.Email);
+                    return RedirectToAction("LoggedIn");
+                }
+                else
+                {
+                    TempData["message"] = "Username or password is incorrect";
+                }
             }
             else
             {
-                TempData["message"] = "Username or password is incorrect";
+                TempData["message"] = "Oops!! looks like the E-mail ID is not registered with TikTi. Kindly register!!!";
             }
             return View();
         }
