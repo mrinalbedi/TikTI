@@ -47,6 +47,7 @@ namespace Tikti.Controllers
         // GET: OtherRequirement/Create
         public IActionResult Create()
         {
+            ViewBag.ROID = Convert.ToInt32(Request.Cookies["RoleOpportunityId"]);
             //ViewData["RoleOpportunityId"] = new SelectList(_context.RoleOpportunity, "RoleOpportunityId", "City");
             return View();
         }
@@ -63,6 +64,7 @@ namespace Tikti.Controllers
             {
                 _context.Add(otherRequirements);
                 await _context.SaveChangesAsync();
+               
                 return RedirectToAction(nameof(Index));
             }
             //ViewData["RoleOpportunityId"] = new SelectList(_context.RoleOpportunity, "RoleOpportunityId", "City", otherRequirements.RoleOpportunityId);
