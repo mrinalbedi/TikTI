@@ -75,7 +75,7 @@ namespace Tikti.Controllers
         }
 
         // POST: RoleOpportunity/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -137,7 +137,7 @@ namespace Tikti.Controllers
         }
 
         // POST: RoleOpportunity/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
