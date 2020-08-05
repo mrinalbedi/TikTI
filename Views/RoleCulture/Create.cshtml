@@ -7,28 +7,43 @@
 
 <hr />
 @*<div class="row align-items-center">*@
-<div class="col-md-4 align-content-center" style="margin:auto">
-    <div class="row">
-        <h1>Select Role Culture</h1>
-    </div>
-    <hr/>
+@*<div class="text-center">
+    <h1>Select Role Culture</h1>
+</div>*@
+
+@*<div class="col-md-3 align-content-center" style="margin:auto; padding-top:2rem">*@
     <form asp-action="Create">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        @for (int i = 0; i < Model.cultures.Count; i++)
-        {
-            <div style="font-size:1.2rem">
-                @Html.CheckBoxFor(m => m.cultures[i].IsSelected)
-                @Html.LabelFor(m => m.cultures[i].CultureName, Model.cultures[i].CultureName)<br />
+        <div class="row no_margin">
+            <div class="col-md-3" style="margin:auto; padding-top:2rem">
+                <h1 class="text-center" style="font-weight:500; font-variant:small-caps; font-size:3.5rem">
+                    "Select Role Cultures"
+                </h1>
             </div>
-            @Html.HiddenFor(m => m.cultures[i].CultureId)
-        }
-        <div class="form-group">
-            <input type="submit" value="Next Fields" class="btn btn-primary" />
+
+            <div class="col-md-4" style="margin:auto; padding-top:2rem">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @for (int i = 0; i < Model.cultures.Count; i++)
+                {
+                    <div style="font-size:1.2rem; line-height:2.2rem">
+                        @Html.CheckBoxFor(m => m.cultures[i].IsSelected)
+                        @Html.LabelFor(m => m.cultures[i].CultureName, Model.cultures[i].CultureName)<br />
+                    </div>
+                    @Html.HiddenFor(m => m.cultures[i].CultureId)
+                }
+            </div>
+
         </div>
-    </form>
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
+        <div class="row no_margin">
+            <div class="col-md-5 text-center">
+                <div class="form-group">
+                    <input type="submit" value="Next Step" class="btn btn-primary btn-lg" />
+                </div>
+            </div>
+        </div>
+</form>
+        @*<div>
+            <a asp-action="Index">Back to List</a>
+        </div>*@
 </div>
 
 @*</div>*@
