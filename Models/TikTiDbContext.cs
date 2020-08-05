@@ -29,7 +29,6 @@ namespace Tikti.Models
         public virtual DbSet<HiringManager> HiringManager { get; set; }
         public virtual DbSet<OrgRegister> OrgRegister { get; set; }
         public virtual DbSet<OrgRegisterHr> OrgRegisterHr { get; set; }
-        public virtual DbSet<OtherRequirement> OtherRequirement { get; set; }
         public virtual DbSet<OtherRequirements> OtherRequirements { get; set; }
         public virtual DbSet<RoleBenefit> RoleBenefit { get; set; }
         public virtual DbSet<RoleCompetencyA> RoleCompetencyA { get; set; }
@@ -63,18 +62,18 @@ namespace Tikti.Models
                 entity.HasOne(d => d.RoleOpportunity)
                     .WithMany(p => p.AlterWorkRoleOpportunity)
                     .HasForeignKey(d => d.RoleOpportunityId)
-                    .HasConstraintName("FK__alterWork__roleO__477199F1");
+                    .HasConstraintName("FK__alterWork__roleO__6C190EBB");
 
                 entity.HasOne(d => d.WorkLocation)
                     .WithMany(p => p.AlterWorkRoleOpportunity)
                     .HasForeignKey(d => d.WorkLocationId)
-                    .HasConstraintName("FK__alterWork__workL__4865BE2A");
+                    .HasConstraintName("FK__alterWork__workL__6D0D32F4");
             });
 
             modelBuilder.Entity<AlternateTitles>(entity =>
             {
                 entity.HasKey(e => e.AlternateTitleId)
-                    .HasName("PK__alternat__1FAF7D5FB090BDB6");
+                    .HasName("PK__alternat__1FAF7D5FF304B1A3");
 
                 entity.ToTable("alternateTitles");
 
@@ -94,7 +93,7 @@ namespace Tikti.Models
                     .WithMany(p => p.AlternateTitles)
                     .HasForeignKey(d => d.SocCode)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__alternate__socCo__318258D2");
+                    .HasConstraintName("FK__alternate__socCo__571DF1D5");
             });
 
             modelBuilder.Entity<AlternativeWorkLocation>(entity =>
@@ -107,14 +106,17 @@ namespace Tikti.Models
                 entity.Property(e => e.WorkLocationId).HasColumnName("workLocationID");
 
                 entity.Property(e => e.City)
+                    .IsRequired()
                     .HasColumnName("city")
                     .IsUnicode(false);
 
                 entity.Property(e => e.Postal)
+                    .IsRequired()
                     .HasColumnName("postal")
                     .IsUnicode(false);
 
                 entity.Property(e => e.Province)
+                    .IsRequired()
                     .HasColumnName("province")
                     .IsUnicode(false);
             });
@@ -159,6 +161,10 @@ namespace Tikti.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Description)
+                    .HasColumnName("description")
+                    .IsUnicode(false);
+
                 entity.Property(e => e.IsSelected).HasColumnName("isSelected");
             });
 
@@ -176,6 +182,10 @@ namespace Tikti.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Description)
+                    .HasColumnName("description")
+                    .IsUnicode(false);
+
                 entity.Property(e => e.IsSelected).HasColumnName("isSelected");
             });
 
@@ -188,6 +198,10 @@ namespace Tikti.Models
                 entity.Property(e => e.CultureName)
                     .HasColumnName("cultureName")
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Description)
+                    .HasColumnName("description")
                     .IsUnicode(false);
 
                 entity.Property(e => e.IsSelected).HasColumnName("isSelected");
@@ -255,7 +269,7 @@ namespace Tikti.Models
             modelBuilder.Entity<OrgRegister>(entity =>
             {
                 entity.HasKey(e => e.RegistrationId)
-                    .HasName("PK__orgRegis__A3DB1415B84BCE62");
+                    .HasName("PK__orgRegis__A3DB14153B2F4CE1");
 
                 entity.ToTable("orgRegister");
 
@@ -320,30 +334,18 @@ namespace Tikti.Models
                 entity.HasOne(d => d.HiringManager)
                     .WithMany(p => p.OrgRegisterHr)
                     .HasForeignKey(d => d.HiringManagerId)
-                    .HasConstraintName("FK__orgRegist__hirin__671F4F74");
+                    .HasConstraintName("FK__orgRegist__hirin__3B75D760");
 
                 entity.HasOne(d => d.Registration)
                     .WithMany(p => p.OrgRegisterHr)
                     .HasForeignKey(d => d.RegistrationId)
-                    .HasConstraintName("FK__orgRegist__regis__662B2B3B");
-            });
-
-            modelBuilder.Entity<OtherRequirement>(entity =>
-            {
-                entity.ToTable("otherRequirement");
-
-                entity.Property(e => e.OtherRequirementId).HasColumnName("otherRequirementID");
-
-                entity.Property(e => e.OtherRequirementName)
-                    .HasColumnName("otherRequirementName")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+                    .HasConstraintName("FK__orgRegist__regis__3A81B327");
             });
 
             modelBuilder.Entity<OtherRequirements>(entity =>
             {
                 entity.HasKey(e => e.RequirementId)
-                    .HasName("PK__otherReq__60E29FF25FBE6F72");
+                    .HasName("PK__otherReq__60E29FF219C758FF");
 
                 entity.ToTable("otherRequirements");
 
@@ -371,7 +373,7 @@ namespace Tikti.Models
                     .WithMany(p => p.OtherRequirements)
                     .HasForeignKey(d => d.RoleOpportunityId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__otherRequ__roleO__52E34C9D");
+                    .HasConstraintName("FK__otherRequ__roleO__778AC167");
             });
 
             modelBuilder.Entity<RoleBenefit>(entity =>
@@ -509,8 +511,6 @@ namespace Tikti.Models
                     .IsRequired()
                     .HasColumnName("jobDescription");
 
-                entity.Property(e => e.OtherRequirents).HasColumnName("otherRequirents");
-
                 entity.Property(e => e.Postal)
                     .IsRequired()
                     .HasColumnName("postal")
@@ -567,12 +567,7 @@ namespace Tikti.Models
                 entity.HasOne(d => d.HiringManager)
                     .WithMany(p => p.RoleOpportunity)
                     .HasForeignKey(d => d.HiringManagerId)
-                    .HasConstraintName("FK__roleOppor__hirin__3552E9B6");
-
-                entity.HasOne(d => d.OtherRequirentsNavigation)
-                    .WithMany(p => p.RoleOpportunity)
-                    .HasForeignKey(d => d.OtherRequirents)
-                    .HasConstraintName("otherRequirement_fk");
+                    .HasConstraintName("FK__roleOppor__hirin__5AEE82B9");
 
                 entity.HasOne(d => d.WorkCommitmentNavigation)
                     .WithMany(p => p.RoleOpportunity)

@@ -23,7 +23,7 @@ namespace Tikti.Controllers
         // GET: RoleOpportunity
         public async Task<IActionResult> Index()
         {
-            var tikTiDbContext = _context.RoleOpportunity.Include(r => r.CertificationNavigation).Include(r => r.CurrencyNavigation).Include(r => r.EducationNavigation).Include(r => r.ExperienceNavigation).Include(r => r.OtherRequirentsNavigation).Include(r => r.WorkCommitmentNavigation);
+            var tikTiDbContext = _context.RoleOpportunity.Include(r => r.CertificationNavigation).Include(r => r.CurrencyNavigation).Include(r => r.EducationNavigation).Include(r => r.ExperienceNavigation).Include(r => r.WorkCommitmentNavigation);
             return View(await tikTiDbContext.ToListAsync());
         }
 
@@ -40,7 +40,6 @@ namespace Tikti.Controllers
                 .Include(r => r.CurrencyNavigation)
                 .Include(r => r.EducationNavigation)
                 .Include(r => r.ExperienceNavigation)
-                .Include(r => r.OtherRequirentsNavigation)
                 .Include(r => r.WorkCommitmentNavigation)
                 .FirstOrDefaultAsync(m => m.RoleOpportunityId == id);
             if (roleOpportunity == null)
@@ -71,7 +70,6 @@ namespace Tikti.Controllers
             ViewData["Currency"] = new SelectList(_context.Currency, "CurrencyId", "Currency1");
             ViewData["Education"] = new SelectList(_context.Education, "EducationId", "Education1");
             ViewData["Experience"] = new SelectList(_context.Experience, "ExperienceId", "Experience1");
-            ViewData["OtherRequirents"] = new SelectList(_context.OtherRequirement, "OtherRequirementId", "OtherRequirementName");
             ViewData["WorkCommitment"] = new SelectList(_context.WorkCommitment.OrderByDescending(x => x.WorkCommitmentId), "WorkCommitmentId", "Commitment");
             return View();
         }
@@ -81,7 +79,7 @@ namespace Tikti.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RoleOpportunityId,AlternateTitleId,JobDescription,DesiredStartDate,WorkCommitment,ContractDuration,Currency,Salary,City,Province,Postal,TelecommutingRoles,Weblink,Certification,ExtraCertificationRequired,ExtraCertification,Experience,Education,OtherRequirents,HiringManagerId")] RoleOpportunity roleOpportunity, IFormFile files)
+        public async Task<IActionResult> Create([Bind("RoleOpportunityId,AlternateTitleId,JobDescription,DesiredStartDate,WorkCommitment,ContractDuration,Currency,Salary,City,Province,Postal,TelecommutingRoles,Weblink,Certification,ExtraCertificationRequired,ExtraCertification,Experience,Education,HiringManagerId")] RoleOpportunity roleOpportunity, IFormFile files)
         {
             if (files != null)
             {
@@ -114,7 +112,6 @@ namespace Tikti.Controllers
             ViewData["Currency"] = new SelectList(_context.Currency, "CurrencyId", "CurrencyId", roleOpportunity.Currency);
             ViewData["Education"] = new SelectList(_context.Education, "EducationId", "EducationId", roleOpportunity.Education);
             ViewData["Experience"] = new SelectList(_context.Experience, "ExperienceId", "ExperienceId", roleOpportunity.Experience);
-            ViewData["OtherRequirents"] = new SelectList(_context.OtherRequirement, "OtherRequirementId", "OtherRequirementId", roleOpportunity.OtherRequirents);
             ViewData["WorkCommitment"] = new SelectList(_context.WorkCommitment, "WorkCommitmentId", "WorkCommitmentId", roleOpportunity.WorkCommitment);
             return View(roleOpportunity);
         }
@@ -135,7 +132,6 @@ namespace Tikti.Controllers
             ViewData["Currency"] = new SelectList(_context.Currency, "CurrencyId", "CurrencyId", roleOpportunity.Currency);
             ViewData["Education"] = new SelectList(_context.Education, "EducationId", "EducationId", roleOpportunity.Education);
             ViewData["Experience"] = new SelectList(_context.Experience, "ExperienceId", "ExperienceId", roleOpportunity.Experience);
-            ViewData["OtherRequirents"] = new SelectList(_context.OtherRequirement, "OtherRequirementId", "OtherRequirementId", roleOpportunity.OtherRequirents);
             ViewData["WorkCommitment"] = new SelectList(_context.WorkCommitment, "WorkCommitmentId", "WorkCommitmentId", roleOpportunity.WorkCommitment);
             return View(roleOpportunity);
         }
@@ -145,7 +141,7 @@ namespace Tikti.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RoleOpportunityId,JobDescription,DesiredStartDate,WorkCommitment,ContractDuration,Currency,Salary,City,Province,Postal,TelecommutingRoles,Weblink,Certification,ExtraCertificationRequired,ExtraCertification,Experience,Education,OtherRequirents")] RoleOpportunity roleOpportunity)
+        public async Task<IActionResult> Edit(int id, [Bind("RoleOpportunityId,JobDescription,DesiredStartDate,WorkCommitment,ContractDuration,Currency,Salary,City,Province,Postal,TelecommutingRoles,Weblink,Certification,ExtraCertificationRequired,ExtraCertification,Experience,Education")] RoleOpportunity roleOpportunity)
         {
             if (id != roleOpportunity.RoleOpportunityId)
             {
@@ -176,7 +172,6 @@ namespace Tikti.Controllers
             ViewData["Currency"] = new SelectList(_context.Currency, "CurrencyId", "CurrencyId", roleOpportunity.Currency);
             ViewData["Education"] = new SelectList(_context.Education, "EducationId", "EducationId", roleOpportunity.Education);
             ViewData["Experience"] = new SelectList(_context.Experience, "ExperienceId", "ExperienceId", roleOpportunity.Experience);
-            ViewData["OtherRequirents"] = new SelectList(_context.OtherRequirement, "OtherRequirementId", "OtherRequirementId", roleOpportunity.OtherRequirents);
             ViewData["WorkCommitment"] = new SelectList(_context.WorkCommitment, "WorkCommitmentId", "WorkCommitmentId", roleOpportunity.WorkCommitment);
             return View(roleOpportunity);
         }
@@ -194,7 +189,6 @@ namespace Tikti.Controllers
                 .Include(r => r.CurrencyNavigation)
                 .Include(r => r.EducationNavigation)
                 .Include(r => r.ExperienceNavigation)
-                .Include(r => r.OtherRequirentsNavigation)
                 .Include(r => r.WorkCommitmentNavigation)
                 .FirstOrDefaultAsync(m => m.RoleOpportunityId == id);
             if (roleOpportunity == null)
