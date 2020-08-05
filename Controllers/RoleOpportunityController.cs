@@ -24,6 +24,7 @@ namespace Tikti.Controllers
         public async Task<IActionResult> Index()
         {
             var tikTiDbContext = _context.RoleOpportunity.Include(r => r.CertificationNavigation).Include(r => r.CurrencyNavigation).Include(r => r.EducationNavigation).Include(r => r.ExperienceNavigation).Include(r => r.OtherRequirentsNavigation).Include(r => r.WorkCommitmentNavigation);
+            
             return View(await tikTiDbContext.ToListAsync());
         }
 
@@ -108,6 +109,7 @@ namespace Tikti.Controllers
                 await _context.SaveChangesAsync();
                 var temp = _context.RoleOpportunity.OrderByDescending(x => x.RoleOpportunityId).FirstOrDefault();
                 Response.Cookies.Append("RoleOpportunityId", temp.RoleOpportunityId.ToString());
+                ViewBag.ROID = temp.RoleOpportunityId;
                 return RedirectToAction("Create", "AlternativeWorkLocation");
             }
             ViewData["Certification"] = new SelectList(_context.Certification, "CertificationId", "CertificationId", roleOpportunity.Certification);
@@ -118,6 +120,17 @@ namespace Tikti.Controllers
             ViewData["WorkCommitment"] = new SelectList(_context.WorkCommitment, "WorkCommitmentId", "WorkCommitmentId", roleOpportunity.WorkCommitment);
             return View(roleOpportunity);
         }
+
+        public FileContentResult DownloadFile(int RouteID)
+        {
+            if (RouteID == 0) { return null; }
+            RoleOpportunity resume = new RoleOpportunity();
+           // ResumeContext rc = new ResumeContext();
+            resume = _context.RoleOpportunity.Where(a => a.RoleOpportunityId == RouteID).SingleOrDefault();
+            //Response.AppendHeader("content-disposition", "inline; filename=file.pdf"); //this will open in a new tab.. remove if you want to open in the same tab.
+            return File(resume.JobDescription, "application/pdf");
+        }
+
         // GET: RoleOpportunity/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

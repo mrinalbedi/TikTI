@@ -71,7 +71,8 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.JobDescription)
+                @*@Html.DisplayFor(modelItem => item.JobDescription)*@
+                <a asp-controller="RoleOpportunity" asp-action="DownloadFile" asp-route-RouteID="@item.RoleOpportunityId" target="_blank">Download</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DesiredStartDate)
