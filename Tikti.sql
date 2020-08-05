@@ -1,3 +1,5 @@
+create database Tikti
+use TikTi
 CREATE TABLE orgRegister (
     registrationID int identity primary key,
     organizationName varchar(30) not null,
@@ -33,10 +35,10 @@ create table workCommitment(
 	Commitment varchar(255)
 )
 
-insert into workCommitment values ('full time')
-insert into workCommitment values ('part time')
-insert into workCommitment values ('part time contract')
-insert into workCommitment values ('full time contract')
+insert into workCommitment values ('Full Time')
+insert into workCommitment values ('Part Time')
+insert into workCommitment values ('Part Time Contract')
+insert into workCommitment values ('Full Time Contract')
 
 
 create table currency(
@@ -90,18 +92,18 @@ insert into education values ('PhD')
 insert into education values ('Certification')
 
 
-create table otherRequirement(
-	otherRequirementID int identity constraint otherRequirement_pk primary key,
-	otherRequirementName varchar(255)
-)
+--create table otherRequirement(
+--	otherRequirementID int identity constraint otherRequirement_pk primary key,
+--	otherRequirementName varchar(255)
+--)
 
-insert into otherRequirement values ('Travel Requirement')
-insert into otherRequirement values ('Driving License')
-insert into otherRequirement values ('Flexible Hours')
-insert into otherRequirement values ('Sponsership Required')
-insert into otherRequirement values ('Overseas Travel Required')
-insert into otherRequirement values ('Drug Testing Required')
-insert into otherRequirement values ('Age > 18')
+--insert into otherRequirement values ('Travel Requirement')
+--insert into otherRequirement values ('Driving License')
+--insert into otherRequirement values ('Flexible Hours')
+--insert into otherRequirement values ('Sponsership Required')
+--insert into otherRequirement values ('Overseas Travel Required')
+--insert into otherRequirement values ('Drug Testing Required')
+--insert into otherRequirement values ('Age > 18')
 
 CREATE TABLE roleOpportunity (
     roleOpportunityID int identity constraint roleOpportunity_pk primary key,
@@ -139,19 +141,19 @@ create table culture(
 	isSelected bit not null default 0
 )
 
-insert into culture values ('caring',0)
-insert into culture values ('integrity',0)
-insert into culture values ('respect',0)
-insert into culture values ('trust',0)
-insert into culture values ('engagement',0)
-insert into culture values ('senseOfBelonging',0)
-insert into culture values ('meaningfulWork',0)
-insert into culture values ('motivativeLeader',0)
-insert into culture values ('learningEnvironment',0)
-insert into culture values ('collaborativeTeamWork',0)
-insert into culture values ('roleProgression',0)
-insert into culture values ('vision_purposeDriven',0)
-insert into culture values ('agile',0)
+insert into culture values ('Caring',0)
+insert into culture values ('Integrity',0)
+insert into culture values ('Respect',0)
+insert into culture values ('Trust',0)
+insert into culture values ('Engagement',0)
+insert into culture values ('Sense Of Belonging',0)
+insert into culture values ('Meaningful Work',0)
+insert into culture values ('Motivative Leader',0)
+insert into culture values ('Learning Environment',0)
+insert into culture values ('Collaborative TeamWork',0)
+insert into culture values ('Role Progression',0)
+insert into culture values ('Vision & Purpose Driven',0)
+insert into culture values ('Agile',0)
 
 
 create table role_culture(
@@ -166,30 +168,30 @@ create table benefit(
 	isSelected bit not null default 0
 )
 
-insert into benefit values ('PTOVacation',0)
-insert into benefit values ('PTOSickDays',0)
-insert into benefit values ('healthInsurance',0)
-insert into benefit values ('lifeInsurance',0)
-insert into benefit values ('dentalInsurance',0)
-insert into benefit values ('visionInsurance',0)
-insert into benefit values ('retirementBenefits_account',0)
-insert into benefit values ('healthcareSpending',0)
-insert into benefit values ('longtermDisablityInsurance',0)
-insert into benefit values ('shorttermDisablityInsurance',0)
-insert into benefit values ('tuitionReimbursement',0)
-insert into benefit values ('childCareBenefits',0)
-insert into benefit values ('fitnessFacilities',0)
-insert into benefit values ('ergonomicEvaluations',0)
-insert into benefit values ('wellnessIncentives',0)
-insert into benefit values ('healthyFoodOption',0)
-insert into benefit values ('stressManagementResources',0)
-insert into benefit values ('onSiteVaccincation',0)
-insert into benefit values ('employeeRecognitionProgram',0)
-insert into benefit values ('employeeRecognitionProgram',0)
-insert into benefit values ('relocationAssistance',0)
-insert into benefit values ('travelAssistance',0)
-insert into benefit values ('teleCommutingOption',0)
-insert into benefit values ('workPlacePerks',0)
+insert into benefit values ('PTO Vacation',0)
+insert into benefit values ('PTO Sick Days',0)
+insert into benefit values ('Health Insurance',0)
+insert into benefit values ('Life Insurance',0)
+insert into benefit values ('Dental Insurance',0)
+insert into benefit values ('Vision Insurance',0)
+insert into benefit values ('Retirement Benefits or Accounts',0)
+insert into benefit values ('Healthcare Spending/Reimbursements',0)
+insert into benefit values ('Long Term Disablity Insurance',0)
+insert into benefit values ('Short Term Disablity Insurance',0)
+insert into benefit values ('Tuition Reimbursement',0)
+insert into benefit values ('ChildCare Benefits',0)
+insert into benefit values ('Fitness Facilities Or Programs',0)
+insert into benefit values ('Ergonomic Evaluations and Equipments',0)
+insert into benefit values ('Wellness Incentives',0)
+insert into benefit values ('Healthy Food Options',0)
+insert into benefit values ('Stress Management Resources',0)
+insert into benefit values ('OnSite Vaccincation or Health Screenings',0)
+insert into benefit values ('Employee Recognition Programs',0)
+insert into benefit values ('Relocation Assistance',0)
+insert into benefit values ('Travel Assistance',0)
+insert into benefit values ('TeleCommuting Options',0)
+insert into benefit values ('Flexible Work Schedules',0)
+insert into benefit values ('Workplace Perks (Eg. recreation activities, Coffe etc.)',0)
 
 
 create table role_benefit(
@@ -286,7 +288,38 @@ create table socCode(
 )
 
 insert into socCode values ('11-3021.00','Computer and Information Systems Manager')
-insert into socCode values ('13-1111.00','Management Analysis')
+insert into socCode values 
+('13-1199.02','Security Management Analysts'),
+('15-1121.00','Computer Systems Analysts'),
+('15-1122.00','Information Security Analysts'),
+('15-1131.00','Computer Programmers'),
+('15-1132.00','Software Developers, Applications'),
+('15-1133.00','Software Developers, System Software'),
+('15-1134.00','Web Developers'),
+('15-1141.00','Database Administrators'),
+('15-1142.00','Network and Computer Systems Administrators'),
+('15-1143.00','Computer Network Architects'),
+('15-1143.01','Telecommunications Engineering Specialists'),
+('15-1151.00','Computer User Support Specialists'),
+('15-1152.00','Computer Network Support Specialists'),
+('15-1199.00','Computer Occupations, All Other'),
+('15-1199.01','Software quality assurance engineers and testers'),
+('15-1199.02','Computer Systems Engineers/Architects'),
+('15-1199.03','Web Administrators'),
+('15-1199.04','Geospatial Information Scientists and Technologists'),
+('15-1199.05','Geospatial Information System Technicians'),
+('15-1199.06','Database Architects'),
+('15-1199.07','Data Warehousing Specialists'),
+('15-1199.08','Business Intelligence Analysts' ),
+('15-1199.09','Information Technology Project Managers'),
+('15-1199.10','Search Marketing Strategists'),
+('15-1199.11','Video Game Designers'),
+('15-1199.12','Document Management Specialists')
+
+
+
+
+
 
 create table alternateTitles (
  alternateTitleID int identity primary key,
