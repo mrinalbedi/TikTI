@@ -47,7 +47,7 @@
                     </div>
                     <div class="form-group" id="TravelDistance">
                         <label asp-for="TravelDistance" class="control-label" style="font-size:1.2rem; line-height:1.5rem"></label>
-                        <input asp-for="TravelDistance" class="form-control" />
+                        <input asp-for="TravelDistance" class="form-control" placeholder="Choose among:[ 0%, 5–20%, 25–50%, >50% ]"/>
                         <span asp-validation-for="TravelDistance" class="text-danger"></span>
                     </div>
                     <div class="form-group form-check">
@@ -57,7 +57,7 @@
                     </div>
                     <div class="form-group" id="LicenseProvince">
                         <label asp-for="LicenseProvince" class="control-label" style="font-size:1.2rem; line-height:1.5rem"></label>
-                        <input asp-for="LicenseProvince" class="form-control" />
+                        <input asp-for="LicenseProvince" class="form-control" placeholder="Enter the State or Province on License."/>
                         <span asp-validation-for="LicenseProvince" class="text-danger"></span>
                     </div>
                     <div class="form-group form-check">
