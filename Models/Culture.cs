@@ -12,6 +12,7 @@ namespace Tikti.Models
 
         public int CultureId { get; set; }
         public string CultureName { get; set; }
+        public string Description { get; set; }
         public bool IsSelected { get; set; }
 
         public virtual ICollection<RoleCulture> RoleCulture { get; set; }

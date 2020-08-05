@@ -34,7 +34,6 @@ namespace Tikti.Models
         public string ExtraCertification { get; set; }
         public int Experience { get; set; }
         public int Education { get; set; }
-        public int OtherRequirents { get; set; }
 
         public virtual AlternateTitles AlternateTitle { get; set; }
         public virtual Certification CertificationNavigation { get; set; }
@@ -42,7 +41,6 @@ namespace Tikti.Models
         public virtual Education EducationNavigation { get; set; }
         public virtual Experience ExperienceNavigation { get; set; }
         public virtual HiringManager HiringManager { get; set; }
-        public virtual OtherRequirement OtherRequirentsNavigation { get; set; }
         public virtual WorkCommitment WorkCommitmentNavigation { get; set; }
         public virtual ICollection<AlterWorkRoleOpportunity> AlterWorkRoleOpportunity { get; set; }
         public virtual ICollection<OtherRequirements> OtherRequirements { get; set; }

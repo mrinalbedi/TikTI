@@ -63,7 +63,9 @@ insert into certification values ('MsOffice Certification ')
 insert into certification values ('ASP.net Certified')
 insert into certification values ('Advanced Java Certified')
 insert into certification values ('Python(Django) Certified')
-
+insert into certification values ('Google Certified Professional Cloud Architect')
+insert into certification values ('Certified Scrum Master')
+insert into certification values ('AWS Certified Developer')
 
 create table experience(
 	experienceID int identity constraint experience_pk primary key,
@@ -97,6 +99,7 @@ insert into education values ('Certification')
 --	otherRequirementName varchar(255)
 --)
 
+
 --insert into otherRequirement values ('Travel Requirement')
 --insert into otherRequirement values ('Driving License')
 --insert into otherRequirement values ('Flexible Hours')
@@ -124,36 +127,29 @@ CREATE TABLE roleOpportunity (
 	extraCertificationRequired bit not null default 0,
 	extraCertification varchar(max),
 	experience int not null constraint experience_fk foreign key references experience(experienceID) on delete cascade,
-	education int not null constraint education_fk foreign key references education(educationID) on delete cascade,
-	otherRequirents int not null constraint otherRequirement_fk foreign key references otherRequirement(otherRequirementID) on delete cascade
+	education int not null constraint education_fk foreign key references education(educationID) on delete cascade
 	)
-
---drop table role_culture
---drop table role_benefit
---drop table role_competencyA
---drop table role_competencyB
---drop table alterWorkRoleOpportunity
---drop table roleOpportunity
 
 create table culture(
 	cultureID int identity constraint culture_pk primary key,
 	cultureName varchar(50),
+	description varchar(max),
 	isSelected bit not null default 0
 )
 
-insert into culture values ('Caring',0)
-insert into culture values ('Integrity',0)
-insert into culture values ('Respect',0)
-insert into culture values ('Trust',0)
-insert into culture values ('Engagement',0)
-insert into culture values ('Sense Of Belonging',0)
-insert into culture values ('Meaningful Work',0)
-insert into culture values ('Motivative Leader',0)
-insert into culture values ('Learning Environment',0)
-insert into culture values ('Collaborative TeamWork',0)
-insert into culture values ('Role Progression',0)
-insert into culture values ('Vision & Purpose Driven',0)
-insert into culture values ('Agile',0)
+insert into culture values ('Caring','Every person, in and outside of the organization, is valued',0)
+insert into culture values ('Integrity','Truth based transparency in all things',0)
+insert into culture values ('Respect','For similar and differing people and their points of view',0)
+insert into culture values ('Trust','You can speak your truth and believe what is said to you',0)
+insert into culture values ('Engagement','A workplace where everyone feels connected',0)
+insert into culture values ('Sense Of Belonging','My contribution is recognized, appreciated and rewarded',0)
+insert into culture values ('Meaningful Work','Work that is important to me and the people we serve',0)
+insert into culture values ('Motivative Leader','Leaders are inspirational role models',0)
+insert into culture values ('Learning Environment','Encourages and supports continuous self growth',0)
+insert into culture values ('Collaborative TeamWork','Succeed as a team or fail individually',0)
+insert into culture values ('Role Progression','Provide pathways for personal and professional growth',0)
+insert into culture values ('Vision & Purpose Driven','Fueled by why we exist and why it’s important',0)
+insert into culture values ('Agile','Pivot with a high degree of urgency, determination and confidence',0)
 
 
 create table role_culture(
@@ -220,25 +216,26 @@ create table alterWorkRoleOpportunity(
 create table competencyA(
 	competencyID int identity constraint competency_pk primary key,
 	competencyName varchar(50),
+	description varchar(max),
 	isSelected bit not null default 0
 )
 
-insert into competencyA values ('Insightful',0)
-insert into competencyA values ('Tech-Savvy',0)
-insert into competencyA values ('Problem Solver',0)
-insert into competencyA values ('Creative',0)
-insert into competencyA values ('Analytical',0)
-insert into competencyA values ('Innovative',0)
-insert into competencyA values ('Broad Perspective',0)
-insert into competencyA values ('Curious',0)
-insert into competencyA values ('Productive',0)
-insert into competencyA values ('Resourceful',0)
-insert into competencyA values ('Planner',0)
-insert into competencyA values ('Self-Starter',0)
-insert into competencyA values ('End user centric',0)
-insert into competencyA values ('Organized',0)
-insert into competencyA values ('Opportunitistic',0)
-insert into competencyA values ('Builder',0)
+insert into competencyA values ('Insightful','You are keen and quick to understanding and deal with a business situation',0)
+insert into competencyA values ('Tech-Savvy','You know how to use technology to solve challenges',0)
+insert into competencyA values ('Problem Solver','You take actions necessary to find solutions to complex situations.',0)
+insert into competencyA values ('Creative','You tap your imagination to solve problems',0)
+insert into competencyA values ('Analytical','You consistently use analysis and logical reasoning',0)
+insert into competencyA values ('Innovative','You look at different ways of solving challenges',0)
+insert into competencyA values ('Broad Perspective','You have a broad perspective beyond your immediate role',0)
+insert into competencyA values ('Curious','You’re consistently interested in learning about people or things around you',0)
+insert into competencyA values ('Productive','You consistently produce expected positive results',0)
+insert into competencyA values ('Resourceful','You find clever ways to overcome challenges',0)
+insert into competencyA values ('Planner','You take actions to prepare for outcomes',0)
+insert into competencyA values ('Self-Starter','You don’t seek direction to begin',0)
+insert into competencyA values ('End user centric','Your actions reflect the impact on the end-customer',0)
+insert into competencyA values ('Organized','You plan things carefully and keep things neat and orderly',0)
+insert into competencyA values ('Opportunitistic','You take advantage of opportunities in the moment',0)
+insert into competencyA values ('Builder','You bring together different parts of the solution',0)
 
 create table role_competencyA(
 	role_competencyAID int identity constraint role_competencyA_pk primary key,
@@ -250,28 +247,29 @@ create table role_competencyA(
 create table competencyB(
 	competencyID int identity constraint competencyB_pk primary key,
 	competencyName varchar(50),
+	description varchar(max),
 	isSelected bit not null default 0
 )
 
-insert into competencyB values ('Effective Communicator',0)
-insert into competencyB values ('Empathetic',0)
-insert into competencyB values ('Respectful',0)
-insert into competencyB values ('Relationship Builder',0)
-insert into competencyB values ('Collaborative',0)
-insert into competencyB values ('Open Minded',0)
-insert into competencyB values ('Authentic',0)
-insert into competencyB values ('Motivator',0)
-insert into competencyB values ('Trustworthy',0)
-insert into competencyB values ('Self-Aware',0)
-insert into competencyB values ('Risk Taker',0)
-insert into competencyB values ('Constant Learner',0)
-insert into competencyB values ('COnfident',0)
-insert into competencyB values ('Agile',0)
-insert into competencyB values ('Accountable',0)
-insert into competencyB values ('Resilient',0)
-insert into competencyB values ('Purposeful',0)
-insert into competencyB values ('Leader',0)
-insert into competencyB values ('Drive',0)
+insert into competencyB values ('Effective Communicator','You easily transfer mutually understood meaning',0)
+insert into competencyB values ('Empathetic','You imagine and understand how someone else feels',0)
+insert into competencyB values ('Respectful','You treat others better than the way you want to be treated',0)
+insert into competencyB values ('Relationship Builder','You develop and maintain positive relationship with stakeholders',0)
+insert into competencyB values ('Collaborative','You work well with others towards a common goal',0)
+insert into competencyB values ('Open Minded','You work well with others that have diverse views from yours',0)
+insert into competencyB values ('Authentic','Your actions consistently align with your values and beliefs',0)
+insert into competencyB values ('Motivator','You connect with others to create energy and enthusiasm',0)
+insert into competencyB values ('Trustworthy','Others see you as honest',0)
+insert into competencyB values ('Self-Aware','You know how you’re feeling and how your emotions and actions impact others',0)
+insert into competencyB values ('Risk Taker','You take actions most others would not take',0)
+insert into competencyB values ('Constant Learner','You continuously strive to better yourself',0)
+insert into competencyB values ('Confident','You are secure and vocal in knowing what you can and cannot do',0)
+insert into competencyB values ('Agile','You’re able to change direction quickly to improve the outcome',0)
+insert into competencyB values ('Accountable','You accept complete responsibility for what you do and can provide satisfactory reasons for doing what you do',0)
+insert into competencyB values ('Resilient','You have the ability to recover quickly from adversities',0)
+insert into competencyB values ('Purposeful','You’re engaged to contribute to the goal',0)
+insert into competencyB values ('Leader','You willingly and confidently step up and take control of situations or people',0)
+insert into competencyB values ('Drive','You’re determined to get to the end result',0)
 
 
 create table role_competencyB(
@@ -288,6 +286,7 @@ create table socCode(
 )
 
 insert into socCode values ('11-3021.00','Computer and Information Systems Manager')
+insert into socCode values ('13-1111.00','Management Analysts')
 insert into socCode values 
 ('13-1199.02','Security Management Analysts'),
 ('15-1121.00','Computer Systems Analysts'),
@@ -317,22 +316,12 @@ insert into socCode values
 ('15-1199.12','Document Management Specialists')
 
 
-
-
-
-
 create table alternateTitles (
  alternateTitleID int identity primary key,
  Name varchar(max) not null,
  socCode varchar(10) not null foreign key references socCode(socCode)
 )
 
-insert into alternateTitles values ('Applciation Development Director','11-3021.00')
-insert into alternateTitles values ('Chief Information Officer','11-3021.00')
-insert into alternateTitles values ('Chief Innovative Officer','11-3021.00')
-insert into alternateTitles values ('Adminsitrative Analysis','13-1111.00')
-insert into alternateTitles values ('Adviser Sales','13-1111.00')
-insert into alternateTitles values ('Analyst Sales','13-1111.00')
 
 --==================================================================================================================
 
@@ -350,3 +339,5 @@ create table otherRequirements(
 	WeekendWork bit not null default 0,
 	Overnight bit not null default 0
 )
+
+
