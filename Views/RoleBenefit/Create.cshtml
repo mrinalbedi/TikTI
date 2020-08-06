@@ -29,7 +29,7 @@
                         @Html.HiddenFor(m => m.benefits[i].BenefitId)
                     }
                 </div>
-                <div class="col-md-3" style="margin:auto; padding-top:2rem; margin-top:0">
+                <div class="col-md-4" style="margin:auto; padding-top:2rem; margin-top:0">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     @for (int i = (Model.benefits.Count / 2); i < Model.benefits.Count; i++)
                     {
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="row no_margin">
-                <div class="col-md-5 text-center">
+                <div class="col-md-4 text-center">
                     <div class="form-group">
                         <input type="submit" value="Next Step" class="btn btn-primary btn-lg" />
                     </div>
