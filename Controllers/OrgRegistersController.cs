@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -213,17 +214,20 @@ namespace Tikti.Controllers
                 }
                 else
                 {
-                    TempData["message"] = "Username or password is incorrect";
+                    //TempData["message"] = "Username or password is incorrect";
+                    ModelState.AddModelError("","Username or password is incorrect");
                 }
             }
             else
             {
-                TempData["message"] = "Oops!! looks like the E-mail ID is not registered with TikTi. Kindly register!!!";
+                //TempData["message"] = "Oops!! looks like the E-mail ID is not registered with TikTi. Kindly register!!!";
+                ModelState.AddModelError("", "Oops!! looks like the E-mail ID is not registered with TikTi. Kindly register!!!");
             }
             return View();
         }
         public ActionResult LoggedIn()
         {
+             
             if (HttpContext.Session.GetString("UserId") != null)
             {
                 return View();

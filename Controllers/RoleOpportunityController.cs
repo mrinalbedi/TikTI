@@ -91,9 +91,9 @@ namespace Tikti.Controllers
                     var fileName = Path.GetFileName(files.FileName);
                     //Getting file Extension
                     var fileExtension = Path.GetExtension(fileName);
-                    if(fileExtension!=".pdf"&&fileExtension!=".doc"&&fileExtension!="docx")
+                    if(fileExtension!=".pdf")
                     {
-                        ModelState.AddModelError("", "Please upload a doc or pdf file format only");
+                        ModelState.AddModelError("", "Please upload pdf format file only");
                     }
                     // concatenating  FileName + FileExtension
                     var newFileName = String.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
@@ -130,7 +130,7 @@ namespace Tikti.Controllers
             // ResumeContext rc = new ResumeContext();
             roleOpportunity = _context.RoleOpportunity.Where(a => a.RoleOpportunityId == RouteID).SingleOrDefault();
             //Response.AppendHeader("content-disposition", "inline; filename=file.pdf"); //this will open in a new tab.. remove if you want to open in the same tab.
-            return File(roleOpportunity.JobDescription,"pdf/doc","JobDescription");
+            return File(roleOpportunity.JobDescription, "application/pdf");
         }
 
         // GET: RoleOpportunity/Edit/5
