@@ -457,12 +457,15 @@ button:focus {
 }
 
 
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
+/*Forms field heading*/
+.field_heading {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.Border_form_field {
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    padding: 6px 12px;
 }
 
