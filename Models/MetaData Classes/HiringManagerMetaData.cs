@@ -25,7 +25,7 @@ namespace Tikti.Models
             {
                 return "The Phone number cannot be blank";
             }
-            else if (!input.Contains(" "))
+            else if (!input.Contains(" ")||!input.Contains("(") || !input.Contains(")")||!input.Contains("-"))
             {
                 input = input.Insert(0, "(");
                 input = input.Insert(4, ")");
@@ -115,8 +115,8 @@ namespace Tikti.Models
 
         public string Email { get; set; }
 
-        [Display(Name = "Contact Phone Number")]
-        [StringLength(10, ErrorMessage = "Phone number should exactly be 10 characters long", MinimumLength = 10)]
+        [Display(Name = "Hiring Manager Phone Number")]
+        [StringLength(15, ErrorMessage = "Phone number should be minimum 10 characters long", MinimumLength = 10)]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Please enter a valid phone number")]
         public string PhoneNumber { get; set; }
     }

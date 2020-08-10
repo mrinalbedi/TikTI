@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.FlowAnalysis;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Tikti.Models;
@@ -20,7 +22,24 @@ namespace Tikti.Controllers
         // GET: HiringManager
         public async Task<IActionResult> Index()
         {
-            return View(await _context.HiringManager.ToListAsync());
+            var query = (from org in _context.OrgRegister
+                         join orhr in _context.OrgRegisterHr
+                         on org.RegistrationId equals orhr.RegistrationId
+                         join hr in _context.HiringManager
+                         on orhr.HiringManagerId equals hr.HiringManagerId
+                         where org.Email == Request.Cookies["Email"].ToString()
+                         select new HiringManager {HiringManagerId=hr.HiringManagerId, FirstName = hr.FirstName, LastName = hr.LastName, Title = hr.Title, Department = hr.Department, PhoneNumber = hr.PhoneNumber, Email = hr.Email });
+
+
+            //List<HiringManager> hiringManagers = new List<HiringManager>();
+            //foreach (var item in query)
+            //{
+            //    hiringManagers.Append(_context.HiringManager.Where(m => m.HiringManagerId == item.HrmId).ToList());
+            //    //return View(await _context.HiringManager.Where(m => m.HiringManagerId ==item.HrmId).ToListAsync());
+            //}
+
+            //return View(await _context.HiringManager.Where(m => m.HiringManagerId == item.HrmId).ToListAsync());
+            return View(query);
         }
 
         // GET: HiringManager/Details/5
@@ -112,6 +131,7 @@ namespace Tikti.Controllers
                 {
                     _context.Update(hiringManager);
                     await _context.SaveChangesAsync();
+                    TempData["message"] = "Details updated successfully";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
