@@ -1,41 +1,68 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using ValidationClassLibrary;
+using System.Text.RegularExpressions;
 
 namespace Tikti.Models
 {
     [ModelMetadataTypeAttribute(typeof(HiringManagerMetaData))]
     public partial class HiringManager : IValidatableObject
     {
+        public static string Capitalize(string input)
+        {
+            if (input == null)
+            {
+                return string.Empty;
+            }
+            string x = input.ToLower().Trim();
+            x = Regex.Replace(x, @"(^\w)|(\s\w)", m => m.Value.ToUpper());
+
+            return x;
+        }
+        public static string PhoneNumberFormat(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return "The Phone number cannot be blank";
+            }
+            else if (!input.Contains(" "))
+            {
+                input = input.Insert(0, "(");
+                input = input.Insert(4, ")");
+                input = input.Insert(5, "-");
+                input = input.Insert(9, "-");
+                input = input.ToUpper();
+            }
+            return input;
+        }
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (FirstName == string.Empty || string.IsNullOrWhiteSpace(FirstName))
             {
-                yield return new ValidationResult("Organization name cannot be blank or just empty spaces", new[] { nameof(FirstName) });
+                yield return new ValidationResult("First name cannot be blank or just empty spaces", new[] { nameof(FirstName) });
             }
             else
             {
                 FirstName = FirstName.Trim();
-                FirstName = Validations.Capitalize(FirstName);
+                FirstName = Capitalize(FirstName);
             }
             if (LastName == string.Empty || string.IsNullOrWhiteSpace(LastName))
             {
-                yield return new ValidationResult("Organization name cannot be blank or just empty spaces", new[] { nameof(LastName) });
+                yield return new ValidationResult("Last name cannot be blank or just empty spaces", new[] { nameof(LastName) });
             }
             else
             {
                 LastName = LastName.Trim();
-                LastName = Validations.Capitalize(LastName);
+                LastName = Capitalize(LastName);
             }
             if (Title == string.Empty || string.IsNullOrWhiteSpace(Title))
             {
-                yield return new ValidationResult("Organization name cannot be blank or just empty spaces", new[] { nameof(Title) });
+                yield return new ValidationResult("Title of the hiring manager cannot be blank or just empty spaces", new[] { nameof(Title) });
             }
             else
             {
                 Title = Title.Trim();
-                Title = Validations.Capitalize(Title);
+                Title = Capitalize(Title);
             }
             if (Department == string.Empty || string.IsNullOrWhiteSpace(Department))
             {
@@ -44,23 +71,23 @@ namespace Tikti.Models
             else
             {
                 Department = Department.Trim();
-                Department = Validations.Capitalize(Department);
+                Department = Capitalize(Department);
             }
             if (PhoneNumber == string.Empty || string.IsNullOrWhiteSpace(PhoneNumber))
             {
-                yield return new ValidationResult("Organization name cannot be blank or just empty spaces", new[] { nameof(Department) });
+                yield return new ValidationResult("Phone number cannot be blank or just empty spaces", new[] { nameof(PhoneNumber) });
             }
             else
             {
                 PhoneNumber = PhoneNumber.Trim();
-                Department = Validations.PhoneNumberFormat(PhoneNumber);
+                PhoneNumber = PhoneNumberFormat(PhoneNumber);
             }
             yield return ValidationResult.Success;
         }
     }
     public class HiringManagerMetaData
     {
-        [Required(ErrorMessage ="First name of the hiring manager is required")]
+        [Required(ErrorMessage = "First name of the hiring manager is required")]
         [StringLength(30, ErrorMessage = "The First name should be minimum 2 characters and maximum 30 characters", MinimumLength = 2)]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
@@ -89,7 +116,7 @@ namespace Tikti.Models
         public string Email { get; set; }
 
         [Display(Name = "Contact Phone Number")]
-        [StringLength(10,ErrorMessage ="Phone number should exactly be 10 characters long",MinimumLength =10)]
+        [StringLength(10, ErrorMessage = "Phone number should exactly be 10 characters long", MinimumLength = 10)]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Please enter a valid phone number")]
         public string PhoneNumber { get; set; }
     }
