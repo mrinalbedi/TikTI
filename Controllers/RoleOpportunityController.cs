@@ -53,11 +53,11 @@ namespace Tikti.Controllers
         }
 
         // GET: RoleOpportunity/Create
-        public IActionResult Create(string dsf)
+        public IActionResult Create(string soc)
         {
             //var org = _context.OrgRegister.Where(x => x.Email == Request.Cookies["Email"].ToString()).FirstOrDefault();
             //var orgHR = _context.OrgRegisterHr.Where(x => x.RegistrationId == org.RegistrationId);
-            var altTitle = _context.AlternateTitles.Where(x => x.SocCode == dsf);
+            var altTitle = _context.AlternateTitles.Where(x => x.SocCode == soc);
             var query = from org in _context.OrgRegister
                         join orhr in _context.OrgRegisterHr
                         on org.RegistrationId equals orhr.RegistrationId

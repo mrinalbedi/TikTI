@@ -60,7 +60,7 @@ namespace Tikti.Controllers
         public IActionResult Create([Bind("SocCode1,Description")] SocCode socCode)
         {
             string socCodeSelected = socCode.SocCode1;
-                return RedirectToAction("Create","RoleOpportunity", new { dsf = socCodeSelected });
+                return RedirectToAction("Create","RoleOpportunity", new { soc = socCodeSelected });
         }
 
         // GET: SocCode/Edit/5
