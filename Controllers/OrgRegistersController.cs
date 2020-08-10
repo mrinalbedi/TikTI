@@ -24,7 +24,10 @@ namespace Tikti.Controllers
         // GET: OrgRegisters
         public async Task<IActionResult> Index()
         {
-            return View(await _context.OrgRegister.ToListAsync());
+           
+            var mail1=Request.Cookies["Email"].ToString();
+            var mail2 = HttpContext.Session.GetString("UserId");
+            return View(await _context.OrgRegister.Where(m=>m.Email==mail1 || m.Email==mail2).ToListAsync());
         }
 
         // GET: OrgRegisters/Details/5
@@ -125,8 +128,14 @@ namespace Tikti.Controllers
             {
                 try
                 {
+                    byte[] encode = new byte[orgRegister.Password.Length];
+                    encode = Encoding.UTF8.GetBytes(orgRegister.Password);
+
+                    orgRegister.Password = Convert.ToBase64String(encode);
+                    orgRegister.ConfirmPassword = Convert.ToBase64String(encode);
                     _context.Update(orgRegister);
                     await _context.SaveChangesAsync();
+                    TempData["message"] = "Details updated successfully";
                 }
                 catch (DbUpdateConcurrencyException)
                 {

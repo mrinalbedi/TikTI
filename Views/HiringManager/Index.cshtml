@@ -5,11 +5,9 @@
     Layout = "~/Views/Shared/_Organization_view.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Update Hiring Manager Details</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="text-danger font-weight-bold text-center">@TempData["message"]</div>
 <table class="table">
     <thead>
         <tr>
@@ -56,9 +54,14 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.HiringManagerId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.HiringManagerId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.HiringManagerId">Delete</a>
+                <div class="form-group">
+                    <a asp-action="Edit" asp-route-id="@item.HiringManagerId"><input type="submit" value="Edit" class="btn btn-primary" />
+                    </a> 
+                </div>
+                @*<a asp-action="Edit" asp-route-id="@item.HiringManagerId">Edit</a>*@ 
+
+                @*<a asp-action="Details" asp-route-id="@item.HiringManagerId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.HiringManagerId">Delete</a>*@
             </td>
         </tr>
 }

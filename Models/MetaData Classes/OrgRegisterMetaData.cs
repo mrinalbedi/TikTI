@@ -118,7 +118,7 @@ namespace Tikti.Models
 
         [Required(ErrorMessage ="The Contact Phone Number is required")]
         [Phone]
-        [StringLength(10,ErrorMessage ="Phone number should be exactly 10 characters long",MinimumLength =10)]
+        [StringLength(15,ErrorMessage ="Phone number should be minimum 10 characters long",MinimumLength =10)]
         [Display(Name = "Contact Phone Number")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Please enter a valid phone number")]
 
