@@ -53,11 +53,11 @@ namespace Tikti.Controllers
         }
 
         // GET: RoleOpportunity/Create
-        public IActionResult Create(string dsf)
+        public IActionResult Create(string soc)
         {
             //var org = _context.OrgRegister.Where(x => x.Email == Request.Cookies["Email"].ToString()).FirstOrDefault();
             //var orgHR = _context.OrgRegisterHr.Where(x => x.RegistrationId == org.RegistrationId);
-            var altTitle = _context.AlternateTitles.Where(x => x.SocCode == dsf);
+            var altTitle = _context.AlternateTitles.Where(x => x.SocCode == soc);
             var query = from org in _context.OrgRegister
                         join orhr in _context.OrgRegisterHr
                         on org.RegistrationId equals orhr.RegistrationId
@@ -82,32 +82,36 @@ namespace Tikti.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RoleOpportunityId,AlternateTitleId,JobDescription,DesiredStartDate,WorkCommitment,ContractDuration,Currency,Salary,City,Province,Postal,TelecommutingRoles,Weblink,Certification,ExtraCertificationRequired,ExtraCertification,Experience,Education,HiringManagerId")] RoleOpportunity roleOpportunity, IFormFile files)
-        {  
-
-            if (ModelState.IsValid)
+        {
+            if (files != null)
             {
-                if (files != null)
+                if (files.Length > 0)
                 {
-                    if (files.Length > 0)
+                    //Getting FileName
+                    var fileName = Path.GetFileName(files.FileName);
+                    //Getting file Extension
+                    var fileExtension = Path.GetExtension(fileName);
+                    if (fileExtension != ".pdf")
                     {
-                        //Getting FileName
-                        var fileName = Path.GetFileName(files.FileName);
-                        //Getting file Extension
-                        var fileExtension = Path.GetExtension(fileName);
-                        if (fileExtension != ".pdf")
-                        {
-                            ModelState.AddModelError("", "Please upload pdf format file only");
-                        }
-                        // concatenating  FileName + FileExtension
-                        var newFileName = String.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
+                        ModelState.AddModelError("", "Please upload pdf format file only");
+                    }
+                    // concatenating  FileName + FileExtension
+                    var newFileName = String.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
 
-                        using (var target = new MemoryStream())
-                        {
-                            files.CopyTo(target);
-                            roleOpportunity.JobDescription = target.ToArray();
-                        }
+                    using (var target = new MemoryStream())
+                    {
+                        files.CopyTo(target);
+                        roleOpportunity.JobDescription = target.ToArray();
                     }
                 }
+            }
+            else
+            {
+                ModelState.AddModelError("", "The job description field cannot be empty");
+            }
+            if (ModelState.IsValid)
+            {
+                
                 _context.Add(roleOpportunity);
                 await _context.SaveChangesAsync();
                 var temp = _context.RoleOpportunity.OrderByDescending(x => x.RoleOpportunityId).FirstOrDefault();

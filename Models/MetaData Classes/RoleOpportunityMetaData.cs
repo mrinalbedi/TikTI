@@ -14,8 +14,6 @@ namespace Tikti.Models
         {
             if(DesiredStartDate!=null)
             {
-
-            
                 if(DesiredStartDate<DateTime.Now)
                 {
                     yield return new ValidationResult("The desired start date cannot be smaller than the current date", new[] { nameof(DesiredStartDate) });
