@@ -19,22 +19,6 @@ namespace Tikti.Models
 
             return x;
         }
-        public static string PhoneNumberFormat(string input)
-        {
-            if (string.IsNullOrEmpty(input))
-            {
-                return "The Phone number cannot be blank";
-            }
-            else if (!input.Contains(" ")||!input.Contains("(") || !input.Contains(")")||!input.Contains("-"))
-            {
-                input = input.Insert(0, "(");
-                input = input.Insert(4, ")");
-                input = input.Insert(5, "-");
-                input = input.Insert(9, "-");
-                input = input.ToUpper();
-            }
-            return input;
-        }
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (FirstName == string.Empty || string.IsNullOrWhiteSpace(FirstName))
@@ -80,7 +64,7 @@ namespace Tikti.Models
             else
             {
                 PhoneNumber = PhoneNumber.Trim();
-                PhoneNumber = PhoneNumberFormat(PhoneNumber);
+               
             }
             yield return ValidationResult.Success;
         }
