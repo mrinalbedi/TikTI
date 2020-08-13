@@ -2,88 +2,96 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Organization_view.cshtml";
+    Layout = "~/Views/Shared/LoggedIn.cshtml";
 }
 
-<h1>Update Profile</h1>
-<div class="text-danger font-weight-bold text-center">@TempData["message"]</div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.OrganizationName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ConfirmPassword)
-            </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.ContactFirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactLastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactPhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Department)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrganizationName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ConfirmPassword)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.ContactFirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContactLastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContactTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContactPhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Department)
-            </td>
-            <td>
-                <div class="form-group">
-                    <a asp-action="Edit" asp-route-id="@item.RegistrationId"><input type="submit" value="Edit" class="btn btn-primary" />
-                    </a> 
-                </div>
-                    @*<a asp-action="Details" asp-route-id="@item.RegistrationId">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.RegistrationId">Delete</a>*@
-            </td>
-            <td>
-                <div class="form-group">
-                    <a asp-action="Index" asp-controller="HiringManager"><input type="submit" value="Update Hiring Manager details" class="btn btn-primary" /></a>
-                </div>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<hr />
+<div style="padding:0 2rem">
+    <h1 class="text-center">Update Profile</h1>
+    <br />
+    <div class="text-danger font-weight-bold text-center">@TempData["message"]</div>
+    <br />
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="border:1px solid black !important">
+                    @Html.DisplayNameFor(model => model.OrganizationName)
+                </th>
+                <th style="border:1px solid black !important">
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ConfirmPassword)
+                    </th>*@
+                <th style="border:1px solid black !important">
+                    @Html.DisplayNameFor(model => model.ContactFirstName)
+                </th>
+                <th style="border:1px solid black !important">
+                    @Html.DisplayNameFor(model => model.ContactLastName)
+                </th>
+                <th style="border:1px solid black !important">
+                    @Html.DisplayNameFor(model => model.ContactTitle)
+                </th>
+                <th style="border:1px solid black !important">
+                    @Html.DisplayNameFor(model => model.ContactPhoneNumber)
+                </th>
+                <th style="border:1px solid black !important">
+                    @Html.DisplayNameFor(model => model.Department)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="border:1px solid black !important">
+                        @Html.DisplayFor(modelItem => item.OrganizationName)
+                    </td>
+                    <td style="border:1px solid black !important">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ConfirmPassword)
+                        </td>*@
+                    <td style="border:1px solid black !important">
+                        @Html.DisplayFor(modelItem => item.ContactFirstName)
+                    </td>
+                    <td style="border:1px solid black !important">
+                        @Html.DisplayFor(modelItem => item.ContactLastName)
+                    </td>
+                    <td style="border:1px solid black !important">
+                        @Html.DisplayFor(modelItem => item.ContactTitle)
+                    </td>
+                    <td style="border:1px solid black !important">
+                        @Html.DisplayFor(modelItem => item.ContactPhoneNumber)
+                    </td>
+                    <td style="border:1px solid black !important">
+                        @Html.DisplayFor(modelItem => item.Department)
+                    </td>
+                </tr>
+                <tr class="">
+                    <td>
+                        <div class="form-group">
+                            <a asp-action="Edit" asp-route-id="@item.RegistrationId">
+                                <input type="submit" value="Edit" class="btn btn-primary" style="width:150px" />
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <a asp-action="Index" asp-controller="HiringManager"><input type="submit" value="Update Hiring Manager details" class="btn btn-primary" /></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
