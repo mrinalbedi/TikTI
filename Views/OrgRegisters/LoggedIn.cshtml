@@ -1,18 +1,21 @@
 ﻿
-@using Microsoft.AspNetCore.Mvc;
-
+    @using Microsoft.AspNetCore.Http;
+    @using Microsoft.AspNetCore.Identity;
+    @using Microsoft.AspNetCore.Mvc;
 @{
     ViewData["Title"] = "Welcome to TikTi!!";
-    Layout = "~/Views/Shared/_Organization_view.cshtml";
+    Layout = "~/Views/Shared/LoggedIn.cshtml";
 }
+<hr />
+<div>
+    <h1 class="text-center"> Welcome to TikTi...</h1>
+    <h2 class="text-center" style="font-weight:500; font-variant:small-caps; font-size:3.5rem">
+        "The one stop solution for all you employment needs."
+    </h2>
+</div>
 
-
-<h1> Welcome to TikTi... @ViewData["UserName"] </h1>
-<h2>The one stop solution for all you employment needs.</h2>
-
-
-
+<hr />
 
 <h4 class="text-center text-uppercase"><a asp-controller="SocCode" asp-action="Create">Upload Role Opportunity</a></h4>
-<h4 class="text-center text-uppercase"><a asp-controller="OrgRegisters" asp-action="Index">Update Profile</a></h4>
+@*<h4 class="text-center text-uppercase"><a asp-controller="OrgRegisters" asp-action="Index">Update Profile</a></h4>*@
 

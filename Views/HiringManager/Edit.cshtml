@@ -2,15 +2,21 @@
 
 @{
     ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Organization_view.cshtml";
+    Layout = "~/Views/Shared/LoggedIn.cshtml";
 }
 
-    <h1>Edit Hiring Manager</h1>
+<h1>Edit Hiring Manager</h1>
 
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
+
+<div class="row no_margin">
+    <div class="col-md-3" style="margin:auto; padding-top:2rem">
+        <h1 class="text-center" style="font-weight:500; font-variant:small-caps; font-size:3.5rem">
+            "Edit Details of Hiring Manager "
+        </h1>
+    </div>
+    <div class="col-md-4" style="margin:auto; padding-top:2rem; margin-top:0">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="HiringManagerId" />
