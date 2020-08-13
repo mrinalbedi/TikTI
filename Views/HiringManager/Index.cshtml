@@ -2,68 +2,73 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Organization_view.cshtml";
+    Layout = "~/Views/Shared/LoggedIn.cshtml";
 }
 
-<h1>Update Hiring Manager Details</h1>
+<hr />
+<div style="padding:0 2rem">
+    <h1 class="text-center">Update Hiring Manager Details</h1>
+    <br />
+    <div class="text-danger font-weight-bold text-center">@TempData["message"]</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="border:1px solid black !important">
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th style="border:1px solid black !important">
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th style="border:1px solid black !important">
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th style="border:1px solid black !important">
+                    @Html.DisplayNameFor(model => model.Department)
+                </th>
+                <th style="border:1px solid black !important">
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th style="border:1px solid black !important">
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th style="border:1px solid black !important"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="border:1px solid black !important">
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td style="border:1px solid black !important">
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td style="border:1px solid black !important">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td style="border:1px solid black !important">
+                        @Html.DisplayFor(modelItem => item.Department)
+                    </td>
+                    <td style="border:1px solid black !important">
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td style="border:1px solid black !important">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td class="text-center" style="border:1px solid black !important">
+                        <div class="form-group">
+                            <a asp-action="Edit" asp-route-id="@item.HiringManagerId">
+                                <input type="submit" value="Edit" class="btn btn-primary" style="width:80px" />
+                            </a>
+                        </div>
+                        @*<a asp-action="Edit" asp-route-id="@item.HiringManagerId">Edit</a>*@
 
-<div class="text-danger font-weight-bold text-center">@TempData["message"]</div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Department)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Department)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                <div class="form-group">
-                    <a asp-action="Edit" asp-route-id="@item.HiringManagerId"><input type="submit" value="Edit" class="btn btn-primary" />
-                    </a> 
-                </div>
-                @*<a asp-action="Edit" asp-route-id="@item.HiringManagerId">Edit</a>*@ 
-
-                @*<a asp-action="Details" asp-route-id="@item.HiringManagerId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.HiringManagerId">Delete</a>*@
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                        @*<a asp-action="Details" asp-route-id="@item.HiringManagerId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.HiringManagerId">Delete</a>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
