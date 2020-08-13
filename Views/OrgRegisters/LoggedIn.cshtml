@@ -1,14 +1,13 @@
-﻿ 
-    @using Microsoft.AspNetCore.Http;
-    @using Microsoft.AspNetCore.Identity;
-    @using Microsoft.AspNetCore.Mvc;
+﻿
+@using Microsoft.AspNetCore.Mvc;
+
 @{
     ViewData["Title"] = "Welcome to TikTi!!";
     Layout = "~/Views/Shared/_Organization_view.cshtml";
 }
 
 
-<h1> Welcome to TikTi...</h1>
+<h1> Welcome to TikTi... @ViewData["UserName"] </h1>
 <h2>The one stop solution for all you employment needs.</h2>
 
 

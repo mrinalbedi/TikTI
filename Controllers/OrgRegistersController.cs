@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,10 +23,10 @@ namespace Tikti.Controllers
         // GET: OrgRegisters
         public async Task<IActionResult> Index()
         {
-           
-            var mail1=Request.Cookies["Email"].ToString();
+
+            var mail1 = Request.Cookies["Email"].ToString();
             var mail2 = HttpContext.Session.GetString("UserId");
-            return View(await _context.OrgRegister.Where(m=>m.Email==mail1 || m.Email==mail2).ToListAsync());
+            return View(await _context.OrgRegister.Where(m => m.Email == mail1 || m.Email == mail2).ToListAsync());
         }
 
         // GET: OrgRegisters/Details/5
@@ -69,11 +68,11 @@ namespace Tikti.Controllers
             if (ModelState.IsValid)
             {
                 MailMessage mm = new MailMessage();
-            mm.To.Add(new MailAddress(orgRegister.Email, "Request for Verification"));
-            mm.From = new MailAddress("alexbaby463@gmail.com");
-            mm.Body = "<a href='http://localhost:55446/OrgRegisters/EmailConfirmed'>Please click here to confirm your registration</a>";
-            mm.IsBodyHtml = true;
-            mm.Subject = "Tikti Registration Verification link";
+                mm.To.Add(new MailAddress(orgRegister.Email, "Request for Verification"));
+                mm.From = new MailAddress("alexbaby463@gmail.com");
+                mm.Body = "<a href='http://localhost:55446/OrgRegisters/EmailConfirmed'>Please click here to confirm your registration</a>";
+                mm.IsBodyHtml = true;
+                mm.Subject = "Tikti Registration Verification link";
                 SmtpClient smcl = new SmtpClient
                 {
                     Host = "smtp.gmail.com",
@@ -83,18 +82,23 @@ namespace Tikti.Controllers
                     EnableSsl = true
                 };
                 smcl.Send(mm);
-            byte[] encode = new byte[orgRegister.Password.Length];
-            encode = Encoding.UTF8.GetBytes(orgRegister.Password);
+                byte[] encode = new byte[orgRegister.Password.Length];
+                encode = Encoding.UTF8.GetBytes(orgRegister.Password);
 
-            orgRegister.Password = Convert.ToBase64String(encode);
-            orgRegister.ConfirmPassword = Convert.ToBase64String(encode);
-            _context.Add(orgRegister);
-            await _context.SaveChangesAsync();
+                orgRegister.Password = Convert.ToBase64String(encode);
+                orgRegister.ConfirmPassword = Convert.ToBase64String(encode);
+                //orgRegister.ContactPhoneNumber=orgRegister.ContactPhoneNumber.Insert(0, "(");
+                //orgRegister.ContactPhoneNumber = orgRegister.ContactPhoneNumber.Insert(4, ")");
+                //orgRegister.ContactPhoneNumber = orgRegister.ContactPhoneNumber.Insert(5, "-");
+                //orgRegister.ContactPhoneNumber = orgRegister.ContactPhoneNumber.Insert(9, "-");
+
+                _context.Add(orgRegister);
+                await _context.SaveChangesAsync();
                 Response.Cookies.Append("RegistrationId", orgRegister.RegistrationId.ToString());
-                return RedirectToAction("Create","HiringManager");
+                return RedirectToAction("Create", "HiringManager");
             }
-          return View(orgRegister);
-    }
+            return View(orgRegister);
+        }
 
         // GET: OrgRegisters/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -208,7 +212,7 @@ namespace Tikti.Controllers
             System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
             System.Text.Decoder utf8Decode = encoder.GetDecoder();
             var usr = _context.OrgRegister.FirstOrDefault(u => u.Email == org.Email);
-            if(usr!=null)
+            if (usr != null)
             {
                 byte[] todecode_byte = Convert.FromBase64String(usr.Password);
                 int charCount = utf8Decode.GetCharCount(todecode_byte, 0, todecode_byte.Length);
@@ -219,12 +223,13 @@ namespace Tikti.Controllers
                 {
                     HttpContext.Session.SetString("UserId", usr.Email.ToString());
                     Response.Cookies.Append("Email", org.Email);
+                    ViewData["UserName"] = usr.ContactFirstName + ' ' + usr.ContactLastName;
                     return RedirectToAction("LoggedIn");
                 }
                 else
                 {
                     //TempData["message"] = "Username or password is incorrect";
-                    ModelState.AddModelError("","Username or password is incorrect");
+                    ModelState.AddModelError("", "Username or password is incorrect");
                 }
             }
             else
@@ -236,7 +241,6 @@ namespace Tikti.Controllers
         }
         public ActionResult LoggedIn()
         {
-             
             if (HttpContext.Session.GetString("UserId") != null)
             {
                 return View();
