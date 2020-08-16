@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 using ValidationClassLibrary;
 
 namespace Tikti.Models
@@ -8,6 +9,33 @@ namespace Tikti.Models
     [ModelMetadataTypeAttribute(typeof(HiringManagerMetaData))]
     public partial class HiringManager : IValidatableObject
     {
+        public static string Capitalize(string input)
+        {
+            if (input == null)
+            {
+                return string.Empty;
+            }
+            string x = input.ToLower().Trim();
+            x = Regex.Replace(x, @"(^\w)|(\s\w)", m => m.Value.ToUpper());
+
+            return x;
+        }
+        public static string PhoneNumberFormat(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return "The Phone number cannot be blank";
+            }
+            else if (!input.Contains(" "))
+            {
+                input = input.Insert(0, "(");
+                input = input.Insert(4, ")");
+                input = input.Insert(5, "-");
+                input = input.Insert(9, "-");
+                input = input.ToUpper();
+            }
+            return input;
+        }
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (FirstName == string.Empty || string.IsNullOrWhiteSpace(FirstName))
@@ -17,7 +45,7 @@ namespace Tikti.Models
             else
             {
                 FirstName = FirstName.Trim();
-                FirstName = Validations.Capitalize(FirstName);
+                FirstName = Capitalize(FirstName);
             }
             if (LastName == string.Empty || string.IsNullOrWhiteSpace(LastName))
             {
@@ -26,7 +54,7 @@ namespace Tikti.Models
             else
             {
                 LastName = LastName.Trim();
-                LastName = Validations.Capitalize(LastName);
+                LastName = Capitalize(LastName);
             }
             if (Title == string.Empty || string.IsNullOrWhiteSpace(Title))
             {
@@ -35,7 +63,7 @@ namespace Tikti.Models
             else
             {
                 Title = Title.Trim();
-                Title = Validations.Capitalize(Title);
+                Title = Capitalize(Title);
             }
             if (Department == string.Empty || string.IsNullOrWhiteSpace(Department))
             {
@@ -44,7 +72,7 @@ namespace Tikti.Models
             else
             {
                 Department = Department.Trim();
-                Department = Validations.Capitalize(Department);
+                Department = Capitalize(Department);
             }
             if (PhoneNumber == string.Empty || string.IsNullOrWhiteSpace(PhoneNumber))
             {
@@ -53,7 +81,7 @@ namespace Tikti.Models
             else
             {
                 PhoneNumber = PhoneNumber.Trim();
-                Department = Validations.PhoneNumberFormat(PhoneNumber);
+                Department = PhoneNumberFormat(PhoneNumber);
             }
             yield return ValidationResult.Success;
         }

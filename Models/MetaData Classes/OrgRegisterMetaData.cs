@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 using ValidationClassLibrary;
 
 namespace Tikti.Models
@@ -8,6 +9,33 @@ namespace Tikti.Models
     [ModelMetadataTypeAttribute(typeof(OrgRegisterMetaData))]
     public partial class OrgRegister : IValidatableObject
     {
+        public static string Capitalize(string input)
+        {
+            if (input == null)
+            {
+                return string.Empty;
+            }
+            string x = input.ToLower().Trim();
+            x = Regex.Replace(x, @"(^\w)|(\s\w)", m => m.Value.ToUpper());
+
+            return x;
+        }
+        public static string PhoneNumberFormat(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return "The Phone number cannot be blank";
+            }
+            else if (!input.Contains(" "))
+            {
+                input = input.Insert(0, "(");
+                input = input.Insert(4, ")");
+                input = input.Insert(5, "-");
+                input = input.Insert(9, "-");
+                input = input.ToUpper();
+            }
+            return input;
+        }
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if(OrganizationName==string.Empty||string.IsNullOrWhiteSpace(OrganizationName))
@@ -17,7 +45,7 @@ namespace Tikti.Models
             else
             {
                 OrganizationName = OrganizationName.Trim();
-                OrganizationName = Validations.Capitalize(OrganizationName);
+                OrganizationName = Capitalize(OrganizationName);
             }
             if (ContactPhoneNumber == string.Empty || string.IsNullOrWhiteSpace(ContactPhoneNumber))
             {
@@ -26,7 +54,7 @@ namespace Tikti.Models
             else
             {
                 ContactPhoneNumber = ContactPhoneNumber.Trim();
-                ContactPhoneNumber = Validations.PhoneNumberFormat(ContactPhoneNumber);
+                ContactPhoneNumber = PhoneNumberFormat(ContactPhoneNumber);
             }
 
             if (ContactFirstName == string.Empty || string.IsNullOrWhiteSpace(ContactFirstName))
@@ -36,7 +64,7 @@ namespace Tikti.Models
             else
             {
                 ContactFirstName = ContactFirstName.Trim();
-                ContactFirstName = Validations.Capitalize(ContactFirstName);
+                ContactFirstName = Capitalize(ContactFirstName);
             }
             if (ContactLastName == string.Empty || string.IsNullOrWhiteSpace(ContactLastName))
             {
@@ -45,7 +73,7 @@ namespace Tikti.Models
             else
             {
                 ContactLastName = ContactLastName.Trim();
-                ContactLastName = Validations.Capitalize(ContactLastName);
+                ContactLastName = Capitalize(ContactLastName);
             }
             if (Department == string.Empty || string.IsNullOrWhiteSpace(Department))
             {
@@ -54,7 +82,7 @@ namespace Tikti.Models
             else
             {
                 Department = Department.Trim();
-                Department = Validations.Capitalize(Department);
+                Department = Capitalize(Department);
             }
             if (ContactTitle == string.Empty || string.IsNullOrWhiteSpace(ContactTitle))
             {
@@ -63,7 +91,7 @@ namespace Tikti.Models
             else
             {
                 ContactTitle = ContactTitle.Trim();
-                ContactTitle = Validations.Capitalize(ContactTitle);
+                ContactTitle = Capitalize(ContactTitle);
             }
             
             yield return ValidationResult.Success;
