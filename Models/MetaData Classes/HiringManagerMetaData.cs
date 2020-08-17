@@ -99,6 +99,7 @@ namespace Tikti.Models
 
         public string Email { get; set; }
 
+        [Required(ErrorMessage ="Phone number of the hiring manager is required")]
         [Display(Name = "Hiring Manager Phone Number")]
         [StringLength(15, ErrorMessage = "Phone number should be minimum 10 characters long", MinimumLength = 10)]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Please enter a valid phone number")]

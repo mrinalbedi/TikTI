@@ -22,11 +22,11 @@ create table HiringManager(
 	PhoneNumber varchar(max),
 	email varchar(max)
 );
-
+drop table orgRegisterHR
 create table orgRegisterHR(
    orgRegisterHRID int identity primary key,
    registrationID int foreign key references orgRegister(registrationID),
-   hiringManagerID int foreign key references HiringManager(hiringManagerID)
+   hiringManagerID int foreign key references HiringManager(hiringManagerID) on delete cascade
 );
 
 
