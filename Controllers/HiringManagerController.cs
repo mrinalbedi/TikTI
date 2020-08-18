@@ -182,5 +182,41 @@ namespace Tikti.Controllers
         {
             return _context.HiringManager.Any(e => e.HiringManagerId == id);
         }
+
+        public IActionResult CreateNewHiringManager()
+        {
+            string RegistrationId = Request.Cookies["RegistrationId"];
+            if (string.IsNullOrEmpty(RegistrationId))
+            {
+                //add code to return to registration page
+            }
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateNewHiringManager([Bind("HiringManagerId,FirstName,LastName,Title,Department,PhoneNumber,Email")] HiringManager hiringManager, string value)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(hiringManager);
+                await _context.SaveChangesAsync();
+
+                OrgRegisterHr orhr = new OrgRegisterHr();
+                orhr.HiringManagerId = hiringManager.HiringManagerId;
+                orhr.RegistrationId = Convert.ToInt32(Request.Cookies["RegistrationId"]);
+
+                _context.Add(orhr);
+                await _context.SaveChangesAsync();
+                if (value == "add")
+                    return RedirectToAction("Create", "HiringManager");
+                if (value == "next")
+                {
+                    TempData["message"] = "New Hiring Manager Added Successfully";
+                    return RedirectToAction("Index", "HiringManager");
+                }
+                    
+            }
+            return View(hiringManager);
+        }
     }
 }

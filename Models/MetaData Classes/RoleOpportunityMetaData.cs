@@ -27,6 +27,9 @@ namespace Tikti.Models
     {
         public int RoleOpportunityId { get; set; }
 
+        [Display(Name ="Role Title")]
+        public int AlternateTitleId { get; set; }
+
         //[Required(ErrorMessage ="The job description is a required field")]
         [Display(Name = "Job Description:")]
         public byte[] JobDescription { get; set; }

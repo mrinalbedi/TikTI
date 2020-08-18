@@ -7,10 +7,14 @@
 
 <hr />
 <div style="padding:0 2rem">
+
     <h1 class="text-center">Update Hiring Manager Details</h1>
     <br />
     <div class="text-danger font-weight-bold text-center">@TempData["message"]</div>
-    <table class="table">
+    <a class="btn btn-primary" asp-action="CreateNewHiringManager" asp-controller="HiringManager">Add new Hiring Manager </a>
+    <br />
+    <br />
+    <table class="table rounded" style="border-radius:25px">
         <thead>
             <tr>
                 <th style="border:1px solid black !important">
@@ -60,6 +64,11 @@
                         <div class="form-group">
                             <a asp-action="Edit" asp-route-id="@item.HiringManagerId">
                                 <input type="submit" value="Edit" class="btn btn-primary" style="width:80px" />
+                            </a>
+                        </div>
+                        <div class="form-group">
+                            <a asp-action="Delete" asp-route-id="@item.HiringManagerId">
+                                <input type="submit" value="Delete" class="btn btn-primary" style="width:80px" />
                             </a>
                         </div>
                         @*<a asp-action="Edit" asp-route-id="@item.HiringManagerId">Edit</a>*@
