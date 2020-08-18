@@ -59,6 +59,9 @@ namespace Tikti.Controllers
             //var org = _context.OrgRegister.Where(x => x.Email == Request.Cookies["Email"].ToString()).FirstOrDefault();
             //var orgHR = _context.OrgRegisterHr.Where(x => x.RegistrationId == org.RegistrationId);
             var altTitle = _context.AlternateTitles.Where(x => x.SocCode == soc);
+            HttpContext.Session.SetString("SOCCOde",soc);
+            Response.Cookies.Append("SOCCode", soc);
+
             var query = from org in _context.OrgRegister
                         join orhr in _context.OrgRegisterHr
                         on org.RegistrationId equals orhr.RegistrationId
@@ -80,10 +83,28 @@ namespace Tikti.Controllers
         // POST: RoleOpportunity/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+
+
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RoleOpportunityId,RegistrationId,AlternateTitleId,JobDescription,DesiredStartDate,WorkCommitment,ContractDuration,Currency,Salary,City,Province,Postal,TelecommutingRoles,Weblink,Certification,ExtraCertificationRequired,ExtraCertification,Experience,Education,HiringManagerId")] RoleOpportunity roleOpportunity, IFormFile files)
         {
+            string soc = string.Empty;
+            if (HttpContext.Session.GetString("SOCCode") != null)
+                soc = HttpContext.Session.GetString("SOCCode");
+            else
+                soc = Request.Cookies["SOCCode"];
+            var altTitle = _context.AlternateTitles.Where(x => x.SocCode == soc);
+            var query = from org in _context.OrgRegister
+                        join orhr in _context.OrgRegisterHr
+                        on org.RegistrationId equals orhr.RegistrationId
+                        join hr in _context.HiringManager
+                        on orhr.HiringManagerId equals hr.HiringManagerId
+                        where org.Email == Request.Cookies["Email"].ToString()
+                        select new { HrmId = hr.HiringManagerId, HrmName = hr.FirstName + ' ' + hr.LastName };
+
             if (files != null)
             {
                 if (files.Length > 0)
@@ -126,11 +147,16 @@ namespace Tikti.Controllers
                 ViewBag.ROID = temp.RoleOpportunityId;
                 return RedirectToAction("Create", "AlternativeWorkLocation");
             }
-            ViewData["Certification"] = new SelectList(_context.Certification, "CertificationId", "CertificationId", roleOpportunity.Certification);
-            ViewData["Currency"] = new SelectList(_context.Currency, "CurrencyId", "CurrencyId", roleOpportunity.Currency);
-            ViewData["Education"] = new SelectList(_context.Education, "EducationId", "EducationId", roleOpportunity.Education);
-            ViewData["Experience"] = new SelectList(_context.Experience, "ExperienceId", "ExperienceId", roleOpportunity.Experience);
-            ViewData["WorkCommitment"] = new SelectList(_context.WorkCommitment, "WorkCommitmentId", "WorkCommitmentId", roleOpportunity.WorkCommitment);
+
+            ViewData["AlternateTitle"] = new SelectList(altTitle, "AlternateTitleId", "Name");
+            ViewData["HiringManager"] = new SelectList(query, "HrmId", "HrmName");
+            ViewData["Certification"] = new SelectList(_context.Certification, "CertificationId", "CertificationName", roleOpportunity.Certification);
+            ViewData["Currency"] = new SelectList(_context.Currency, "CurrencyId", "Currency1", roleOpportunity.Currency);
+            ViewData["Education"] = new SelectList(_context.Education, "EducationId", "Education1", roleOpportunity.Education);
+            ViewData["Experience"] = new SelectList(_context.Experience, "ExperienceId", "Experience1", roleOpportunity.Experience);
+            ViewData["WorkCommitment"] = new SelectList(_context.WorkCommitment.OrderByDescending(x => x.WorkCommitmentId), "WorkCommitmentId", "Commitment", roleOpportunity.WorkCommitment);
+
+            
             return View(roleOpportunity);
         }
 
@@ -145,9 +171,12 @@ namespace Tikti.Controllers
         }
 
         // GET: RoleOpportunity/Edit/5
-        public IActionResult Edit(IFormFile files)
+        public IActionResult Edit(IFormFile files,string soc)
         {
+            var altTitle = _context.AlternateTitles.Where(x => x.SocCode == soc);
+
             
+
             string UserId = string.Empty;
             if (HttpContext.Session.GetString("UserId") != null)
                 UserId = HttpContext.Session.GetString("UserId");
@@ -171,7 +200,7 @@ namespace Tikti.Controllers
                         select new { HrmId = hr.HiringManagerId, HrmName = hr.FirstName + ' ' + hr.LastName };
 
 
-            ViewData["AlternateTitle"] = new SelectList(_context.AlternateTitles, "AlternateTitleId", "Name", roleOpportunity.AlternateTitleId);
+            ViewData["AlternateTitle"] = new SelectList(altTitle, "AlternateTitleId", "Name", roleOpportunity.AlternateTitleId);
             ViewData["HrManager"] = new SelectList(query, "HrmId", "HrmName",roleOpportunity.HiringManagerId);
             ViewData["Certification"] = new SelectList(_context.Certification, "CertificationId", "CertificationName", roleOpportunity.Certification);
             ViewData["Currency"] = new SelectList(_context.Currency, "CurrencyId", "Currency1", roleOpportunity.Currency);
@@ -188,6 +217,20 @@ namespace Tikti.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([Bind("RoleOpportunityId,RegistrationId,AlternateTitleId,JobDescription,DesiredStartDate,WorkCommitment,ContractDuration,Currency,Salary,City,Province,Postal,TelecommutingRoles,Weblink,Certification,ExtraCertificationRequired,ExtraCertification,Experience,Education,HiringManagerId")] RoleOpportunity roleOpportunity, IFormFile files)
         {
+            string soc = string.Empty;
+            if (HttpContext.Session.GetString("SOCCode") != null)
+                soc = HttpContext.Session.GetString("SOCCode");
+            else
+                soc = Request.Cookies["SOCCode"];
+            var altTitle = _context.AlternateTitles.Where(x => x.SocCode == soc);
+            var query = from org in _context.OrgRegister
+                        join orhr in _context.OrgRegisterHr
+                        on org.RegistrationId equals orhr.RegistrationId
+                        join hr in _context.HiringManager
+                        on orhr.HiringManagerId equals hr.HiringManagerId
+                        where org.Email == Request.Cookies["Email"].ToString()
+                        select new { HrmId = hr.HiringManagerId, HrmName = hr.FirstName + ' ' + hr.LastName };
+
             string UserId = string.Empty;
             if (HttpContext.Session.GetString("RegId") != null)
                 UserId = HttpContext.Session.GetString("RegId");
@@ -219,6 +262,8 @@ namespace Tikti.Controllers
             else
             {
                 ModelState.AddModelError("", "The job description field cannot be empty");
+                var x = _context.RoleOpportunity.Where(m => m.RoleOpportunityId == Convert.ToInt32(Request.Cookies["RoleOppId"])).FirstOrDefault();
+                roleOpportunity.JobDescription = x.JobDescription;
             }
             if (ModelState.IsValid)
             {
@@ -241,11 +286,13 @@ namespace Tikti.Controllers
                 }
                 return RedirectToAction("Edit", "RoleCulture");
             }
+            ViewData["AlternateTitle"] = new SelectList(altTitle, "AlternateTitleId", "Name");
+            ViewData["HiringManager"] = new SelectList(query, "HrmId", "HrmName");
             ViewData["Certification"] = new SelectList(_context.Certification, "CertificationId", "CertificationName", roleOpportunity.Certification);
             ViewData["Currency"] = new SelectList(_context.Currency, "CurrencyId", "Currency1", roleOpportunity.Currency);
             ViewData["Education"] = new SelectList(_context.Education, "EducationId", "Education1", roleOpportunity.Education);
             ViewData["Experience"] = new SelectList(_context.Experience, "ExperienceId", "Experience1", roleOpportunity.Experience);
-            ViewData["WorkCommitment"] = new SelectList(_context.WorkCommitment, "WorkCommitmentId", "Commitment", roleOpportunity.WorkCommitment);
+            ViewData["WorkCommitment"] = new SelectList(_context.WorkCommitment.OrderByDescending(x => x.WorkCommitmentId), "WorkCommitmentId", "Commitment", roleOpportunity.WorkCommitment);
             return View(roleOpportunity);
         }
 

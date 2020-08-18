@@ -15,7 +15,7 @@
         <div class="row no_margin">
             <div class="col-md-3" style="margin:auto; padding-top:2rem">
                 <h1 class="text-center" style="font-weight:500; font-variant:small-caps; font-size:3.5rem">
-                    Indicate Which Competencies are Critical for the Role....
+                    Indicate Which Competencies are Critical for the Role <br />
                     (Choose all that apply)
                 </h1>
             </div>
@@ -31,7 +31,8 @@
                 {
                     <div style="font-size:1.2rem; line-height:2.0rem">
                         @Html.CheckBoxFor(m => m.competencyA[i].IsSelected)
-                        @Html.LabelFor(m => m.competencyA[i].CompetencyName, Model.competencyA[i].CompetencyName)<br />
+                        @*@Html.LabelFor(m => m.competencyA[i].CompetencyName, Model.competencyA[i].CompetencyName)<br />*@
+                       <label title="@Model.competencyA[i].Description">@Model.competencyA[i].CompetencyName</label>
                     </div>
                     @Html.HiddenFor(m => m.competencyA[i].CompetencyId)
                 }
@@ -46,10 +47,11 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 @for (int i = Model.competencyA.Count / 2; i < Model.competencyA.Count; i++)
                 {
-                    <div style="font-size:1.2rem; line-height:2.0rem">
-                        @Html.CheckBoxFor(m => m.competencyA[i].IsSelected)
-                        @Html.LabelFor(m => m.competencyA[i].CompetencyName, Model.competencyA[i].CompetencyName)<br />
-                    </div>
+            <div style="font-size:1.2rem; line-height:2.0rem">
+                @Html.CheckBoxFor(m => m.competencyA[i].IsSelected)
+                @*@Html.LabelFor(m => m.competencyA[i].CompetencyName, Model.competencyA[i].CompetencyName)<br />*@
+                <label title="@Model.competencyA[i].Description">@Model.competencyA[i].CompetencyName</label>
+            </div>
                     @Html.HiddenFor(m => m.competencyA[i].CompetencyId)
                 }
             </div>

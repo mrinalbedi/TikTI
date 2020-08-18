@@ -31,7 +31,7 @@ namespace Tikti.Models
         public int AlternateTitleId { get; set; }
 
         //[Required(ErrorMessage ="The job description is a required field")]
-        [Display(Name = "Job Description:")]
+        [Display(Name = "Job Description (pdf format only)")]
         public byte[] JobDescription { get; set; }
 
 
