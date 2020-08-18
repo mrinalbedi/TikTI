@@ -4,10 +4,10 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Organization_view.cshtml";
 }
-
-<h1>Edit</h1>
-
-<h4>SocCode</h4>
+<br />
+<h1 class="text-center" style="font-weight:400; font-size:2.5rem">
+    "<strong>Review and Edit</strong>" <br /> SOC Codes
+</h1>
 <hr />
 <form asp-action="Edit">
     <div class="row no_margin">
@@ -23,17 +23,13 @@
     <div class="row no_margin">
         <div class="col text-center">
             <div class="form-group">
-                <input type="submit" value="Next Step" class="btn btn-primary btn-lg" />
+                <input type="submit" value="Review Next Step" class="btn btn-primary btn-lg" />
             </div>
         </div>
     </div>
-    @*<div class="form-group">
-            <input type="submit" value="Next Step" class="btn btn-primary btn-lg" />
-        </div>*@
 </form>
-@*</div>*@
 
-<div>
+@*<div>
     <a asp-action="Index">Back to List</a>
-</div>
+</div>*@
 

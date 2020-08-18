@@ -6,43 +6,45 @@
 }
 <hr />
 @*<div class="row">*@
-<div class="col-md-4 align-content-center" style="margin:auto">
-    <div class="row">
-        <h1>Alternative Work Location</h1>
-    </div>
-    <hr />
-    <a class="float-right" asp-action="Create" asp-controller="RoleCulture">Skip this step</a>
-    <br />
-    <form asp-action="Add">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <h6>
-                <label asp-for="City" class="control-label">City</label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </h6>
-        </div>
-        <div class="form-group">
-            <h6>
-                <label asp-for="Province" class="control-label">Province/State</label>
-                <input asp-for="Province" class="form-control" />
-                <span asp-validation-for="Province" class="text-danger"></span>
-            </h6>
-        </div>
-        <div class="form-group">
-            <h6>
-                <label asp-for="Postal" class="control-label">Postal</label>
-                <input asp-for="Postal" class="form-control" />
-                <span asp-validation-for="Postal" class="text-danger"></span>
-            </h6>
-        </div>
-        <div class="row no_margin">
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary"/>
+<form asp-action="Add">
+    <div class="row no_margin">
+            <div class="col-md-4" style="margin:auto; padding-top:2rem; margin-top:0">
+                <a class="float-right" asp-action="Create" asp-controller="RoleCulture">Skip this step</a>
+                <br />
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <h6>
+                        <label asp-for="City" class="control-label">City</label>
+                        <input asp-for="City" class="form-control" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </h6>
+                </div>
+                <div class="form-group">
+                    <h6>
+                        <label asp-for="Province" class="control-label">Province/State</label>
+                        <input asp-for="Province" class="form-control" />
+                        <span asp-validation-for="Province" class="text-danger"></span>
+                    </h6>
+                </div>
+                <div class="form-group">
+                    <h6>
+                        <label asp-for="Postal" class="control-label">Postal</label>
+                        <input asp-for="Postal" class="form-control" />
+                        <span asp-validation-for="Postal" class="text-danger"></span>
+                    </h6>
+                </div>
             </div>
-        </div>
-    </form>
-</div>
+            <div class="col-md-4" style="margin:auto; padding-top:2rem">
+                <h1 class="text-center" style="font-weight:400; font-size:2.5rem">
+                    "<strong>Add</strong>" <br /> Alternative Work Location
+                </h1><hr />
+                <div class="text-center form-group">
+                    <input type="submit" value="Save Location" class="btn-lg btn btn-primary" />
+                </div>
+            </div><hr />
+    </div>
+</form>
 @*</div>*@
 
 
