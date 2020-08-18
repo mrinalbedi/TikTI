@@ -8,6 +8,7 @@ namespace Tikti.Models
         public OrgRegister()
         {
             OrgRegisterHr = new HashSet<OrgRegisterHr>();
+            RoleOpportunity = new HashSet<RoleOpportunity>();
         }
 
         public int RegistrationId { get; set; }
@@ -22,5 +23,6 @@ namespace Tikti.Models
         public string Department { get; set; }
 
         public virtual ICollection<OrgRegisterHr> OrgRegisterHr { get; set; }
+        public virtual ICollection<RoleOpportunity> RoleOpportunity { get; set; }
     }
 }

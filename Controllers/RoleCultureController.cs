@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Tikti.Models;
 
@@ -82,21 +84,31 @@ namespace Tikti.Controllers
         }
 
         // GET: RoleCulture/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit()
         {
-            if (id == null)
+            string RoleOpportunityId = string.Empty;
+            if (HttpContext.Session.GetString("RoleOppId") != null)
+                RoleOpportunityId = HttpContext.Session.GetString("RoleOppId");
+            else
+                RoleOpportunityId = Request.Cookies["RoleOppId"];
+            var roleCulture = _context.RoleCulture.Where(x=>x.RoleOpportunity == Convert.ToInt32(RoleOpportunityId));
+            
+            RoleCultureVM rcvm = new RoleCultureVM();
+            foreach (var x in _context.Culture)
             {
-                return NotFound();
+                rcvm.cultures.Add(x);
+                foreach(var y in roleCulture)
+                {
+                    if (y.Culture == x.CultureId)
+                    {
+                        x.IsSelected = true;
+                        _context.RoleCulture.Remove(y);
+                        
+                    }
+                }
             }
-
-            var roleCulture = await _context.RoleCulture.FindAsync(id);
-            if (roleCulture == null)
-            {
-                return NotFound();
-            }
-            ViewData["Culture"] = new SelectList(_context.Culture, "CultureId", "CultureId", roleCulture.Culture);
-            ViewData["RoleOpportunity"] = new SelectList(_context.RoleOpportunity, "RoleOpportunityId", "City", roleCulture.RoleOpportunity);
-            return View(roleCulture);
+            await _context.SaveChangesAsync();
+            return View(rcvm);
         }
 
         // POST: RoleCulture/Edit/5
@@ -104,35 +116,29 @@ namespace Tikti.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RoleCultureId,RoleOpportunity,Culture")] RoleCulture roleCulture)
+        public async Task<IActionResult> Edit([Bind("RoleCultureId,RoleOpportunity,Culture")] RoleCulture roleCulture, RoleCultureVM rcvm)
         {
-            if (id != roleCulture.RoleCultureId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
+                foreach (var x in rcvm.cultures)
                 {
-                    _context.Update(roleCulture);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RoleCultureExists(roleCulture.RoleCultureId))
+                    if (x.IsSelected == true)
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
+                        RoleCulture rc = new RoleCulture();
+                        rc.RoleOpportunity = Convert.ToInt32(Request.Cookies["RoleOppId"]);
+                        rc.Culture = x.CultureId;
+                        _context.Add(rc);
+                        await _context.SaveChangesAsync();
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                var query = from culture in _context.Culture
+                            select culture;
+                foreach (var q in query)
+                    q.IsSelected = false;
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Edit", "RoleBenefit");
             }
-            ViewData["Culture"] = new SelectList(_context.Culture, "CultureId", "CultureId", roleCulture.Culture);
-            ViewData["RoleOpportunity"] = new SelectList(_context.RoleOpportunity, "RoleOpportunityId", "City", roleCulture.RoleOpportunity);
+
             return View(roleCulture);
         }
 

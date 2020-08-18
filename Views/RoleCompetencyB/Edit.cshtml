@@ -1,37 +1,70 @@
-﻿@model Tikti.Models.RoleCompetencyB
+﻿@model Tikti.Models.RoleCompetencyB_VM
 
 @{
-    ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Organization_view.cshtml";
+    ViewData["Title"] = "Select more Competencies";
+    Layout = "~/Views/Shared/LoggedIn.cshtml";
 }
 
-<h1>Edit</h1>
-
-<h4>RoleCompetencyB</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="RoleCompetencyBid" />
-            <div class="form-group">
-                <label asp-for="RoleOpportunity" class="control-label"></label>
-                <select asp-for="RoleOpportunity" class="form-control" asp-items="ViewBag.RoleOpportunity"></select>
-                <span asp-validation-for="RoleOpportunity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ComptencyB" class="control-label"></label>
-                <select asp-for="ComptencyB" class="form-control" asp-items="ViewBag.ComptencyB"></select>
-                <span asp-validation-for="ComptencyB" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+@*<div class="col-md-4 align-content-center" style="margin:auto">
+    <div class="row">
+        <h1>Select Competency Part 2</h1>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <hr />*@
+<hr />
+<form asp-action="Edit">
+    <div class="row no_margin">
+        <div class="col-md-3" style="margin:auto; padding-top:2rem">
+            <h1 class="text-center" style="font-weight:500; font-variant:small-caps; font-size:3.5rem">
+                "Select Competencies Continued"
+            </h1>
+        </div>
+        <div class="col-md-3" style="margin:auto; padding-top:2rem; margin-top:1rem">
+            <div class="row text-center">
+                <h3 class="text-center" style="font-weight:400;font-size:2.5rem">
+                    'People'
+                </h3>
+            </div>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*@for (int i = 0; i < Model.competencyB.Count; i++)*@
+            @for (int i = 0; i < 8; i++)
+            {
+                <div style="font-size:1.2rem; line-height:2.2rem">
+                    @Html.CheckBoxFor(m => m.competencyB[i].IsSelected)
+                    @Html.LabelFor(m => m.competencyB[i].CompetencyName, Model.competencyB[i].CompetencyName)<br />
+                </div>
+                @Html.HiddenFor(m => m.competencyB[i].CompetencyId)
+            }
+        </div>
+        <div class="col-md-4" style="margin:auto; padding-top:2rem; margin-top:1rem">
+            <div class="row text-center">
+                <h3 class="text-center" style="font-weight:400;font-size:2.5rem">
+                    'Personal Uniqueness'
+                </h3>
+            </div>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*@for (int i = 0; i < Model.competencyB.Count; i++)*@
+            @for (int i = 8; i < Model.competencyB.Count; i++)
+            {
+                <div style="font-size:1.2rem; line-height:1.5rem">
+                    @Html.CheckBoxFor(m => m.competencyB[i].IsSelected)
+                    @Html.LabelFor(m => m.competencyB[i].CompetencyName, Model.competencyB[i].CompetencyName)<br />
+                </div>
+                @Html.HiddenFor(m => m.competencyB[i].CompetencyId)
+            }
+        </div>
+    </div>
+    <div class="row no_margin">
+        <div class="col-md-4 text-center">
+            <div class="form-group">
+                <input type="submit" value="Next Step" class="btn btn-primary btn-lg" />
+            </div>
+        </div>
+    </div>
+    @*<div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>*@
+</form>
+@*</div>*@
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -82,21 +83,31 @@ namespace Tikti.Controllers
         }
 
         // GET: RoleCompetencyA/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            string RoleOpportunityId = string.Empty;
+            if (HttpContext.Session.GetString("RoleOppId") != null)
+                RoleOpportunityId = HttpContext.Session.GetString("RoleOppId");
+            else
+                RoleOpportunityId = Request.Cookies["RoleOppId"];
 
-            var roleCompetencyA = await _context.RoleCompetencyA.FindAsync(id);
-            if (roleCompetencyA == null)
+            var roleCompetencyA = _context.RoleCompetencyA.Where(x => x.RoleOpportunity == Convert.ToInt32(RoleOpportunityId));
+            RoleCompetencyA_VM rcavm = new RoleCompetencyA_VM();
+            foreach (var x in _context.CompetencyA)
             {
-                return NotFound();
+                rcavm.competencyA.Add(x);
+                foreach (var y in roleCompetencyA)
+                {
+                    if (y.ComptencyA == x.CompetencyId)
+                    {
+                        x.IsSelected = true;
+                        _context.RoleCompetencyA.Remove(y);
+                       
+                    }
+                }
             }
-            ViewData["ComptencyA"] = new SelectList(_context.CompetencyA, "CompetencyId", "CompetencyId", roleCompetencyA.ComptencyA);
-            ViewData["RoleOpportunity"] = new SelectList(_context.RoleOpportunity, "RoleOpportunityId", "City", roleCompetencyA.RoleOpportunity);
-            return View(roleCompetencyA);
+            await _context.SaveChangesAsync();
+            return View(rcavm);
         }
 
         // POST: RoleCompetencyA/Edit/5
@@ -104,35 +115,28 @@ namespace Tikti.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RoleCompetencyAid,RoleOpportunity,ComptencyA")] RoleCompetencyA roleCompetencyA)
+        public async Task<IActionResult> Edit([Bind("RoleCompetencyAid,RoleOpportunity,ComptencyA")] RoleCompetencyA roleCompetencyA, RoleCompetencyA_VM rcavm)
         {
-            if (id != roleCompetencyA.RoleCompetencyAid)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
+                foreach (var x in rcavm.competencyA)
                 {
-                    _context.Update(roleCompetencyA);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RoleCompetencyAExists(roleCompetencyA.RoleCompetencyAid))
+                    if (x.IsSelected == true)
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
+                        RoleCompetencyA rca = new RoleCompetencyA();
+                        rca.RoleOpportunity = Convert.ToInt32(Request.Cookies["RoleOpportunityId"]);
+                        rca.ComptencyA = x.CompetencyId;
+                        _context.Add(rca);
+                        await _context.SaveChangesAsync();
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                var query = from competencyA in _context.CompetencyA
+                            select competencyA;
+                foreach (var q in query)
+                    q.IsSelected = false;
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Edit", "RoleCompetencyB");
             }
-            ViewData["ComptencyA"] = new SelectList(_context.CompetencyA, "CompetencyId", "CompetencyId", roleCompetencyA.ComptencyA);
-            ViewData["RoleOpportunity"] = new SelectList(_context.RoleOpportunity, "RoleOpportunityId", "City", roleCompetencyA.RoleOpportunity);
             return View(roleCompetencyA);
         }
 

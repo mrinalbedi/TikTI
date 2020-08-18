@@ -110,6 +110,7 @@ insert into education values ('Certification')
 
 CREATE TABLE roleOpportunity (
     roleOpportunityID int identity constraint roleOpportunity_pk primary key,
+	registrationID int not null foreign key references orgRegister(registrationID),
 	alternateTitleID int not null constraint alternateTitle_fk foreign key references alternateTitles(alternateTitleID),
     jobDescription varbinary(max) not null,
 	hiringManagerID int foreign key references HiringManager(hiringManagerID),

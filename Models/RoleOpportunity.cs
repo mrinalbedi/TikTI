@@ -16,6 +16,7 @@ namespace Tikti.Models
         }
 
         public int RoleOpportunityId { get; set; }
+        public int RegistrationId { get; set; }
         public int AlternateTitleId { get; set; }
         public byte[] JobDescription { get; set; }
         public int? HiringManagerId { get; set; }
@@ -41,6 +42,7 @@ namespace Tikti.Models
         public virtual Education EducationNavigation { get; set; }
         public virtual Experience ExperienceNavigation { get; set; }
         public virtual HiringManager HiringManager { get; set; }
+        public virtual OrgRegister Registration { get; set; }
         public virtual WorkCommitment WorkCommitmentNavigation { get; set; }
         public virtual ICollection<AlterWorkRoleOpportunity> AlterWorkRoleOpportunity { get; set; }
         public virtual ICollection<OtherRequirements> OtherRequirements { get; set; }
