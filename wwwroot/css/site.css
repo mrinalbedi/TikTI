@@ -328,7 +328,8 @@ button:focus {
 }
 
 .pad_left_right_2rem{
-    padding:0 2rem 0 2rem;
+    padding-left:2rem;
+    padding-right:2rem;
 }
 .no_padding {
     padding: 0 !important;
@@ -515,3 +516,23 @@ button:focus {
     background-color: #3e8e41;
 }
 
+.table1 {
+    border-radius: 50px;
+    width: 50%;
+    margin: 0px auto;
+    float: none;
+}
+
+.table_Padding {
+    padding:0.5rem 2rem;
+}
+
+.table_border {
+    border: 1px solid black;
+    border-radius: 2%;
+}
+
+input.larger {
+    width: 20px;
+    height: 20px;
+}

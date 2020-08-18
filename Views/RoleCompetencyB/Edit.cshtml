@@ -4,20 +4,9 @@
     ViewData["Title"] = "Select more Competencies";
     Layout = "~/Views/Shared/LoggedIn.cshtml";
 }
-
-@*<div class="col-md-4 align-content-center" style="margin:auto">
-    <div class="row">
-        <h1>Select Competency Part 2</h1>
-    </div>
-    <hr />*@
 <hr />
 <form asp-action="Edit">
     <div class="row no_margin">
-        <div class="col-md-3" style="margin:auto; padding-top:2rem">
-            <h1 class="text-center" style="font-weight:500; font-variant:small-caps; font-size:3.5rem">
-                "Select Competencies Continued"
-            </h1>
-        </div>
         <div class="col-md-3" style="margin:auto; padding-top:2rem; margin-top:1rem">
             <div class="row text-center">
                 <h3 class="text-center" style="font-weight:400;font-size:2.5rem">
@@ -54,17 +43,13 @@
                 @Html.HiddenFor(m => m.competencyB[i].CompetencyId)
             }
         </div>
-    </div>
-    <div class="row no_margin">
-        <div class="col-md-4 text-center">
-            <div class="form-group">
-                <input type="submit" value="Next Step" class="btn btn-primary btn-lg" />
+        <div class="col-md-3" style="margin:auto; padding-top:2rem">
+            <h1 class="text-center" style="font-weight:400; font-size:2.5rem">
+                "<strong>Review and Edit</strong>" <br /> Competencies
+            </h1><hr />
+            <div class="form-group text-center">
+                <input type="submit" value="Review Next Step" class="btn btn-primary btn-lg" />
             </div>
         </div>
     </div>
-    @*<div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
-        </div>*@
 </form>
-@*</div>*@
-
