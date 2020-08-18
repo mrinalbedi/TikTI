@@ -23,8 +23,7 @@ namespace Tikti.Controllers
         // GET: OrgRegisters
         public async Task<IActionResult> Index()
         {
-
-            var mail1 = Request.Cookies["Email"].ToString();
+           var mail1 = Request.Cookies["Email"].ToString();
             var mail2 = HttpContext.Session.GetString("UserId");
             return View(await _context.OrgRegister.Where(m => m.Email == mail1 || m.Email == mail2).ToListAsync());
         }
