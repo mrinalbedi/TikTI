@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Tikti.Models;
 
 namespace Tikti.Controllers
@@ -48,7 +47,6 @@ namespace Tikti.Controllers
         public IActionResult Create()
         {
             ViewBag.ROID = Convert.ToInt32(Request.Cookies["RoleOpportunityId"]);
-            //ViewData["RoleOpportunityId"] = new SelectList(_context.RoleOpportunity, "RoleOpportunityId", "City");
             return View();
         }
 
@@ -64,27 +62,22 @@ namespace Tikti.Controllers
             {
                 _context.Add(otherRequirements);
                 await _context.SaveChangesAsync();
-               
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Edit", "RoleOpportunity");
             }
             //ViewData["RoleOpportunityId"] = new SelectList(_context.RoleOpportunity, "RoleOpportunityId", "City", otherRequirements.RoleOpportunityId);
             return View(otherRequirements);
         }
 
         // GET: OtherRequirement/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            string RoleOpportunityId = string.Empty;
+            if (HttpContext.Session.GetString("RoleOppId") != null)
+                RoleOpportunityId = HttpContext.Session.GetString("RoleOppId");
+            else
+                RoleOpportunityId = Request.Cookies["RoleOppId"];
 
-            var otherRequirements = await _context.OtherRequirements.FindAsync(id);
-            if (otherRequirements == null)
-            {
-                return NotFound();
-            }
-            ViewData["RoleOpportunityId"] = new SelectList(_context.RoleOpportunity, "RoleOpportunityId", "City", otherRequirements.RoleOpportunityId);
+            var otherRequirements = _context.OtherRequirements.Where(x => x.RoleOpportunityId == Convert.ToInt32(RoleOpportunityId)).FirstOrDefault();
             return View(otherRequirements);
         }
 
@@ -93,17 +86,18 @@ namespace Tikti.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RequirementId,RoleOpportunityId,Sponsorship,OverseasTravel,DrugTesting,Age18,Travel,TravelDistance,DriverLicense,LicenseProvince,WeekendWork,Overnight")] OtherRequirements otherRequirements)
+        public async Task<IActionResult> Edit([Bind("RequirementId,RoleOpportunityId,Sponsorship,OverseasTravel,DrugTesting,Age18,Travel,TravelDistance,DriverLicense,LicenseProvince,WeekendWork,Overnight")] OtherRequirements otherRequirements)
         {
-            if (id != otherRequirements.RequirementId)
-            {
-                return NotFound();
-            }
-
+            string RoleOpportunityId = string.Empty;
+            if (HttpContext.Session.GetString("RoleOppId") != null)
+                RoleOpportunityId = HttpContext.Session.GetString("RoleOppId");
+            else
+                RoleOpportunityId = Request.Cookies["RoleOppId"];
             if (ModelState.IsValid)
             {
                 try
                 {
+                    otherRequirements.RoleOpportunityId = Convert.ToInt32(RoleOpportunityId);
                     _context.Update(otherRequirements);
                     await _context.SaveChangesAsync();
                 }
@@ -118,9 +112,8 @@ namespace Tikti.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index","AlternativeWorkLocation");
             }
-            ViewData["RoleOpportunityId"] = new SelectList(_context.RoleOpportunity, "RoleOpportunityId", "City", otherRequirements.RoleOpportunityId);
             return View(otherRequirements);
         }
 

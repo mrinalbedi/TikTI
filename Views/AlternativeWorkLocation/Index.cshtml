@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Organization_view.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Add New Work Location</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Add">Add New Work Location</a>
 </p>
 <table class="table">
     <thead>
@@ -26,23 +26,32 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Province)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Postal)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.WorkLocationId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.WorkLocationId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.WorkLocationId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Province)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Postal)
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.WorkLocationId">Edit</a> |
+                    <a class="btn btn-primary" asp-action="Delete" asp-route-id="@item.WorkLocationId">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
 </table>
+
+
+<form>
+    <input type="checkbox" /><span>By clicking on this checkbox <a>I agree</a></span>
+</form>
+
+<br />
+<a class="btn btn-primary" asp-action="RoleOpportunityUploaded">Upload Role Opportunity</a>
+    

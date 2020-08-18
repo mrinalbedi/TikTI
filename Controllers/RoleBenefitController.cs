@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -82,21 +83,31 @@ namespace Tikti.Controllers
         }
 
         // GET: RoleBenefit/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            string RoleOpportunityId = string.Empty;
+            if (HttpContext.Session.GetString("RoleOppId") != null)
+                RoleOpportunityId = HttpContext.Session.GetString("RoleOppId");
+            else
+                RoleOpportunityId = Request.Cookies["RoleOppId"];
+            var roleBenefit = _context.RoleBenefit.Where(x => x.RoleOpportunity == Convert.ToInt32(RoleOpportunityId));
 
-            var roleBenefit = await _context.RoleBenefit.FindAsync(id);
-            if (roleBenefit == null)
+            RoleBenefitVM rbvm = new RoleBenefitVM();
+            foreach (var x in _context.Benefit)
             {
-                return NotFound();
+                rbvm.benefits.Add(x);
+                foreach (var y in roleBenefit)
+                {
+                    if (y.Benefit == x.BenefitId)
+                    {
+                        x.IsSelected = true;
+                        _context.RoleBenefit.Remove(y);
+                        
+                    }
+                }
             }
-            ViewData["Benefit"] = new SelectList(_context.Benefit, "BenefitId", "BenefitId", roleBenefit.Benefit);
-            ViewData["RoleOpportunity"] = new SelectList(_context.RoleOpportunity, "RoleOpportunityId", "City", roleBenefit.RoleOpportunity);
-            return View(roleBenefit);
+            await _context.SaveChangesAsync();
+            return View(rbvm);
         }
 
         // POST: RoleBenefit/Edit/5
@@ -104,35 +115,28 @@ namespace Tikti.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RoleBenefitId,RoleOpportunity,Benefit")] RoleBenefit roleBenefit)
+        public async Task<IActionResult> Edit([Bind("RoleBenefitId,RoleOpportunity,Benefit")] RoleBenefit roleBenefit, RoleBenefitVM rbvm)
         {
-            if (id != roleBenefit.RoleBenefitId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
+                foreach (var x in rbvm.benefits)
                 {
-                    _context.Update(roleBenefit);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RoleBenefitExists(roleBenefit.RoleBenefitId))
+                    if (x.IsSelected == true)
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
+                        RoleBenefit rb = new RoleBenefit();
+                        rb.RoleOpportunity = Convert.ToInt32(Request.Cookies["RoleOppId"]);
+                        rb.Benefit = x.BenefitId;
+                        _context.Add(rb);
+                        await _context.SaveChangesAsync();
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                var query = from benefit in _context.Benefit
+                            select benefit;
+                foreach (var q in query)
+                    q.IsSelected = false;
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Edit", "RoleCompetencyA");
             }
-            ViewData["Benefit"] = new SelectList(_context.Benefit, "BenefitId", "BenefitId", roleBenefit.Benefit);
-            ViewData["RoleOpportunity"] = new SelectList(_context.RoleOpportunity, "RoleOpportunityId", "City", roleBenefit.RoleOpportunity);
             return View(roleBenefit);
         }
 

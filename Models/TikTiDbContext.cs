@@ -62,18 +62,18 @@ namespace Tikti.Models
                 entity.HasOne(d => d.RoleOpportunity)
                     .WithMany(p => p.AlterWorkRoleOpportunity)
                     .HasForeignKey(d => d.RoleOpportunityId)
-                    .HasConstraintName("FK__alterWork__roleO__6C190EBB");
+                    .HasConstraintName("FK__alterWork__roleO__7C4F7684");
 
                 entity.HasOne(d => d.WorkLocation)
                     .WithMany(p => p.AlterWorkRoleOpportunity)
                     .HasForeignKey(d => d.WorkLocationId)
-                    .HasConstraintName("FK__alterWork__workL__6D0D32F4");
+                    .HasConstraintName("FK__alterWork__workL__7D439ABD");
             });
 
             modelBuilder.Entity<AlternateTitles>(entity =>
             {
                 entity.HasKey(e => e.AlternateTitleId)
-                    .HasName("PK__alternat__1FAF7D5FF304B1A3");
+                    .HasName("PK__alternat__1FAF7D5FEA5B1E7B");
 
                 entity.ToTable("alternateTitles");
 
@@ -93,7 +93,7 @@ namespace Tikti.Models
                     .WithMany(p => p.AlternateTitles)
                     .HasForeignKey(d => d.SocCode)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__alternate__socCo__571DF1D5");
+                    .HasConstraintName("FK__alternate__socCo__66603565");
             });
 
             modelBuilder.Entity<AlternativeWorkLocation>(entity =>
@@ -269,7 +269,7 @@ namespace Tikti.Models
             modelBuilder.Entity<OrgRegister>(entity =>
             {
                 entity.HasKey(e => e.RegistrationId)
-                    .HasName("PK__orgRegis__A3DB14153B2F4CE1");
+                    .HasName("PK__orgRegis__A3DB1415BD0F219D");
 
                 entity.ToTable("orgRegister");
 
@@ -334,18 +334,18 @@ namespace Tikti.Models
                 entity.HasOne(d => d.HiringManager)
                     .WithMany(p => p.OrgRegisterHr)
                     .HasForeignKey(d => d.HiringManagerId)
-                    .HasConstraintName("FK__orgRegist__hirin__3B75D760");
+                    .HasConstraintName("FK__orgRegist__hirin__4AB81AF0");
 
                 entity.HasOne(d => d.Registration)
                     .WithMany(p => p.OrgRegisterHr)
                     .HasForeignKey(d => d.RegistrationId)
-                    .HasConstraintName("FK__orgRegist__regis__3A81B327");
+                    .HasConstraintName("FK__orgRegist__regis__49C3F6B7");
             });
 
             modelBuilder.Entity<OtherRequirements>(entity =>
             {
                 entity.HasKey(e => e.RequirementId)
-                    .HasName("PK__otherReq__60E29FF219C758FF");
+                    .HasName("PK__otherReq__60E29FF20629392E");
 
                 entity.ToTable("otherRequirements");
 
@@ -373,7 +373,7 @@ namespace Tikti.Models
                     .WithMany(p => p.OtherRequirements)
                     .HasForeignKey(d => d.RoleOpportunityId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__otherRequ__roleO__778AC167");
+                    .HasConstraintName("FK__otherRequ__roleO__07C12930");
             });
 
             modelBuilder.Entity<RoleBenefit>(entity =>
@@ -523,6 +523,8 @@ namespace Tikti.Models
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
+                entity.Property(e => e.RegistrationId).HasColumnName("registrationID");
+
                 entity.Property(e => e.Salary)
                     .IsRequired()
                     .HasColumnName("salary")
@@ -567,7 +569,13 @@ namespace Tikti.Models
                 entity.HasOne(d => d.HiringManager)
                     .WithMany(p => p.RoleOpportunity)
                     .HasForeignKey(d => d.HiringManagerId)
-                    .HasConstraintName("FK__roleOppor__hirin__5AEE82B9");
+                    .HasConstraintName("FK__roleOppor__hirin__6B24EA82");
+
+                entity.HasOne(d => d.Registration)
+                    .WithMany(p => p.RoleOpportunity)
+                    .HasForeignKey(d => d.RegistrationId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__roleOppor__regis__693CA210");
 
                 entity.HasOne(d => d.WorkCommitmentNavigation)
                     .WithMany(p => p.RoleOpportunity)

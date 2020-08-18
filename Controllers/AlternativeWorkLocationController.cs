@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -17,9 +18,25 @@ namespace Tikti.Controllers
         }
 
         // GET: AlternativeWorkLocation
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.AlternativeWorkLocation.ToListAsync());
+            string RoleOpportunityId = string.Empty;
+            if (HttpContext.Session.GetString("RoleOppId") != null)
+                RoleOpportunityId = HttpContext.Session.GetString("RoleOppId");
+            else
+                RoleOpportunityId = Request.Cookies["RoleOppId"];
+
+            var query = from awro in _context.AlterWorkRoleOpportunity
+                        join awl in _context.AlternativeWorkLocation
+                        on awro.WorkLocationId equals awl.WorkLocationId
+                        join ro in _context.RoleOpportunity
+                        on awro.RoleOpportunityId equals ro.RoleOpportunityId
+                        where ro.RoleOpportunityId == Convert.ToInt32(RoleOpportunityId)
+                        select new AlternativeWorkLocation {WorkLocationId = awl.WorkLocationId ,City = awl.City ,
+                            Province = awl.Province , Postal = awl.Postal };
+
+
+            return View(query);
         }
 
         // GET: AlternativeWorkLocation/Details/5
@@ -154,5 +171,37 @@ namespace Tikti.Controllers
         {
             return _context.AlternativeWorkLocation.Any(e => e.WorkLocationId == id);
         }
+
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        // POST: AlternativeWorkLocation/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add([Bind("WorkLocationId,City,Province,Postal")] AlternativeWorkLocation alternativeWorkLocation, string value)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(alternativeWorkLocation);
+                await _context.SaveChangesAsync();
+                AlterWorkRoleOpportunity awro = new AlterWorkRoleOpportunity();
+                awro.WorkLocationId = alternativeWorkLocation.WorkLocationId;
+                awro.RoleOpportunityId = Convert.ToInt32(Request.Cookies["RoleOppId"]);
+                _context.Add(awro);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "AlternativeWorkLocation");
+               
+            }
+            return View(alternativeWorkLocation);
+        }
+        public IActionResult RoleOpportunityUploaded()
+        {
+            return View();
+        }
+
     }
 }

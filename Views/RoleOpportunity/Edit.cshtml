@@ -5,107 +5,146 @@
     Layout = "~/Views/Shared/_Organization_view.cshtml";
 }
 
-<h1>Edit</h1>
-
-<h4>RoleOpportunity</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <div class="row no_margin">
+        <div class="col-md-3" style="margin:auto; padding-top:2rem">
+            <h1 class="text-center" style="font-weight:500; font-variant:small-caps; font-size:3.5rem">
+                "Upload the Role Opportunity"
+            </h1>
+        </div>
+        <div class="col-md-3" style="margin:auto; padding-top:2rem; margin-top:0">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="RoleOpportunityId" />
-            <div class="form-group">
-                <label asp-for="JobDescription" class="control-label"></label>
-                <input asp-for="JobDescription" class="form-control" />
-                <span asp-validation-for="JobDescription" class="text-danger"></span>
+
+            <div class="form-group" style="font-size: 1rem; font-weight: 500;">
+                <label asp-for="AlternateTitle" class="control-label"></label>
+                <select asp-for="AlternateTitleId" class="form-control" asp-items="ViewBag.AlternateTitle"></select>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="font-size: 1rem; font-weight: 500;">
+                <label asp-for="JobDescription" class="control-label">Job Description</label>
+                <input asp-for="JobDescription" class="form-control-file Border_form_field" name="files" type="file" />
+            </div>
+            <div class="form-group" style="font-size: 1rem; font-weight: 500;">
+                <label asp-for="HiringManagerId" class="control-label">Hiring Manager</label>
+                <select asp-for="HiringManagerId" class="form-control" asp-items="ViewBag.HrManager"></select>
+            </div>
+            <div class="form-group" style="font-size: 1rem; font-weight: 500;">
                 <label asp-for="DesiredStartDate" class="control-label"></label>
-                <input asp-for="DesiredStartDate" class="form-control" />
+                <input type="date" asp-for="DesiredStartDate" class="form-control" />
                 <span asp-validation-for="DesiredStartDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="font-size: 1rem; font-weight: 500;">
                 <label asp-for="WorkCommitment" class="control-label"></label>
-                <select asp-for="WorkCommitment" class="form-control" asp-items="ViewBag.WorkCommitment"></select>
-                <span asp-validation-for="WorkCommitment" class="text-danger"></span>
+                <select asp-for="WorkCommitment" class="form-control" asp-items="ViewBag.WorkCommitment" id="wk"></select>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="cd" style="font-size: 1rem; font-weight: 500;">
                 <label asp-for="ContractDuration" class="control-label"></label>
                 <input asp-for="ContractDuration" class="form-control" />
                 <span asp-validation-for="ContractDuration" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="font-size: 1rem; font-weight: 500;">
                 <label asp-for="Currency" class="control-label"></label>
                 <select asp-for="Currency" class="form-control" asp-items="ViewBag.Currency"></select>
-                <span asp-validation-for="Currency" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="font-size: 1rem; font-weight: 500;">
                 <label asp-for="Salary" class="control-label"></label>
                 <input asp-for="Salary" class="form-control" />
                 <span asp-validation-for="Salary" class="text-danger"></span>
             </div>
-            <div class="form-group">
+        </div>
+        <div class="col-md-3" style="margin:auto; padding-top:2rem; margin-top:0">
+            <div class="form-group" style="font-size: 1rem; font-weight: 500;">
                 <label asp-for="City" class="control-label"></label>
                 <input asp-for="City" class="form-control" />
                 <span asp-validation-for="City" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="font-size: 1rem; font-weight: 500;">
                 <label asp-for="Province" class="control-label"></label>
                 <input asp-for="Province" class="form-control" />
                 <span asp-validation-for="Province" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="font-size: 1rem; font-weight: 500;">
                 <label asp-for="Postal" class="control-label"></label>
                 <input asp-for="Postal" class="form-control" />
                 <span asp-validation-for="Postal" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
-                <label class="form-check-label">
+                <label class="form-check-label" style="font-size: 1rem; font-weight: 500;">
                     <input class="form-check-input" asp-for="TelecommutingRoles" /> @Html.DisplayNameFor(model => model.TelecommutingRoles)
                 </label>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="font-size: 1rem; font-weight: 500;">
                 <label asp-for="Weblink" class="control-label"></label>
                 <input asp-for="Weblink" class="form-control" />
                 <span asp-validation-for="Weblink" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="font-size: 1rem; font-weight: 500;">
                 <label asp-for="Certification" class="control-label"></label>
                 <select asp-for="Certification" class="form-control" asp-items="ViewBag.Certification"></select>
-                <span asp-validation-for="Certification" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
+            <div class="form-group form-check" style="font-size: 1rem; font-weight: 500;">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="ExtraCertificationRequired" /> @Html.DisplayNameFor(model => model.ExtraCertificationRequired)
+                    <input class="form-check-input" asp-for="ExtraCertificationRequired" id="check" />
+                    @Html.DisplayNameFor(model => model.ExtraCertificationRequired)
                 </label>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="font-size: 1rem; font-weight: 500;" id="input">
                 <label asp-for="ExtraCertification" class="control-label"></label>
                 <input asp-for="ExtraCertification" class="form-control" />
                 <span asp-validation-for="ExtraCertification" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="font-size: 1rem; font-weight: 500;">
                 <label asp-for="Experience" class="control-label"></label>
                 <select asp-for="Experience" class="form-control" asp-items="ViewBag.Experience"></select>
-                <span asp-validation-for="Experience" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="font-size: 1rem; font-weight: 500;">
                 <label asp-for="Education" class="control-label"></label>
                 <select asp-for="Education" class="form-control" asp-items="ViewBag.Education"></select>
-                <span asp-validation-for="Education" class="text-danger"></span>
             </div>
-            
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+    <div class="row no_margin">
+        <div class="col-md-4 text-center">
+            <div class="form-group">
+                <input type="submit" value="Next Step" class="btn btn-primary btn-lg" />
+            </div>
+        </div>
+    </div>
+</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#wk').on('change', function () {
+                if (this.value == '3' || this.value == '4') {
+                    $("#cd").show();
+                }
+                else {
+                    $("#cd").hide();
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+            window.onload = function () {
+                document.getElementById('input').style.display = 'none';
+        };
+    </script>
+    <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#check').click(function () {
+                        if ($(this).is(":checked")) {
+                            $("#input").show();
+                        }
+                        else {
+                            $("#input").hide();
+                        }
+                    });
+                });
+    </script>
+
 }
