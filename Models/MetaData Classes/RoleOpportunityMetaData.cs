@@ -42,7 +42,7 @@ namespace Tikti.Models
 
         [Display(Name = "Desired Start Date:")]
         [Required(ErrorMessage ="The desired start date is required")]
-        //[DisplayFormat(DataFormatString= "{0: dddd d MMMM, yyyy, h:mm:ss tt}")]
+        [DisplayFormat(DataFormatString= "{0: dddd d MMMM, yyyy}")]
         public DateTime DesiredStartDate { get; set; }
 
 

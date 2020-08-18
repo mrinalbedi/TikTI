@@ -68,12 +68,13 @@
                         <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="Home" asp-action="Approach">TikTi’s Approach</a>
                         <a class="btn btn-outline-primary btn-margin" role="button" aria-pressed="true" asp-controller="OrgRegisters" asp-action="Login">Login</a>
                         <div style="float:right; padding-right:10rem" class="dropdown">
-                            <a>
-                                <img src="~/Images/Logo/User.Png" alt="TikTi" height="50" />
+                            <a asp-controller="OrgRegisters" asp-action="LoggedIn">
+                                <img src="~/Images/Logo/User.Png" alt="TikTi" height="50"  />
                             </a>
                             <div class="dropdown-content">
                                 <a asp-controller="Home" asp-action="Organization">Log Out</a>
                                 <a asp-controller="OrgRegisters" asp-action="Index">Update Profile</a>
+                                <a asp-controller="RoleOpportunity" asp-action="Index">View My Postings</a>
                             </div>
                         </div>
                     </div>

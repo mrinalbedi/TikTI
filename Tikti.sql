@@ -1,3 +1,4 @@
+
 create database Tikti
 use TikTi
 CREATE TABLE orgRegister (
@@ -22,7 +23,7 @@ create table HiringManager(
 	PhoneNumber varchar(max),
 	email varchar(max)
 );
-drop table orgRegisterHR
+
 create table orgRegisterHR(
    orgRegisterHRID int identity primary key,
    registrationID int foreign key references orgRegister(registrationID),
@@ -94,19 +95,6 @@ insert into education values ('PhD')
 insert into education values ('Certification')
 
 
---create table otherRequirement(
---	otherRequirementID int identity constraint otherRequirement_pk primary key,
---	otherRequirementName varchar(255)
---)
-
-
---insert into otherRequirement values ('Travel Requirement')
---insert into otherRequirement values ('Driving License')
---insert into otherRequirement values ('Flexible Hours')
---insert into otherRequirement values ('Sponsership Required')
---insert into otherRequirement values ('Overseas Travel Required')
---insert into otherRequirement values ('Drug Testing Required')
---insert into otherRequirement values ('Age > 18')
 
 CREATE TABLE roleOpportunity (
     roleOpportunityID int identity constraint roleOpportunity_pk primary key,
@@ -153,10 +141,11 @@ insert into culture values ('Vision & Purpose Driven','Fueled by why we exist an
 insert into culture values ('Agile','Pivot with a high degree of urgency, determination and confidence',0)
 
 
+
 create table role_culture(
 	role_cultureID int identity constraint role_culture_pk primary key,
-	roleOpportunity int not null constraint roleOpportunity_fk foreign key references roleOpportunity(roleOpportunityID),
-	culture int not null constraint culture_fk foreign key references culture(cultureID)
+	roleOpportunity int not null constraint roleOpportunity_fk foreign key references roleOpportunity(roleOpportunityID) on delete cascade,
+	culture int not null constraint culture_fk foreign key references culture(cultureID) on delete cascade
 )
 
 create table benefit(
@@ -190,11 +179,11 @@ insert into benefit values ('TeleCommuting Options',0)
 insert into benefit values ('Flexible Work Schedules',0)
 insert into benefit values ('Workplace Perks (Eg. recreation activities, Coffe etc.)',0)
 
-
+drop table role_benfit
 create table role_benefit(
 	role_benefitID int identity constraint role_benefit_pk primary key,
-	roleOpportunity int not null constraint roleOpportunity_fkey foreign key references roleOpportunity(roleOpportunityID),
-	benefit int not null constraint benefit_fk foreign key references benefit(benefitID)
+	roleOpportunity int not null constraint roleOpportunity_fkey foreign key references roleOpportunity(roleOpportunityID) on delete cascade,
+	benefit int not null constraint benefit_fk foreign key references benefit(benefitID) on delete cascade
 )
 
 
@@ -205,11 +194,12 @@ create table alternativeWorkLocation(
 	postal varchar(max) not null
 )
 
+drop table alterWorkRoleOpportunity
 
 create table alterWorkRoleOpportunity(
 	alterWorkRoleOpportunityId int identity primary key,
-	roleOpportunityID int foreign key references roleOpportunity(roleOpportunityID),
-	workLocationID int foreign key references alternativeWorkLocation(workLocationID)
+	roleOpportunityID int foreign key references roleOpportunity(roleOpportunityID) on delete cascade,
+	workLocationID int foreign key references alternativeWorkLocation(workLocationID) on delete cascade
 )
 
 --============================================================================================
@@ -238,10 +228,11 @@ insert into competencyA values ('Organized','You plan things carefully and keep 
 insert into competencyA values ('Opportunitistic','You take advantage of opportunities in the moment',0)
 insert into competencyA values ('Builder','You bring together different parts of the solution',0)
 
+drop table role_competencyA
 create table role_competencyA(
 	role_competencyAID int identity constraint role_competencyA_pk primary key,
-	roleOpportunity int not null constraint roleOpportunity_frgnkey foreign key references roleOpportunity(roleOpportunityID),
-	comptencyA int not null constraint competencyA_fk foreign key references competencyA(competencyID)
+	roleOpportunity int not null constraint roleOpportunity_frgnkey foreign key references roleOpportunity(roleOpportunityID) on delete cascade,
+	comptencyA int not null constraint competencyA_fk foreign key references competencyA(competencyID) on delete cascade
 )
 
 
@@ -273,10 +264,11 @@ insert into competencyB values ('Leader','You willingly and confidently step up 
 insert into competencyB values ('Drive','You’re determined to get to the end result',0)
 
 
+drop table role_competencyB
 create table role_competencyB(
 	role_competencyBID int identity constraint role_competencyB_pk primary key,
-	roleOpportunity int not null constraint roleOpportunity_frnkey foreign key references roleOpportunity(roleOpportunityID),
-	comptencyB int not null constraint competencyB_fk foreign key references competencyA(competencyID)
+	roleOpportunity int not null constraint roleOpportunity_frnkey foreign key references roleOpportunity(roleOpportunityID) on delete cascade,
+	comptencyB int not null constraint competencyB_fk foreign key references competencyA(competencyID) on delete cascade
 )
 
 --=========================================================================================
@@ -328,7 +320,7 @@ create table alternateTitles (
 
 create table otherRequirements(
 	requirementID int identity not null primary key,
-	roleOpportunityID int not null foreign key references roleOpportunity(roleOpportunityID),
+	roleOpportunityID int not null foreign key references roleOpportunity(roleOpportunityID) on delete cascade,
 	sponsorship bit not null default 0,
 	overseasTravel bit not null default 0,
 	drugTesting bit not null default 0,
@@ -340,5 +332,4 @@ create table otherRequirements(
 	WeekendWork bit not null default 0,
 	Overnight bit not null default 0
 )
-
 
