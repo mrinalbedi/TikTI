@@ -62,7 +62,7 @@ namespace Tikti.Controllers
             {
                 _context.Add(otherRequirements);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Edit", "RoleOpportunity");
+                return RedirectToAction("Edit", "SocCode");
             }
             //ViewData["RoleOpportunityId"] = new SelectList(_context.RoleOpportunity, "RoleOpportunityId", "City", otherRequirements.RoleOpportunityId);
             return View(otherRequirements);

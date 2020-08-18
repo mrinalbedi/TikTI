@@ -4,7 +4,7 @@ delete from alternateTitles
 DBCC CHECKIDENT ('alternateTitles', RESEED, 0)
 
 --////11-3021.00------------------------------
-insert into alternateTitles values ('Applciation Development Director','11-3021.00')
+insert into alternateTitles values ('Application Development Director','11-3021.00')
 insert into alternateTitles values ('Chief Information Officer','11-3021.00')
 insert into alternateTitles values ('Chief Technology Officer (CTO)','11-3021.00'),
 ('Computer Operations Manager','11-3021.00'),
@@ -213,20 +213,5 @@ insert into alternateTitles values('Information Systems Auditor
 insert into alternateTitles values('Information Systems Consultant
 ','15-1121.00')
 insert into alternateTitles values('Applications Analyst','15-1121.00')
-insert into alternateTitles values('Applications Analyst','15-1121.00')
-insert into alternateTitles values('Applications Analyst','15-1121.00')
-insert into alternateTitles values('Applications Analyst','15-1121.00')
-insert into alternateTitles values('Applications Analyst','15-1121.00')
 
-insert into alternateTitles values('Applications Analyst','15-1121.00')
-insert into alternateTitles values('Applications Analyst','15-1121.00')
 
-insert into alternateTitles values('Applications Analyst','15-1121.00')
-insert into alternateTitles values('Applications Analyst','15-1121.00')
-
-insert into alternateTitles values('Applications Analyst','15-1121.00')
-insert into alternateTitles values('Applications Analyst','15-1121.00')
-insert into alternateTitles values('Applications Analyst','15-1121.00')
-insert into alternateTitles values('Applications Analyst','15-1121.00')
-insert into alternateTitles values('Applications Analyst','15-1121.00')
-insert into alternateTitles values('Applications Analyst','15-1121.00')

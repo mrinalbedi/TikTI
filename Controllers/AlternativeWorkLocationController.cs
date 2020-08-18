@@ -34,7 +34,11 @@ namespace Tikti.Controllers
                         where ro.RoleOpportunityId == Convert.ToInt32(RoleOpportunityId)
                         select new AlternativeWorkLocation {WorkLocationId = awl.WorkLocationId ,City = awl.City ,
                             Province = awl.Province , Postal = awl.Postal };
-
+            if(!query.Any())
+            {
+                TempData["message"] = "You have not added any alternative work locations for this role opportunity";
+                //return View("Index");
+            }
 
             return View(query);
         }
@@ -121,6 +125,7 @@ namespace Tikti.Controllers
                 {
                     _context.Update(alternativeWorkLocation);
                     await _context.SaveChangesAsync();
+                    TempData["message"] = "Details have been updated successfully";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -193,6 +198,7 @@ namespace Tikti.Controllers
                 awro.RoleOpportunityId = Convert.ToInt32(Request.Cookies["RoleOppId"]);
                 _context.Add(awro);
                 await _context.SaveChangesAsync();
+                TempData["message"] = "New Work location added successfully";
                 return RedirectToAction("Index", "AlternativeWorkLocation");
                
             }

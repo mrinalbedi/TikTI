@@ -64,19 +64,23 @@ namespace Tikti.Controllers
         }
 
         // GET: SocCode/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var query = from x in _context.SocCode
+                        select x;
+            ViewData["SocCode"] = new SelectList(query, "SocCode1", "Description");
+            return View();
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
 
-            var socCode = await _context.SocCode.FindAsync(id);
-            if (socCode == null)
-            {
-                return NotFound();
-            }
-            return View(socCode);
+            //var socCode = await _context.SocCode.FindAsync(id);
+            //if (socCode == null)
+            //{
+            //    return NotFound();
+            //}
+            //return View(socCode);
         }
 
         // POST: SocCode/Edit/5
@@ -86,32 +90,35 @@ namespace Tikti.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("SocCode1,Description")] SocCode socCode)
         {
-            if (id != socCode.SocCode1)
-            {
-                return NotFound();
-            }
+            
+            string socCodeSelected = socCode.SocCode1;
+            return RedirectToAction("Edit", "RoleOpportunity", new { soc = socCodeSelected });
+            //if (id != socCode.SocCode1)
+            //{
+            //    return NotFound();
+            //}
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(socCode);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!SocCodeExists(socCode.SocCode1))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(socCode);
+            //if (ModelState.IsValid)
+            //{
+            //    try
+            //    {
+            //        _context.Update(socCode);
+            //        await _context.SaveChangesAsync();
+            //    }
+            //    catch (DbUpdateConcurrencyException)
+            //    {
+            //        if (!SocCodeExists(socCode.SocCode1))
+            //        {
+            //            return NotFound();
+            //        }
+            //        else
+            //        {
+            //            throw;
+            //        }
+            //    }
+            //    return RedirectToAction("Edit","RoleOpportunity",socCode);
+            //}
+            //return View(socCode);
         }
 
         // GET: SocCode/Delete/5

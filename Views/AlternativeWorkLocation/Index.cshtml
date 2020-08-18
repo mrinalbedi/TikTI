@@ -5,10 +5,11 @@
     Layout = "~/Views/Shared/_Organization_view.cshtml";
 }
 
-<h1>Add New Work Location</h1>
+<br />
+<br />
 
 <p>
-    <a asp-action="Add">Add New Work Location</a>
+    <a class="btn btn-primary" asp-action="Add">Add New Work Location</a>
 </p>
 <table class="table">
     <thead>
@@ -26,6 +27,8 @@
         </tr>
     </thead>
     <tbody>
+        @if (Model.Any())
+        {
         @foreach (var item in Model)
         {
             <tr>
@@ -39,19 +42,39 @@
                     @Html.DisplayFor(modelItem => item.Postal)
                 </td>
                 <td>
-                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.WorkLocationId">Edit</a> |
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.WorkLocationId">Edit</a> 
                     <a class="btn btn-primary" asp-action="Delete" asp-route-id="@item.WorkLocationId">Delete</a>
                 </td>
             </tr>
         }
-        </tbody>
+        }
+    </tbody>
 </table>
 
 
 <form>
-    <input type="checkbox" /><span>By clicking on this checkbox <a>I agree</a></span>
+    <input type="checkbox" id="chk" /><span>By clicking on this checkbox I agree to TikTi's <a class="font-weight-bolder" target="_blank" asp-controller="Home" asp-action="PrivacyPolicy">Privacy Policy</a></span>
+    <br />
+    <button style="visibility:hidden;" class="btn btn-primary" id="btn-final" asp-action="RoleOpportunityUploaded">Upload Role Opportunity</button>
+
 </form>
 
-<br />
-<a class="btn btn-primary" asp-action="RoleOpportunityUploaded">Upload Role Opportunity</a>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#chk').click(function () {
+                if ($(this).is(":checked")) {
+                    document.getElementById("btn-final").style.visibility = "visible";
+                }
+                else {
+                    document.getElementById("btn-final").style.visibility = "hidden";
+                }
+            });
+                });
+</script>
     
+}
