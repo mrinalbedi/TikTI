@@ -8,11 +8,6 @@
 <hr />
 <form asp-action="Edit" method="post" enctype="multipart/form-data">
     <div class="row no_margin">
-        <div class="col-md-3" style="margin:auto; padding-top:2rem">
-            <h1 class="text-center" style="font-weight:500; font-variant:small-caps; font-size:3.5rem">
-                "Upload the Role Opportunity"
-            </h1>
-        </div>
         <div class="col-md-3" style="margin:auto; padding-top:2rem; margin-top:0">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -102,12 +97,19 @@
                 <select asp-for="Education" class="form-control" asp-items="ViewBag.Education"></select>
             </div>
         </div>
+        <div class="col-md-4" style="margin:auto; padding-top:2rem">
+            <h1 class="text-center" style="font-weight:400; font-size:2.5rem">
+                "<strong>Review and Edit</strong>" <br /> Role Opportunity Details
+            </h1><hr />
+            <div class="form-group text-center">
+                <input type="submit" value="Review Next Step" class="btn btn-primary btn-lg" />
+            </div>
+        </div>
     </div>
+
     <div class="row no_margin">
         <div class="col-md-4 text-center">
-            <div class="form-group">
-                <input type="submit" value="Next Step" class="btn btn-primary btn-lg" />
-            </div>
+
         </div>
     </div>
 </form>

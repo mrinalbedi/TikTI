@@ -5,15 +5,17 @@
     Layout = "~/Views/Shared/LoggedIn.cshtml";
 }
 <hr />
-@*<div class="row">*@
-    <div class="col-md-4 align-content-center" style="margin:auto">
-        <div class="row">
-            <h1>Alternative Work Location</h1>
+<form asp-action="Create">
+    <div class="row no_margin">
+        <div class="col-md-4" style="margin:auto; padding-top:2rem">
+            <h1 class="text-center" style="font-weight:500; font-variant:small-caps; font-size:3.5rem">
+                "Add Alternative Work Location"
+            </h1>
         </div>
-        <hr />
-        <a class="float-right" asp-action="Create" asp-controller="RoleCulture">Skip this step</a>
-        <br />
-        <form asp-action="Create">
+
+        <div class="col-md-4" style="margin:auto; padding-top:2rem; margin-top:0">
+            <a class="float-right" asp-action="Create" asp-controller="RoleCulture">Skip this step</a>
+            <br />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <h6>
@@ -36,15 +38,14 @@
                     <span asp-validation-for="Postal" class="text-danger"></span>
                 </h6>
             </div>
-            <div class="row no_margin">
-                <div class="form-group">
-                    <input type="submit" value="Save & Add Another" class="btn btn-primary" asp-route-value="add" />
-                    <input type="submit" value="Save & Next" class="btn btn-primary" asp-route-value="next" />
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
-@*</div>*@
-
-
-
+    <div class="row no_margin">
+        <div class="col-md-6 text-center">
+            <div class="form-group">
+                <input type="submit" value="Save & Add Another" class="btn btn-primary" asp-route-value="add" />
+                <input type="submit" value="Save & Next" class="btn btn-primary" asp-route-value="next" />
+            </div>
+        </div>
+    </div>
+</form>
