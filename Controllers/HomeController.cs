@@ -45,7 +45,10 @@ namespace Tikti.Controllers
             return View();
         }
 
-
+        public IActionResult ContactForm()
+        {
+            return View();
+        }
 
 
 
