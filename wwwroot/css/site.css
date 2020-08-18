@@ -516,11 +516,6 @@ button:focus {
     background-color: #3e8e41;
 }
 
-.table, td {
-    border: 1px solid black;
-}
-
-
 .table1 {
     border-radius: 5px;
     width: 50%;
@@ -534,4 +529,10 @@ button:focus {
 
 .table_border {
     border: 1px solid black;
+    border-radius: 2%;
+}
+
+input.larger {
+    width: 20px;
+    height: 20px;
 }
