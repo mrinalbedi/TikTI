@@ -179,7 +179,7 @@ insert into benefit values ('TeleCommuting Options',0)
 insert into benefit values ('Flexible Work Schedules',0)
 insert into benefit values ('Workplace Perks (Eg. recreation activities, Coffe etc.)',0)
 
-drop table role_benfit
+drop table role_benefit
 create table role_benefit(
 	role_benefitID int identity constraint role_benefit_pk primary key,
 	roleOpportunity int not null constraint roleOpportunity_fkey foreign key references roleOpportunity(roleOpportunityID) on delete cascade,

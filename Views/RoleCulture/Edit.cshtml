@@ -14,7 +14,9 @@
             {
                 <div style="font-size:1.2rem; line-height:2.2rem">
                     @Html.CheckBoxFor(m => m.cultures[i].IsSelected)
-                    @Html.LabelFor(m => m.cultures[i].CultureName, Model.cultures[i].CultureName)<br />
+                    @*@Html.LabelFor(m => m.cultures[i].CultureName, Model.cultures[i].CultureName)*@
+                    <label title="@Model.cultures[i].Description">@Model.cultures[i].CultureName</label>
+                    <br />
                 </div>
                 @Html.HiddenFor(m => m.cultures[i].CultureId)
             }

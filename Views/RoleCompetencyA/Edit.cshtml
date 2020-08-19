@@ -25,7 +25,9 @@
             {
                 <div style="font-size:1.2rem; line-height:2.0rem">
                     @Html.CheckBoxFor(m => m.competencyA[i].IsSelected)
-                    @Html.LabelFor(m => m.competencyA[i].CompetencyName, Model.competencyA[i].CompetencyName)<br />
+                    @*@Html.LabelFor(m => m.competencyA[i].CompetencyName, Model.competencyA[i].CompetencyName)*@
+                    <label title="@Model.competencyA[i].Description">@Model.competencyA[i].CompetencyName</label>
+                    <br />
                 </div>
                 @Html.HiddenFor(m => m.competencyA[i].CompetencyId)
             }
@@ -42,7 +44,7 @@
             {
                 <div style="font-size:1.2rem; line-height:2.0rem">
                     @Html.CheckBoxFor(m => m.competencyA[i].IsSelected)
-                    @Html.LabelFor(m => m.competencyA[i].CompetencyName, Model.competencyA[i].CompetencyName)<br />
+                    <label title="@Model.competencyA[i].Description">@Model.competencyA[i].CompetencyName</label><br />
                 </div>
                 @Html.HiddenFor(m => m.competencyA[i].CompetencyId)
             }

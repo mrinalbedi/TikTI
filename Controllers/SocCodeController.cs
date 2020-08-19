@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -60,6 +61,8 @@ namespace Tikti.Controllers
         public IActionResult Create([Bind("SocCode1,Description")] SocCode socCode)
         {
             string socCodeSelected = socCode.SocCode1;
+            Response.Cookies.Append("soc", socCodeSelected);
+            HttpContext.Session.SetString("soc", socCodeSelected);
                 return RedirectToAction("Create","RoleOpportunity", new { soc = socCodeSelected });
         }
 
@@ -67,6 +70,7 @@ namespace Tikti.Controllers
         public async Task<IActionResult> Edit()
         {
             var query = from x in _context.SocCode
+                        where x.SocCode1==Request.Cookies["soc"] || x.SocCode1==HttpContext.Session.GetString("soc").ToString()
                         select x;
             ViewData["SocCode"] = new SelectList(query, "SocCode1", "Description");
             return View();

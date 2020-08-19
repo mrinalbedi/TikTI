@@ -32,19 +32,7 @@ namespace Tikti.Controllers
                 UserId = Request.Cookies["Email"];
             var OrgObject = _context.OrgRegister.Where(x => x.Email == UserId).FirstOrDefault();
 
-      
             var tikTiDbContext = _context.RoleOpportunity.Include(r => r.CertificationNavigation).Include(r => r.CurrencyNavigation).Include(r => r.EducationNavigation).Include(r => r.ExperienceNavigation).Include(r => r.WorkCommitmentNavigation).Include(m=>m.HiringManager);
-             //var tikTiDbContext= from ro in _context.RoleOpportunity
-             //                    join hr in _context.HiringManager on ro.HiringManagerId equals hr.HiringManagerId
-             //                    join wc in _context.WorkCommitment on ro.WorkCommitment equals wc.WorkCommitmentId
-             //                    join c in _context.Currency on ro.Currency equals c.CurrencyId
-             //                    join cert in _context.Certification on ro.Certification equals cert.CertificationId
-             //                    join e in _context.Experience on ro.Experience equals e.ExperienceId
-             //                    join ed in _context.Education on ro.Education equals ed.EducationId
-             //                    where ro.RegistrationId==OrgObject.RegistrationId
-             //                    select new RoleOpportunity{RoleOpportunityId=ro.RoleOpportunityId,RegistrationId=ro.RegistrationId,
-             //                    JobDescription=ro.JobDescription,HiringManagerId=hr.FirstName+ ' '+hr.LastName
-
             return View(await tikTiDbContext.Where(m=>m.RegistrationId==OrgObject.RegistrationId).ToListAsync());
         }
 

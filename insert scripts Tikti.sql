@@ -196,22 +196,170 @@ insert into alternateTitles values('Enterprise Architect','15-1121.00')
 insert into alternateTitles values('ERP Technical Lead (Enterprise Resource Planning Technical Lead)','15-1121.00')
 insert into alternateTitles values('Functional Analyst','15-1121.00')
 insert into alternateTitles values('Health IT Specialist (Health Information Technology Specialist)','15-1121.00')
+insert into alternateTitles values('Health Systems Analyst','15-1121.00')
+insert into alternateTitles values('Implementation Consultant','15-1121.00')
+insert into alternateTitles values('Information Scientist','15-1121.00')
+insert into alternateTitles values('Information Systems Analyst (ISA)','15-1121.00')
+insert into alternateTitles values('Information Systems Architect','15-1121.00')
+insert into alternateTitles values('Information Systems Auditor','15-1121.00')
+insert into alternateTitles values('Information Systems Consultant','15-1121.00')
+insert into alternateTitles values('Information Systems Planner','15-1121.00')
+insert into alternateTitles values('Information Systems Specialist','15-1121.00')
+insert into alternateTitles values('Information Technology Analyst (IT Analyst)','15-1121.00')
+insert into alternateTitles values('Information Technology Auditor (IT Auditor)','15-1121.00')
+insert into alternateTitles values('Information Technology Consultant (IT Consultant)','15-1121.00')
+insert into alternateTitles values('Internet E-Commerce Specialist','15-1121.00')
+insert into alternateTitles values('IT Business Analyst (Information Technology Business Analyst)','15-1121.00')
+insert into alternateTitles values('IT Security Analyst (Information Technology Security Analyst)','15-1121.00')
+insert into alternateTitles values('Public Health Informatician','15-1121.00')
+insert into alternateTitles values('Reporting Analyst','15-1121.00')
+insert into alternateTitles values('Research and Development Specialist','15-1121.00')
+insert into alternateTitles values('Scientific Systems Analyst','15-1121.00')
+insert into alternateTitles values('Software Architect','15-1121.00')
+insert into alternateTitles values('Software consultant','15-1121.00')
+insert into alternateTitles values('Systems Analysis Information Technology Specialist','15-1121.00')
+insert into alternateTitles values('Systems Analyst','15-1121.00')
+insert into alternateTitles values('Systems Architect','15-1121.00')
+insert into alternateTitles values('Systems Developer','15-1121.00')
+insert into alternateTitles values('Systems Engineer','15-1121.00')
+insert into alternateTitles values('Systems Integrator)','15-1121.00')
+insert into alternateTitles values('Technical Analyst','15-1121.00')
+insert into alternateTitles values('Technical Business Analyst','15-1121.00')
+insert into alternateTitles values('Usability Engineer','15-1121.00')
+insert into alternateTitles values('Vulnerability Assessment Analyst','15-1121.00')
 
 
-insert into alternateTitles values('Health Systems Analyst
-','15-1121.00')
-insert into alternateTitles values('Implementation Consultant
-','15-1121.00')
-insert into alternateTitles values('Information Scientist
-','15-1121.00')
-insert into alternateTitles values('Information Systems Analyst (ISA)
-','15-1121.00')
-insert into alternateTitles values('Information Systems Architect
-','15-1121.00')
-insert into alternateTitles values('Information Systems Auditor
-','15-1121.00')
-insert into alternateTitles values('Information Systems Consultant
-','15-1121.00')
-insert into alternateTitles values('Applications Analyst','15-1121.00')
+
+---------------------------------------------------------------------------------------------
+ insert into alternateTitles values('All Source-Collection Manager','15-1122.00')
+ insert into alternateTitles values('All Source-Collection Requirements Manager','15-1122.00')
+  insert into alternateTitles values('Automatic Data Processing Systems Security Specialist (ADP Systems Security)','15-1122.00')
+   insert into alternateTitles values('Certified Information Systems Security Professional (CISSP)','15-1122.00')
+   insert into alternateTitles values('Computer Security Coordinator','15-1122.00')
+	  insert into alternateTitles values('Computer Security Information Specialist','15-1122.00')
+	   insert into alternateTitles values('Computer Security Specialist','15-1122.00')
+	    insert into alternateTitles values('Cryptological Technician','15-1122.00')
+		 insert into alternateTitles values('Cryptologist','15-1122.00')
+
+		 insert into alternateTitles values('Cyber Defense Analyst','15-1122.00')
+
+	    insert into alternateTitles values('Cyber Incident Responder','15-1122.00')
+
+	   insert into alternateTitles values('Cyber Information Security Analyst','15-1122.00')
+	   insert into alternateTitles values('Cyber Intel Planner','15-1122.00')
+insert into alternateTitles values('Cyber Operations Planner (Cyber Ops Planner)','15-1122.00')
+insert into alternateTitles values('Cyber Operator','15-1122.00')
+insert into alternateTitles values('Cyber Security Analyst','15-1122.00')
+ insert into alternateTitles values('Cyber Security Engineer','15-1122.00')
+insert into alternateTitles values('Cyber Security Specialist','15-1122.00')
+
+insert into alternateTitles values('Data Security Administrator','15-1122.00')
+insert into alternateTitles values('Database Security Expert','15-1122.00')
+insert into alternateTitles values('Exploitation Analyst','15-1122.00')
+insert into alternateTitles values('Information Assurance Analyst','15-1122.00')
+insert into alternateTitles values('Information Assurance Engineer','15-1122.00')
+insert into alternateTitles values('Information Security Analyst','15-1122.00')
+insert into alternateTitles values('Information Security Engineer','15-1122.00')
+insert into alternateTitles values('Information Security Officer','15-1122.00')
+insert into alternateTitles values('Information Security Specialist','15-1122.00')
+insert into alternateTitles values('Information Systems Security Analyst','15-1122.00')
+insert into alternateTitles values('Information Systems Security Officer','15-1122.00')
+
+insert into alternateTitles values('Information Systems Security Specialist','15-1122.00')
+insert into alternateTitles values('Information Technology Consultant (IT Consultant)','15-1122.00')
+insert into alternateTitles values('Information Technology Security Analyst (IT Security Analyst)','15-1122.00')
+insert into alternateTitles values('Information Technology Specialist','15-1122.00')
+
+insert into alternateTitles values('Internet Security Specialist','15-1122.00')
+insert into alternateTitles values('IT Auditor (Information Technology Auditor)','15-1122.00')
+insert into alternateTitles values('Mission Assessment Specialist','15-1122.00')
+insert into alternateTitles values('Network Security Analyst','15-1122.00')
+insert into alternateTitles values('Information Technology Specialist','15-1122.00')
+insert into alternateTitles values('Network Security Officer','15-1122.00')
+insert into alternateTitles values('Network Security Officer','15-1122.00')
+insert into alternateTitles values('Partner Integration Planner','15-1122.00')
+insert into alternateTitles values('Security Analyst','15-1122.00')
+insert into alternateTitles values('Security Consultant','15-1122.00')
+insert into alternateTitles values('Security Engineer','15-1122.00')
+insert into alternateTitles values('Security Manager','15-1122.00')
+
+insert into alternateTitles values('Security Operations Analyst','15-1122.00')
+insert into alternateTitles values('Security Operations Center Analyst (SOC Analyst)','15-1122.00')
+insert into alternateTitles values('Security Specialist','15-1122.00')
+insert into alternateTitles values('Systems Analyst','15-1122.00')
+insert into alternateTitles values('Systems Security Analyst','15-1122.00')
+insert into alternateTitles values('Systems Security Information Technology Specialist','15-1122.00')
+insert into alternateTitles values('Threat Monitoring Analyst','15-1122.00')
+insert into alternateTitles values('Warning Analyst','15-1122.00')
+
+--==========================================================================
+insert into alternateTitles values('.NET Programmer','15-1131.00')
+insert into alternateTitles values('Analyst Programmer','15-1131.00')
+insert into alternateTitles values('Application Programmer','15-1131.00')
+insert into alternateTitles values('Application Programmer Analyst','15-1131.00')
+insert into alternateTitles values('Applications Programmer','15-1131.00')
+insert into alternateTitles values('Beta Tester','15-1131.00')
+insert into alternateTitles values('Business Programmer','15-1131.00')
+insert into alternateTitles values('Certified Ethical Hacker','15-1131.00')
+insert into alternateTitles values('Client Server Programmer','15-1131.00')
+insert into alternateTitles values('COBOL Programmer (Common Business Oriented Language Programmer)','15-1131.00')
+insert into alternateTitles values('Computer Game Programmer','15-1131.00')
+insert into alternateTitles values('Computer Language Coder','15-1131.00')
+insert into alternateTitles values('Computer Programmer','15-1131.00')
+insert into alternateTitles values('Computer Programmer Analyst','15-1131.00')
+insert into alternateTitles values('Database Programmer','15-1131.00')
+insert into alternateTitles values('Engineering and Scientific Programmer','15-1131.00')
+insert into alternateTitles values('Engineering Programmer','15-1131.00')
+insert into alternateTitles values('Enterprise Architect','15-1131.00')
+insert into alternateTitles values('Game Programmer','15-1131.00')
+insert into alternateTitles values('Graphic Engineer','15-1131.00')
+insert into alternateTitles values('Internet Programmer','15-1131.00')
+insert into alternateTitles values('Java Developer','15-1131.00')
+insert into alternateTitles values('Java Programmer','15-1131.00')
+insert into alternateTitles values('Object-Oriented Programmer','15-1131.00')
+insert into alternateTitles values('Operating System Programmer','15-1131.00')
+insert into alternateTitles values('Programmer','15-1131.00')
+insert into alternateTitles values('Programmer Analyst','15-1131.00')
+insert into alternateTitles values('SAS Programmer','15-1131.00')
+insert into alternateTitles values('Software Programmer','15-1131.00')
+insert into alternateTitles values('Systems Programmer','15-1131.00')
+insert into alternateTitles values('Video Game Programmer','15-1131.00')
+insert into alternateTitles values('Web Applications Programmer','15-1131.00')
+insert into alternateTitles values('Web Programmerr','15-1131.00')
+insert into alternateTitles values('Website Programmer','15-1131.00')
+insert into alternateTitles values('White Hat Hacker','15-1131.00')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
