@@ -52,6 +52,7 @@
             <div style="font-size:1.2rem; line-height:1.5rem">
                 @Html.CheckBoxFor(m => m.competencyB[i].IsSelected)
                 @*@Html.LabelFor(m => m.competencyB[i].CompetencyName, Model.competencyB[i].CompetencyName)<br />*@
+                
                 <label title="@Model.competencyB[i].Description">@Model.competencyB[i].CompetencyName</label>
             </div>
                     @Html.HiddenFor(m => m.competencyB[i].CompetencyId)

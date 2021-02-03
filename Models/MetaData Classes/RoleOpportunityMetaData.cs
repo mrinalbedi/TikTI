@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Tikti.Models
@@ -19,6 +20,10 @@ namespace Tikti.Models
                     yield return new ValidationResult("The desired start date cannot be smaller than the current date", new[] { nameof(DesiredStartDate) });
 
                 }
+            }
+            if(!Regex.IsMatch(Salary, @"^\d+$"))
+            {
+                yield return new ValidationResult("Please enter a valid salary", new[] { nameof(Salary) });
             }
             yield return ValidationResult.Success;
         }
@@ -58,8 +63,9 @@ namespace Tikti.Models
         public int Currency { get; set; }
 
         [Required(ErrorMessage ="The salary field is required")]
+        [DataType(DataType.Currency)]
         [Display(Name = "Salary For Position:")]
-        public string Salary { get; set; }
+        public double Salary { get; set; }
 
         [Required(ErrorMessage ="The work location(City) is required")]
         [Display(Name = "Work Location(City)")]

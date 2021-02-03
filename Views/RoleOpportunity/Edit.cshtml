@@ -2,8 +2,8 @@
 
 @{
     var id = Model.RoleOpportunityId;
-    ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Organization_view.cshtml";
+    ViewData["Title"] = "Edit Role Opportunity";
+    Layout = "~/Views/Shared/LoggedIn.cshtml";
 }
 
 <hr />
@@ -12,6 +12,7 @@
         <div class="col-md-3" style="margin:auto; padding-top:2rem; margin-top:0">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            <input asp-for="RoleOpportunityId" type="hidden" value="@ViewBag.RoleOppId" />
             <div class="form-group" style="font-size: 1rem; font-weight: 500;">
                 <label asp-for="AlternateTitle" class="control-label"></label>
                 <select asp-for="AlternateTitleId" class="form-control" asp-items="ViewBag.AlternateTitle"></select>

@@ -180,9 +180,6 @@ namespace Tikti.Controllers
         public IActionResult Edit(IFormFile files,string soc)
         {
             var altTitle = _context.AlternateTitles.Where(x => x.SocCode == soc);
-
-            
-
             string UserId = string.Empty;
             if (HttpContext.Session.GetString("UserId") != null)
                 UserId = HttpContext.Session.GetString("UserId");
@@ -193,7 +190,8 @@ namespace Tikti.Controllers
             HttpContext.Session.SetString("RegId", RegId.ToString());
             Response.Cookies.Append("RegId", RegId.ToString());
             var roleOpportunity = _context.RoleOpportunity.Where(x => x.RegistrationId == RegId).OrderByDescending(x => x.RoleOpportunityId).FirstOrDefault();
-            
+            ViewBag.RoleOppId = roleOpportunity.RoleOpportunityId;
+
             HttpContext.Session.SetString("RoleOppId", roleOpportunity.RoleOpportunityId.ToString());
             Response.Cookies.Append("RoleOppId", roleOpportunity.RoleOpportunityId.ToString());
 

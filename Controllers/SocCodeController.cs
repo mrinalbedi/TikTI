@@ -69,10 +69,16 @@ namespace Tikti.Controllers
         // GET: SocCode/Edit/5
         public async Task<IActionResult> Edit()
         {
-            var query = from x in _context.SocCode
-                        where x.SocCode1==Request.Cookies["soc"] || x.SocCode1==HttpContext.Session.GetString("soc").ToString()
-                        select x;
-            ViewData["SocCode"] = new SelectList(query, "SocCode1", "Description");
+            string soc = string.Empty;
+            if (Request.Cookies["soc"] != null)
+                soc = Request.Cookies["soc"];
+            else if(HttpContext.Session.GetString("soc").ToString()!=null)
+                soc=  HttpContext.Session.GetString("soc").ToString();
+
+            //var query = from x in _context.SocCode
+            //            where x.SocCode1==Request.Cookies["soc"] || x.SocCode1==HttpContext.Session.GetString("soc").ToString()
+            //            select x;
+            ViewData["SocCode"] = new SelectList(_context.SocCode, "SocCode1", "Description",soc);
             return View();
             //if (id == null)
             //{
